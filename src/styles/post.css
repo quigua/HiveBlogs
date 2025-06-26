@@ -1,0 +1,281 @@
+/* src/styles/post.css */
+
+/* No se importa _variables.css aquí, ya que global.css ya lo hace y PostLayout.astro es envuelto por Layout.astro */
+
+/* ----------------------------------------------------- */
+/* Estilos para la Página de Detalle de Post */
+/* ----------------------------------------------------- */
+
+.post-detail-page {
+  padding: 40px 0;
+  display: flex;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap; /* Para responsive */
+  align-items: flex-start;
+}
+
+.post-article {
+  flex: 3; /* Ocupa más espacio */
+  background-color: var(--color-background-card);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.post-article .post-header {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.post-article .post-main-image {
+  width: 100%;
+  height: 400px; /* Altura de la imagen principal del post */
+  object-fit: cover;
+  display: block;
+}
+
+.post-article .post-info {
+  padding: 30px;
+}
+
+.post-article .post-title {
+  font-size: 2.8rem;
+  color: var(--color-primary);
+  margin-top: 0;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.post-article .post-meta {
+  font-size: 0.95rem;
+  color: var(--color-dark-gray);
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.post-article .post-meta span {
+  white-space: nowrap; /* Evita que las meta-etiquetas se rompan */
+}
+
+.post-article .post-meta .post-category {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.post-article .post-excerpt {
+  font-size: 1.1rem;
+  color: var(--color-text-body);
+  margin-bottom: 25px;
+  font-style: italic;
+  border-left: 4px solid var(--color-primary);
+  padding-left: 15px;
+}
+
+.post-article .post-tags {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.post-article .post-tags .tag {
+  background-color: var(--color-light-gray);
+  color: var(--color-dark-gray);
+  padding: 7px 12px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.post-article .post-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border-light);
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.post-article .action-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  color: var(--color-dark-gray);
+  font-weight: bold;
+}
+
+.post-article .action-item .icon {
+  font-size: 1.3rem;
+}
+
+.post-article .post-content-body {
+  padding: 0 30px 30px; /* Padding solo para el contenido markdown */
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--color-text-body);
+}
+
+/* Estilos para elementos Markdown dentro del post-content-body */
+.post-content-body h1,
+.post-content-body h2,
+.post-content-body h3,
+.post-content-body h4,
+.post-content-body h5,
+.post-content-body h6 {
+  color: var(--color-primary);
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.post-content-body h1 { font-size: 2.5rem; }
+.post-content-body h2 { font-size: 2rem; }
+.post-content-body h3 { font-size: 1.7rem; }
+.post-content-body h4 { font-size: 1.4rem; }
+.post-content-body h5 { font-size: 1.2rem; }
+.post-content-body h6 { font-size: 1rem; }
+
+.post-content-body p {
+  margin-bottom: 1em;
+}
+
+.post-content-body ul,
+.post-content-body ol {
+  margin-bottom: 1em;
+  padding-left: 20px;
+}
+
+.post-content-body li {
+  margin-bottom: 0.5em;
+}
+
+.post-content-body a {
+  color: var(--color-secondary);
+  text-decoration: underline;
+}
+
+.post-content-body a:hover {
+  text-decoration: none;
+}
+
+.post-content-body blockquote {
+  border-left: 4px solid var(--color-tertiary);
+  padding: 10px 20px;
+  margin: 20px 0;
+  background-color: var(--color-light-gray);
+  color: var(--color-dark-gray);
+  font-style: italic;
+}
+
+.post-content-body pre {
+  background-color: var(--color-dark-gray);
+  color: var(--color-white);
+  padding: 15px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+.post-content-body code {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.post-content-body pre code {
+  display: block;
+  padding: 0;
+}
+
+.post-content-body img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-content-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.post-content-body th,
+.post-content-body td {
+  border: 1px solid var(--color-border-light);
+  padding: 10px;
+  text-align: left;
+}
+
+.post-content-body th {
+  background-color: var(--color-light-gray);
+  color: var(--color-text-body);
+}
+
+/* ----------------------------------------------------- */
+/* Sidebar para Posts (Similar a la de inicio) */
+/* ----------------------------------------------------- */
+
+.post-detail-page .sidebar-column {
+  flex: 1; /* Ocupa menos espacio */
+  min-width: 250px;
+  background-color: var(--color-background-card);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 100px;
+}
+
+/* ----------------------------------------------------- */
+/* Responsive para Página de Detalle de Post */
+/* ----------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .post-detail-page {
+    flex-direction: column;
+    padding: 20px 0;
+  }
+
+  .post-detail-page .post-article,
+  .post-detail-page .sidebar-column {
+    width: 100%;
+    min-width: unset;
+    padding: 0; /* Remover padding del contenedor principal si ya lo tiene el interior */
+  }
+
+  .post-article .post-main-image {
+    height: 250px;
+  }
+
+  .post-article .post-info,
+  .post-article .post-content-body {
+    padding: 20px;
+  }
+
+  .post-article .post-title {
+    font-size: 2rem;
+  }
+
+  .post-article .post-meta {
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .post-detail-page .sidebar-column {
+    position: static;
+    top: unset;
+  }
+}

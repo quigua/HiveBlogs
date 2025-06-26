@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro'; // Importa el layout general
+import PostLayout from '../../layouts/PostLayout.astro'; // Importa el layout específico del post
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+
+const postFrontmatter = {
+  ...entry.data,
+};
+
+const { Content } = await entry.render();
+---
+
+<Layout title={postFrontmatter.title}> {/* Layout.astro envuelve todo */}
+  <PostLayout frontmatter={postFrontmatter}> {/* PostLayout.astro es el layout del contenido del post */}
+    <Content />
+  </PostLayout>
+</Layout>

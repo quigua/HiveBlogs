@@ -1,0 +1,30 @@
+/* src/styles/_variables.css */
+
+:root {
+  /* Paleta Base */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-light-gray: #f0f0f0;
+  --color-medium-gray: #cccccc;
+  --color-dark-gray: #555555; /* Gris oscuro para fondos o texto secundario */
+
+  /* Paleta Principal del Tema (ej. inspirada en HiveBlogs) */
+  --color-primary: #a333c8; /* Morado Oscuro - Para elementos principales, títulos, etc. */
+  --color-secondary: #f29e1f; /* Naranja Brillante - Para acentos, CTA, categorías */
+  --color-tertiary: #5d3ebc; /* Morado Medio - Complemento */
+
+  /* Colores Funcionales (basados en la paleta) */
+  --color-text-body: #333333; /* Texto principal del cuerpo */
+  --color-text-light: #ffffff; /* Texto claro (para fondos oscuros) */
+  --color-text-muted: #888888; /* Texto secundario, descripciones */
+
+  /* Colores de Fondo Específicos */
+  --color-background-body: #f4f4f4; /* Fondo general del cuerpo de la página */
+  --color-background-card: #ffffff; /* Fondo para tarjetas, secciones con contenido claro */
+  --color-background-header-footer: var(--color-primary); /* El header y footer usarán el color primario */
+  --color-background-dark: var(--color-dark-gray); /* Fondo oscuro general, como el footer */
+
+  /* Colores de Borde/Separadores */
+  --color-border-light: #e0e0e0;
+  --color-border-dark: #3a3f47;
+}

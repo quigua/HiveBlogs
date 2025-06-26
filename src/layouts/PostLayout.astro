@@ -1,0 +1,83 @@
+---
+// Importa las propiedades directamente del frontmatter que se pasa
+export interface Props {
+  frontmatter: { // Recibe el objeto frontmatter completo
+    title: string;
+    date: string;
+    author: string;
+    imageUrl: string;
+    category: string;
+    tags: string[]; // Asegúrate de que tags es un array de strings
+    reads?: number; // Puede ser opcional si no todos los posts tienen esta data
+    votes?: number; // Puede ser opcional
+    hbdPayout?: string; // Puede ser opcional
+    comments?: number; // Puede ser opcional
+    excerpt?: string; // También puede ser opcional
+  };
+}
+
+// Desestructura el frontmatter de Astro.props
+const { frontmatter } = Astro.props;
+
+// Desestructura las propiedades individuales del objeto frontmatter
+const { title, date, author, imageUrl, category, tags, excerpt, reads, votes, hbdPayout, comments } = frontmatter;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    {/* Aquí NO se importan los CSS ni se vinculan con <link rel="stylesheet"> */}
+    {/* Este layout no maneja el CSS directamente, lo hará el layout superior (Layout.astro) o la página que lo usa */}
+  </head>
+  <body>
+    {/* NOTA: Este PostLayout no incluye el header y footer principal del sitio, 
+             ya que será envuelto por Layout.astro */}
+
+    <main class="post-detail-page">
+      <article class="post-article">
+        <header class="post-header">
+          <img src={imageUrl} alt={title} class="post-main-image" />
+          <div class="post-info">
+            <h1 class="post-title">{title}</h1>
+            <div class="post-meta">
+              <span class="post-author">Por {author}</span>
+              <span class="post-date">{date}</span>
+              <span class="post-category">{category}</span>
+            </div>
+            {tags && tags.length > 0 && ( // Condición para renderizar tags solo si existen
+              <div class="post-tags">
+                {tags.map((tag) => (
+                  <span class="tag">#{tag}</span>
+                ))}
+              </div>
+            )}
+            {excerpt && <p class="post-excerpt">{excerpt}</p>}
+            <div class="post-actions">
+              {votes && <span class="action-item">👍 {votes} Votos</span>}
+              {hbdPayout && <span class="action-item">💰 {hbdPayout}</span>}
+              {comments && <span class="action-item">💬 {comments} Comentarios</span>}
+            </div>
+          </div>
+        </header>
+
+        <div class="post-content-body">
+          <slot /> {/* Aquí se renderiza el contenido del Markdown */}
+        </div>
+      </article>
+
+      <aside class="sidebar-column">
+        <h3>Más posts de la categoría "{category}"</h3>
+        <p>Contenido relacionado...</p>
+      </aside>
+    </main>
+
+  </body>
+</html>
+
+<style is:global>
+  {/* ¡ESTE BLOQUE DEBE ESTAR COMPLETAMENTE VACÍO! */}
+</style>

@@ -1,0 +1,587 @@
+/* src/styles/global.css */
+
+@import './_variables.css'; /* ¡IMPORTANTE! Importa tus variables de color aquí */
+
+/* ----------------------------------------------------- */
+/* Estilos Base y Tipografía */
+/* ----------------------------------------------------- */
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background-body);
+  color: var(--color-text-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Enlaces generales */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ----------------------------------------------------- */
+/* Header Principal */
+/* ----------------------------------------------------- */
+
+.main-header {
+  background-color: var(--color-background-header-footer);
+  color: var(--color-text-light);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+}
+
+.main-header .logo a {
+  color: var(--color-text-light);
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.main-header .main-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main-header .main-nav ul li {
+  margin-left: 20px;
+}
+
+.main-header .main-nav ul li a {
+  color: var(--color-text-light);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.main-header .main-nav ul li a:hover {
+  color: var(--color-secondary);
+}
+
+/* ----------------------------------------------------- */
+/* Estilos para el componente Hero */
+/* ----------------------------------------------------- */
+
+.hero {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  color: var(--color-white);
+  text-align: center;
+  padding: 100px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Overlay oscuro para que el texto resalte */
+  z-index: 1;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero .call-to-action {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  padding: 15px 30px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.hero .call-to-action:hover {
+  background-color: var(--color-tertiary); /* Cambiado a una variable existente */
+}
+
+/* ----------------------------------------------------- */
+/* Estilos para la sección de contenido (página de inicio) */
+/* ----------------------------------------------------- */
+
+.content-section {
+  padding: 30px 0;
+}
+
+.content-section .container {
+  display: flex;
+  gap: 30px; /* Espacio entre la columna principal y la barra lateral */
+  flex-wrap: wrap; /* Permite que las columnas se envuelvan en pantallas pequeñas */
+  align-items: flex-start; /* Alinea las columnas arriba */
+}
+
+.content-section .main-column {
+  flex: 3; /* La columna principal ocupa más espacio */
+  min-width: 300px; /* Asegura un ancho mínimo para la columna principal */
+}
+
+.content-section .sidebar-column {
+  flex: 1; /* La barra lateral ocupa menos espacio */
+  min-width: 250px; /* Asegura un ancho mínimo para la barra lateral */
+  background-color: var(--color-background-card);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: sticky; /* Hace que la barra lateral sea pegajosa */
+  top: 100px; /* Ajusta esto si tu header es más alto */
+}
+
+/* Títulos de sección */
+h2 {
+  color: var(--color-primary);
+  font-size: 2rem;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* ----------------------------------------------------- */
+/* Cuadrícula de Posts (Página de Inicio) */
+/* ----------------------------------------------------- */
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
+/* ----------------------------------------------------- */
+/* Tarjeta de Post (PostCard) */
+/* ----------------------------------------------------- */
+
+.post-card {
+  background-color: var(--color-background-card);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-in-out;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+}
+
+.post-card .post-image-link {
+  display: block;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.post-card .post-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.post-card .post-content {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-card .post-meta-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--color-dark-gray);
+  margin-bottom: 10px;
+}
+
+.post-card .post-category {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.post-card .post-title-link {
+  text-decoration: none;
+  color: var(--color-text-body);
+}
+
+.post-card h3 {
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--color-primary);
+}
+
+.post-card .post-excerpt {
+  font-size: 0.95rem;
+  color: var(--color-dark-gray);
+  margin-bottom: 15px;
+  flex-grow: 1;
+}
+
+.post-card .post-meta-bottom {
+  font-size: 0.8rem;
+  color: var(--color-dark-gray);
+  margin-top: auto;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.post-card .post-author a {
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.post-card .post-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-top: 1px solid var(--color-border-light);
+  padding-top: 15px;
+}
+
+.post-card .action-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: var(--color-dark-gray);
+}
+
+.post-card .action-item .icon {
+  font-size: 1.1rem;
+}
+
+.post-card .post-tags {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.post-card .post-tags .tag {
+  background-color: var(--color-light-gray);
+  color: var(--color-dark-gray);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+/* ----------------------------------------------------- */
+/* Navegación de categorías en la barra lateral */
+/* ----------------------------------------------------- */
+
+.categories-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.categories-nav li {
+  margin-bottom: 10px;
+}
+
+.categories-nav a {
+  display: block;
+  padding: 8px 10px;
+  background-color: var(--color-light-gray);
+  border-radius: 5px;
+  color: var(--color-text-body);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.categories-nav a:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+/* ----------------------------------------------------- */
+/* Placeholder para otros detalles de la barra lateral */
+/* ----------------------------------------------------- */
+
+.other-details-placeholder {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.other-details-placeholder h3 {
+  color: var(--color-primary);
+  margin-bottom: 15px;
+}
+
+.other-details-placeholder ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.other-details-placeholder li {
+  margin-bottom: 8px;
+}
+
+/* ----------------------------------------------------- */
+/* Footer Principal */
+/* ----------------------------------------------------- */
+
+.main-footer {
+  background-color: var(--color-background-dark); /* Usando tu variable para el fondo del footer */
+  color: var(--color-text-light); /* Texto claro para fondo oscuro */
+  padding: 40px 20px 20px;
+  margin-top: 50px;
+  border-top: 1px solid var(--color-border-dark);
+}
+
+.main-footer .footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto 30px;
+}
+
+.footer-section h3 {
+  color: var(--color-secondary);
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.footer-section p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: var(--color-light-gray);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: var(--color-primary);
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid var(--color-border-dark);
+  padding-top: 20px;
+  font-size: 0.85rem;
+  color: var(--color-light-gray);
+}
+
+/* ----------------------------------------------------- */
+/* Responsive Design */
+/* ----------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .main-header .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .main-header .main-nav ul {
+    margin-top: 15px;
+    justify-content: center;
+  }
+
+  .main-header .main-nav ul li {
+    margin: 0 10px 10px;
+  }
+
+  .content-section .container {
+    flex-direction: column;
+  }
+
+  .content-section .main-column,
+  .content-section .sidebar-column {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .content-section .sidebar-column {
+    position: static;
+    top: unset;
+  }
+
+  .posts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Responsive para Hero */
+  .hero {
+    min-height: 400px;
+    padding: 60px 20px;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .hero .call-to-action {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+
+  /* Responsive para Footer */
+  .main-footer .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .footer-section ul {
+    margin-bottom: 20px;
+  }
+}
+
+/* ----------------------------------------------------- */
+/* Estilos para el Submenú de Navegación */
+/* ----------------------------------------------------- */
+
+.main-nav ul li.has-submenu {
+  position: relative; /* Necesario para posicionar el submenú */
+}
+
+.main-nav ul li.has-submenu .submenu {
+  display: none; /* Oculta el submenú por defecto */
+  position: absolute;
+  top: 100%; /* Coloca el submenú justo debajo del elemento padre */
+  left: 0;
+  background-color: var(--color-background-header-footer); /* Mismo fondo que el header */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  min-width: 180px; /* Ancho mínimo para los elementos del submenú */
+  z-index: 999; /* Asegura que esté por encima de otros elementos */
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  border-radius: 0 0 5px 5px; /* Bordes redondeados en la parte inferior */
+}
+
+.main-nav ul li.has-submenu:hover .submenu {
+  display: block; /* Muestra el submenú al pasar el ratón por el padre */
+}
+
+.main-nav ul li.has-submenu .submenu li {
+  margin: 0; /* Reinicia el margen para los elementos del submenú */
+}
+
+.main-nav ul li.has-submenu .submenu li a {
+  padding: 8px 20px; /* Padding para los enlaces del submenú */
+  display: block;
+  color: var(--color-text-light); /* Color de texto para el submenú */
+  white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+}
+
+.main-nav ul li.has-submenu .submenu li a:hover {
+  background-color: var(--color-secondary); /* Cambia el fondo al pasar el ratón */
+  color: var(--color-white); /* Asegura que el texto sea blanco */
+  text-decoration: none; /* Quita el subrayado al pasar el ratón */
+}
+
+/* Estilo básico para la flecha indicadora (puedes usar un icono si tienes FontAwesome, etc.) */
+.main-nav ul li.has-submenu .arrow-down {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  vertical-align: middle;
+  border-top: 5px solid var(--color-text-light);
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  transition: transform 0.3s ease;
+}
+
+.main-nav ul li.has-submenu:hover .arrow-down {
+  transform: rotate(180deg); /* Rota la flecha al desplegar */
+}
+
+/* Ajuste responsive para el submenú */
+@media (max-width: 768px) {
+  .main-nav ul li.has-submenu .submenu {
+    position: static; /* No posiciona el submenú en móvil */
+    display: block; /* Muestra siempre en móvil si el padre está activo */
+    background-color: transparent;
+    box-shadow: none;
+    min-width: unset;
+    text-align: center;
+    padding: 0;
+    margin-top: 10px; /* Espacio debajo del elemento principal */
+  }
+  .main-nav ul li.has-submenu .submenu li a {
+    padding: 8px 10px;
+  }
+  .main-nav ul li.has-submenu .arrow-down {
+    display: none; /* Oculta la flecha en móvil si no es relevante */
+  }
+  /* Necesitarías JS para un toggle de submenú en móvil si no quieres que esté siempre expandido */
+}

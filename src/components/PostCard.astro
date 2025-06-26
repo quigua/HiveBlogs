@@ -1,0 +1,197 @@
+---
+export interface Props {
+  title: string;
+  date: string;
+  author: string;
+  imageUrl: string;
+  excerpt: string;
+  category: string;
+  tags: string[];
+  reads: number;
+  votes: number;
+  hbdPayout: string;
+  comments: number;
+  slug: string; // ¡Nueva propiedad para el slug del post!
+}
+
+const { title, date, author, imageUrl, excerpt, category, tags, reads, votes, hbdPayout, comments, slug } = Astro.props;
+---
+<div class="post-card">
+  <a href={`/posts/${slug}`} class="post-image-link"> {/* Enlace dinámico usando el slug */}
+    <img src={imageUrl} alt={title} class="post-thumbnail" />
+  </a>
+  <div class="post-content">
+    <div class="post-meta-top">
+      <span class="post-category">{category}</span>
+      <span class="post-reads">{reads} Lecturas</span>
+    </div>
+    <a href={`/posts/${slug}`} class="post-title-link"> {/* Enlace dinámico usando el slug */}
+      <h3>{title}</h3>
+    </a>
+    <p class="post-excerpt">{excerpt}</p>
+    <div class="post-meta-bottom">
+      <span class="post-author">Por <a href="#">{author}</a></span>
+      <span class="post-date">{date}</span>
+    </div>
+    <div class="post-actions">
+      <span class="action-item">
+        <span class="icon">👍</span> {votes} Votos
+      </span>
+      <span class="action-item">
+        <span class="icon">💰</span> {hbdPayout}
+      </span>
+      <span class="action-item">
+        <span class="icon">💬</span> {comments} Comentarios
+      </span>
+    </div>
+    <div class="post-tags">
+      {tags.map(tag => (
+        <a href="#" class="tag">#{tag}</a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .post-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease-in-out;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .post-image-link {
+    display: block;
+  }
+
+  .post-thumbnail {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .post-content {
+    padding: var(--spacing-md);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-meta-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .post-category {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+
+  .post-reads {
+    color: var(--color-text-light);
+  }
+
+  .post-title-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post-card h3 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text);
+    font-size: var(--font-size-md);
+    line-height: 1.3;
+  }
+
+  .post-title-link:hover h3 {
+    color: var(--color-primary);
+  }
+
+  .post-excerpt {
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    flex-grow: 1;
+  }
+
+  .post-meta-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    margin-top: auto;
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .post-author a {
+    color: var(--color-primary);
+    font-weight: bold;
+  }
+
+  .post-date {
+    color: var(--color-text-light);
+  }
+
+  .post-actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+  }
+
+  .action-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .action-item .icon {
+    font-size: 1.1em;
+    line-height: 1;
+  }
+
+  .post-tags {
+    margin-top: var(--spacing-sm);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .tag {
+    background-color: var(--color-background-light);
+    color: var(--color-primary-dark);
+    font-size: 0.8em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .tag:hover {
+    background-color: var(--color-border);
+  }
+</style>
