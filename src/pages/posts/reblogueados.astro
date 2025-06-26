@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { SITE_INFO, POST_SETTINGS } from '../../config/site';
+
+// Obtener todos los posts reblogueados de la carpeta de datos
+const allRebloggedPosts = await Astro.glob('../../data/reblogged-posts/*.md');
+
+// Los reblogueados no tienen 'created' sino la fecha del reblog.
+// Por ahora, asumimos que 'created' en el frontmatter representa la fecha original del post.
+// Si necesitas ordenar por la fecha del reblog, necesitaríamos ese dato de la API.
+const sortedPosts = allRebloggedPosts.sort((a, b) => {
+  const dateA = new Date(a.frontmatter.created);
+  const dateB = new Date(b.frontmatter.created);
+  return dateB.getTime() - dateA.getTime(); // Descendente
+});
+
+// Limitar el número de posts según la configuración
+const postsToShow = sortedPosts.slice(0, POST_SETTINGS.postsPerPage);
+---
+
+<Layout title="Posts Reblogueados" description={`Explora los posts reblogueados por ${SITE_INFO.author} en HiveBlogs.`}>
+  <section class="content-section">
+    <div class="container">
+      <div class="main-column">
+        <h2>Posts Reblogueados por {SITE_INFO.author}</h2>
+        {postsToShow.length === 0 ? (
+          <p>No se encontraron posts reblogueados. Ejecuta `node fetch-hive-posts.js` para obtenerlos.</p>
+        ) : (
+          <div class="posts-grid">
+            {postsToShow.map((post) => (
+              <PostCard post={post} />
+            ))}
+          </div>
+        )}
+      </div>
+      <aside class="sidebar-column">
+        <h3>Categorías de Hive</h3>
+        <nav class="categories-nav">
+          {/* Aquí puedes listar dinámicamente las categorías de tus posts */}
+          <ul>
+            <li><a href="#">Tecnología</a></li>
+            <li><a href="#">Blockchain</a></li>
+            <li><a href="#">Noticias</a></li>
+          </ul>
+        </nav>
+      </aside>
+    </div>
+  </section>
+</Layout>

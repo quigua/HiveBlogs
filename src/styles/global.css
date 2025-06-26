@@ -1,18 +1,28 @@
 /* src/styles/global.css */
 
-@import './_variables.css'; /* ¡IMPORTANTE! Importa tus variables de color aquí */
+@import './_variables.css'; /* IMPORTS YOUR COLOR VARIABLES */
 
-/* ----------------------------------------------------- */
-/* Estilos Base y Tipografía */
-/* ----------------------------------------------------- */
-
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
+/* --- 1. Reset Básico y Box-Sizing --- */
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+/* --- 2. Estilos Base de HTML y Body --- */
+html {
+  scroll-behavior: smooth;
+  line-height: 1.6;
   background-color: var(--color-background-body);
   color: var(--color-text-body);
+}
+
+body {
+  font-family: Arial, sans-serif; /* Usando fuente genérica */
+  font-size: 1rem; /* 16px por defecto */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -23,20 +33,44 @@ body {
   padding: 0 20px;
 }
 
+/* --- 3. Tipografía General --- */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-body);
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+h1 { font-size: 3.5rem; } /* Large for main titles */
+h2 { font-size: 2.5rem; } /* Sub-titles/section titles */
+h3 { font-size: 1.8rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+
+p {
+  margin-bottom: 1rem;
+}
+
 /* Enlaces generales */
 a {
   color: var(--color-primary);
   text-decoration: none;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
 }
 
 a:hover {
   text-decoration: underline;
+  color: var(--color-tertiary);
 }
 
-/* ----------------------------------------------------- */
-/* Header Principal */
-/* ----------------------------------------------------- */
+/* Imágenes */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 
+/* --- 4. Header Principal --- */
 .main-header {
   background-color: var(--color-background-header-footer);
   color: var(--color-text-light);
@@ -51,7 +85,7 @@ a:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+  flex-wrap: wrap;
 }
 
 .main-header .logo a {
@@ -84,11 +118,66 @@ a:hover {
   color: var(--color-secondary);
 }
 
-/* ----------------------------------------------------- */
-/* Estilos para el componente Hero */
-/* ----------------------------------------------------- */
+/* Submenú de Navegación */
+.main-nav ul li.has-submenu {
+  position: relative;
+}
 
-.hero {
+.main-nav ul li.has-submenu .submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--color-background-header-footer);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  min-width: 180px;
+  z-index: 999;
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  border-radius: 0 0 5px 5px;
+}
+
+.main-nav ul li.has-submenu:hover .submenu {
+  display: block;
+}
+
+.main-nav ul li.has-submenu .submenu li {
+  margin: 0;
+}
+
+.main-nav ul li.has-submenu .submenu li a {
+  padding: 8px 20px;
+  display: block;
+  color: var(--color-text-light);
+  white-space: nowrap;
+}
+
+.main-nav ul li.has-submenu .submenu li a:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+/* Flecha indicadora para submenú */
+.main-nav ul li.has-submenu .arrow-down {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  vertical-align: middle;
+  border-top: 5px solid var(--color-text-light);
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  transition: transform 0.3s ease;
+}
+
+.main-nav ul li.has-submenu:hover .arrow-down {
+  transform: rotate(180deg);
+}
+
+/* --- 5. Estilos para el componente Hero --- */
+.hero { /* Cambiado de .hero-section a .hero para consistencia con tu código */
   position: relative;
   background-size: cover;
   background-position: center;
@@ -109,7 +198,7 @@ a:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Overlay oscuro para que el texto resalte */
+  background-color: rgba(0, 0, 0, 0.5); /* Overlay oscuro */
   z-index: 1;
 }
 
@@ -123,6 +212,7 @@ a:hover {
   font-size: 3.5rem;
   margin-bottom: 20px;
   line-height: 1.2;
+  color: var(--color-white); /* Título del hero siempre blanco */
 }
 
 .hero p {
@@ -133,7 +223,8 @@ a:hover {
   margin-right: auto;
 }
 
-.hero .call-to-action {
+.hero .call-to-action { /* Cambiado de .btn-primary a .call-to-action para consistencia con tu código */
+  display: inline-block;
   background-color: var(--color-secondary);
   color: var(--color-white);
   padding: 15px 30px;
@@ -145,52 +236,94 @@ a:hover {
 }
 
 .hero .call-to-action:hover {
-  background-color: var(--color-tertiary); /* Cambiado a una variable existente */
+  background-color: var(--color-tertiary);
 }
 
-/* ----------------------------------------------------- */
-/* Estilos para la sección de contenido (página de inicio) */
-/* ----------------------------------------------------- */
-
+/* --- 6. Estilos para Secciones de Contenido y Layout de Columnas --- */
 .content-section {
   padding: 30px 0;
 }
 
 .content-section .container {
   display: flex;
-  gap: 30px; /* Espacio entre la columna principal y la barra lateral */
-  flex-wrap: wrap; /* Permite que las columnas se envuelvan en pantallas pequeñas */
-  align-items: flex-start; /* Alinea las columnas arriba */
+  gap: 30px;
+  flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 .content-section .main-column {
-  flex: 3; /* La columna principal ocupa más espacio */
-  min-width: 300px; /* Asegura un ancho mínimo para la columna principal */
+  flex: 3;
+  min-width: 300px;
 }
 
 .content-section .sidebar-column {
-  flex: 1; /* La barra lateral ocupa menos espacio */
-  min-width: 250px; /* Asegura un ancho mínimo para la barra lateral */
+  flex: 1;
+  min-width: 250px;
   background-color: var(--color-background-card);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: sticky; /* Hace que la barra lateral sea pegajosa */
-  top: 100px; /* Ajusta esto si tu header es más alto */
+  position: sticky;
+  top: 100px; /* Ajusta según la altura de tu header */
 }
 
 /* Títulos de sección */
-h2 {
+.main-column h2 { /* Específico para h2 en la columna principal, tu h2 general sigue arriba */
   color: var(--color-primary);
   font-size: 2rem;
   margin-bottom: 25px;
   text-align: center;
 }
 
-/* ----------------------------------------------------- */
-/* Cuadrícula de Posts (Página de Inicio) */
-/* ----------------------------------------------------- */
+/* Navegación de categorías en la barra lateral */
+.categories-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
+.categories-nav li {
+  margin-bottom: 10px;
+}
+
+.categories-nav a {
+  display: block;
+  padding: 8px 10px;
+  background-color: var(--color-light-gray);
+  border-radius: 5px;
+  color: var(--color-text-body);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.categories-nav a:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+/* Placeholder para otros detalles de la barra lateral */
+.other-details-placeholder {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.other-details-placeholder h3 {
+  color: var(--color-primary);
+  margin-bottom: 15px;
+}
+
+.other-details-placeholder ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.other-details-placeholder li {
+  margin-bottom: 8px;
+}
+
+/* --- 7. Cuadrícula de Posts (Página de Inicio) --- */
 .posts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -198,10 +331,7 @@ h2 {
   margin-top: 20px;
 }
 
-/* ----------------------------------------------------- */
-/* Tarjeta de Post (PostCard) */
-/* ----------------------------------------------------- */
-
+/* --- 8. Tarjeta de Post (PostCard) --- */
 .post-card {
   background-color: var(--color-background-card);
   border-radius: 8px;
@@ -210,6 +340,7 @@ h2 {
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease-in-out;
+  min-height: 420px; /* Ajuste para mantener altura consistente */
 }
 
 .post-card:hover {
@@ -241,7 +372,7 @@ h2 {
   display: flex;
   justify-content: space-between;
   font-size: 0.85rem;
-  color: var(--color-dark-gray);
+  color: var(--color-text-muted); /* Usando text-muted */
   margin-bottom: 10px;
 }
 
@@ -251,6 +382,11 @@ h2 {
   padding: 3px 8px;
   border-radius: 4px;
   font-weight: bold;
+  text-transform: capitalize;
+}
+
+.post-card .post-reads {
+  color: var(--color-text-muted); /* Usando text-muted */
 }
 
 .post-card .post-title-link {
@@ -265,47 +401,69 @@ h2 {
   color: var(--color-primary);
 }
 
+.post-card .post-title-link:hover h3 {
+  color: var(--color-secondary);
+}
+
 .post-card .post-excerpt {
   font-size: 0.95rem;
-  color: var(--color-dark-gray);
+  line-height: 1.5;
+  color: var(--color-text-body); /* Usando text-body */
   margin-bottom: 15px;
   flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .post-card .post-meta-bottom {
-  font-size: 0.8rem;
-  color: var(--color-dark-gray);
-  margin-top: auto;
-  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--color-text-muted); /* Usando text-muted */
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid var(--color-border-light);
 }
 
 .post-card .post-author a {
   color: var(--color-primary);
   font-weight: bold;
+  text-decoration: none;
+}
+
+.post-card .post-author a:hover {
+  text-decoration: underline;
+}
+
+.post-card .post-date {
+  color: var(--color-text-muted); /* Usando text-muted */
 }
 
 .post-card .post-actions {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   margin-top: 15px;
   margin-bottom: 15px;
   border-top: 1px solid var(--color-border-light);
   padding-top: 15px;
+  font-size: 0.9rem;
+  color: var(--color-text-body);
 }
 
 .post-card .action-item {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 0.9rem;
-  color: var(--color-dark-gray);
 }
 
 .post-card .action-item .icon {
-  font-size: 1.1rem;
+  font-size: 1.1em;
+  line-height: 1;
 }
 
 .post-card .post-tags {
@@ -313,77 +471,153 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--color-border-light);
 }
 
 .post-card .post-tags .tag {
   background-color: var(--color-light-gray);
   color: var(--color-dark-gray);
+  font-size: 0.8rem;
   padding: 5px 10px;
   border-radius: 5px;
-  font-size: 0.8rem;
-}
-
-/* ----------------------------------------------------- */
-/* Navegación de categorías en la barra lateral */
-/* ----------------------------------------------------- */
-
-.categories-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.categories-nav li {
-  margin-bottom: 10px;
-}
-
-.categories-nav a {
-  display: block;
-  padding: 8px 10px;
-  background-color: var(--color-light-gray);
-  border-radius: 5px;
-  color: var(--color-text-body);
   text-decoration: none;
   transition: background-color 0.2s ease;
 }
 
-.categories-nav a:hover {
+.post-card .post-tags .tag:hover {
   background-color: var(--color-secondary);
   color: var(--color-white);
 }
 
-/* ----------------------------------------------------- */
-/* Placeholder para otros detalles de la barra lateral */
-/* ----------------------------------------------------- */
-
-.other-details-placeholder {
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 1px solid var(--color-border-light);
+/* --- 9. Estilos para Página de Detalle del Post ([...slug].astro) --- */
+.post-detail-container {
+  max-width: 800px;
+  margin: 50px auto; /* Reemplaza --spacing-lg */
+  padding: 30px; /* Reemplaza --spacing-md */
+  background-color: var(--color-background-card); /* Reemplaza --color-surface */
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-.other-details-placeholder h3 {
+.post-detail-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 30px; /* Reemplaza --spacing-md */
+}
+
+.post-detail-title {
+  font-size: 2.8rem; /* Reemplaza --font-size-xl */
+  color: var(--color-text-body); /* Reemplaza --color-text */
+  margin-bottom: 20px; /* Reemplaza --spacing-sm */
+  line-height: 1.2;
+}
+
+.post-detail-meta {
+  font-size: 0.95rem; /* Reemplaza --font-size-sm */
+  color: var(--color-text-muted);
+  margin-bottom: 30px; /* Reemplaza --spacing-lg */
+  border-bottom: 1px solid var(--color-border-light); /* Reemplaza --color-border */
+  padding-bottom: 10px; /* Reemplaza --spacing-sm */
+}
+
+.post-detail-meta a {
   color: var(--color-primary);
-  margin-bottom: 15px;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.other-details-placeholder ul {
-  list-style: none;
+.post-detail-meta a:hover {
+  text-decoration: underline;
+}
+
+.post-content-body {
+  line-height: 1.8; /* Ajustado para mejor legibilidad */
+  font-size: 1rem; /* Reemplaza --font-size-base */
+  color: var(--color-text-body);
+}
+
+/* Estilos básicos para el contenido Markdown generado */
+.post-content-body h1, .post-content-body h2, .post-content-body h3, .post-content-body h4, .post-content-body h5, .post-content-body h6 {
+  color: var(--color-text-body); /* Reemplaza --color-text */
+  margin-top: 30px; /* Reemplaza --spacing-md */
+  margin-bottom: 15px; /* Reemplaza --spacing-sm */
+  line-height: 1.3; /* Added for consistency */
+}
+/* Specific heading sizes for post content body */
+.post-content-body h1 { font-size: 2.5rem; }
+.post-content-body h2 { font-size: 2rem; }
+.post-content-body h3 { font-size: 1.5rem; }
+
+.post-content-body p {
+  margin-bottom: 1rem; /* Reemplaza --spacing-sm */
+}
+
+.post-content-body a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.post-content-body a:hover {
+  text-decoration: underline;
+}
+
+.post-content-body ul, .post-content-body ol {
+  margin-bottom: 1rem; /* Reemplaza --spacing-sm */
+  padding-left: 25px; /* Ajustado a 25px para consistencia */
+}
+
+.post-content-body li {
+  margin-bottom: 8px; /* Ajustado a 8px */
+}
+
+.post-content-body blockquote {
+  border-left: 5px solid var(--color-primary); /* Reemplaza --color-border, usando primary para un toque de color */
+  background-color: var(--color-light-gray); /* Reemplaza --color-background-light */
+  padding: 1rem; /* Reemplaza --spacing-sm */
+  margin: 1.5rem 0; /* Ajustado para consistencia */
+  color: var(--color-text-muted);
+  font-style: italic;
+  border-radius: 8px; /* Added for better aesthetics */
+}
+
+.post-content-body code {
+  background-color: var(--color-light-gray); /* Reemplaza --color-background-light */
+  padding: 3px 6px; /* Ajustado */
+  border-radius: 4px;
+  font-family: monospace; /* Fallback si 'Fira Code' no está disponible */
+  font-size: 0.9em; /* Adjusted */
+}
+
+.post-content-body pre {
+  background-color: var(--color-dark-gray); /* Reemplaza --color-background-code */
+  padding: 1rem; /* Reemplaza --spacing-sm */
+  border-radius: 8px; /* Adjusted */
+  overflow-x: auto;
+  margin-bottom: 1.5rem; /* Reemplaza --spacing-sm */
+  color: var(--color-white); /* Text white for code blocks */
+}
+
+.post-content-body pre code {
+  background-color: transparent;
   padding: 0;
-  margin: 0;
+  color: inherit;
 }
 
-.other-details-placeholder li {
-  margin-bottom: 8px;
+.post-content-body img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto; /* Reemplaza --spacing-md */
+  border-radius: 8px;
 }
 
-/* ----------------------------------------------------- */
-/* Footer Principal */
-/* ----------------------------------------------------- */
-
+/* --- 10. Footer Principal --- */
 .main-footer {
-  background-color: var(--color-background-dark); /* Usando tu variable para el fondo del footer */
-  color: var(--color-text-light); /* Texto claro para fondo oscuro */
+  background-color: var(--color-background-dark);
+  color: var(--color-text-light);
   padding: 40px 20px 20px;
   margin-top: 50px;
   border-top: 1px solid var(--color-border-dark);
@@ -437,10 +671,7 @@ h2 {
   color: var(--color-light-gray);
 }
 
-/* ----------------------------------------------------- */
-/* Responsive Design */
-/* ----------------------------------------------------- */
-
+/* --- 11. Responsive Design --- */
 @media (max-width: 768px) {
   .main-header .container {
     flex-direction: column;
@@ -454,6 +685,24 @@ h2 {
 
   .main-header .main-nav ul li {
     margin: 0 10px 10px;
+  }
+
+  /* Responsive para submenú */
+  .main-nav ul li.has-submenu .submenu {
+    position: static;
+    display: block;
+    background-color: transparent;
+    box-shadow: none;
+    min-width: unset;
+    text-align: center;
+    padding: 0;
+    margin-top: 10px;
+  }
+  .main-nav ul li.has-submenu .submenu li a {
+    padding: 8px 10px;
+  }
+  .main-nav ul li.has-submenu .arrow-down {
+    display: none;
   }
 
   .content-section .container {
@@ -502,86 +751,17 @@ h2 {
   .footer-section ul {
     margin-bottom: 20px;
   }
-}
 
-/* ----------------------------------------------------- */
-/* Estilos para el Submenú de Navegación */
-/* ----------------------------------------------------- */
-
-.main-nav ul li.has-submenu {
-  position: relative; /* Necesario para posicionar el submenú */
-}
-
-.main-nav ul li.has-submenu .submenu {
-  display: none; /* Oculta el submenú por defecto */
-  position: absolute;
-  top: 100%; /* Coloca el submenú justo debajo del elemento padre */
-  left: 0;
-  background-color: var(--color-background-header-footer); /* Mismo fondo que el header */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  min-width: 180px; /* Ancho mínimo para los elementos del submenú */
-  z-index: 999; /* Asegura que esté por encima de otros elementos */
-  list-style: none;
-  padding: 10px 0;
-  margin: 0;
-  border-radius: 0 0 5px 5px; /* Bordes redondeados en la parte inferior */
-}
-
-.main-nav ul li.has-submenu:hover .submenu {
-  display: block; /* Muestra el submenú al pasar el ratón por el padre */
-}
-
-.main-nav ul li.has-submenu .submenu li {
-  margin: 0; /* Reinicia el margen para los elementos del submenú */
-}
-
-.main-nav ul li.has-submenu .submenu li a {
-  padding: 8px 20px; /* Padding para los enlaces del submenú */
-  display: block;
-  color: var(--color-text-light); /* Color de texto para el submenú */
-  white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
-}
-
-.main-nav ul li.has-submenu .submenu li a:hover {
-  background-color: var(--color-secondary); /* Cambia el fondo al pasar el ratón */
-  color: var(--color-white); /* Asegura que el texto sea blanco */
-  text-decoration: none; /* Quita el subrayado al pasar el ratón */
-}
-
-/* Estilo básico para la flecha indicadora (puedes usar un icono si tienes FontAwesome, etc.) */
-.main-nav ul li.has-submenu .arrow-down {
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin-left: 5px;
-  vertical-align: middle;
-  border-top: 5px solid var(--color-text-light);
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
-  transition: transform 0.3s ease;
-}
-
-.main-nav ul li.has-submenu:hover .arrow-down {
-  transform: rotate(180deg); /* Rota la flecha al desplegar */
-}
-
-/* Ajuste responsive para el submenú */
-@media (max-width: 768px) {
-  .main-nav ul li.has-submenu .submenu {
-    position: static; /* No posiciona el submenú en móvil */
-    display: block; /* Muestra siempre en móvil si el padre está activo */
-    background-color: transparent;
-    box-shadow: none;
-    min-width: unset;
-    text-align: center;
-    padding: 0;
-    margin-top: 10px; /* Espacio debajo del elemento principal */
+  /* Responsive para Post Detail */
+  .post-detail-container {
+    margin: 30px auto; /* Reemplaza --spacing-md */
+    padding: 20px; /* Reemplaza --spacing-sm */
   }
-  .main-nav ul li.has-submenu .submenu li a {
-    padding: 8px 10px;
+  .post-detail-title {
+    font-size: 2rem; /* Reemplaza --font-size-lg */
   }
-  .main-nav ul li.has-submenu .arrow-down {
-    display: none; /* Oculta la flecha en móvil si no es relevante */
-  }
-  /* Necesitarías JS para un toggle de submenú en móvil si no quieres que esté siempre expandido */
+  /* Responsive heading sizes for post content body */
+  .post-content-body h1 { font-size: 2rem; }
+  .post-content-body h2 { font-size: 1.8rem; }
+  .post-content-body h3 { font-size: 1.3rem; }
 }

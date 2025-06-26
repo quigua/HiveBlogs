@@ -33,6 +33,6 @@ export const SITE_INFO = {
 
 // Puedes exportar otras configuraciones si las necesitas, por ejemplo, para posts
 export const POST_SETTINGS = {
-  postsPerPage: 8,
+  postsPerPage: 6,
   showExcerpt: true,
 };

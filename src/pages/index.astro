@@ -1,171 +1,51 @@
 ---
-import Layout from '../layouts/Layout.astro'; // Asegúrate de que importa el Layout general
+import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import PostCard from '../components/PostCard.astro';
-// NO DEBE HABER NINGUNA IMPORTACIÓN DE CSS AQUÍ
+import { SITE_INFO, POST_SETTINGS } from '../config/site';
+
+// Ahora obtenemos los posts de la carpeta src/data/original-posts
+// Puedes elegir qué posts mostrar en la página principal, por ejemplo, solo originales
+const allPosts = await Astro.glob('../data/original-posts/*.md');
+
+const sortedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.created).getTime() - new Date(a.frontmatter.created).getTime());
+
+// Limitar el número de posts
+const latestPosts = sortedPosts.slice(0, POST_SETTINGS.postsPerPage);
 ---
 
-<Layout title="Inicio - HiveBlogs"> {/* Usa Layout.astro y le pasa el título */}
+<Layout title={SITE_INFO.title} description={SITE_INFO.description}>
   <Hero />
 
   <section class="content-section">
     <div class="container">
       <div class="main-column">
-        <h2>Últimos Posts</h2>
+        <h2>Últimos Posts Originales</h2>
         <div class="posts-grid">
-          <PostCard
-            title="Mi Primer Post en Hive"
-            date="25 de Jun, 2025"
-            author="quigua"
-            imageUrl="/images/placeholder-1.jpg"
-            excerpt="Un breve extracto de lo que trata este primer post, hablando de la experiencia inicial en Hive."
-            category="Introducción"
-            tags={['hive', 'blogging', 'primer-post']}
-            reads={125}
-            votes={50}
-            hbdPayout="5.23 HBD"
-            comments={10}
-            slug="mi-primer-post"
-          />
-          <PostCard
-            title="Diseño Web con Astro y CSS Moderno"
-            date="24 de Jun, 2025"
-            author="elvis"
-            imageUrl="/images/placeholder-2.jpg"
-            excerpt="Explorando las bondades de Astro para construir sitios web rápidos y cómo manejar el CSS."
-            category="Desarrollo Web"
-            tags={['astro', 'css', 'frontend']}
-            reads={230}
-            votes={85}
-            hbdPayout="12.75 HBD"
-            comments={22}
-            slug="diseno-web-con-astro"
-          />
-          <PostCard
-            title="Integrando Blockchain en Aplicaciones Web"
-            date="23 de Jun, 2025"
-            author="usuario_x"
-            imageUrl="/images/placeholder-3.jpg"
-            excerpt="Cómo la tecnología blockchain puede transformar nuestras aplicaciones, con ejemplos prácticos."
-            category="Blockchain"
-            tags={['blockchain', 'web3', 'descentralizado']}
-            reads={89}
-            votes={30}
-            hbdPayout="3.10 HBD"
-            comments={5}
-            slug="integrando-blockchain"
-          />
-          <PostCard
-            title="Guía Completa de Headless CMS para tu Blog"
-            date="22 de Jun, 2025"
-            author="admin"
-            imageUrl="/images/placeholder-4.jpg"
-            excerpt="Descubre cómo un CMS headless puede darte más flexibilidad y control sobre tu contenido."
-            category="CMS"
-            tags={['headless-cms', 'contenido', 'gestión']}
-            reads={180}
-            votes={70}
-            hbdPayout="9.80 HBD"
-            comments={15}
-            slug="guia-headless-cms"
-          />
-          <PostCard
-            title="El Futuro de los Blogs y la Web Descentralizada"
-            date="21 de Jun, 2025"
-            author="quigua"
-            imageUrl="/images/placeholder-5.jpg"
-            excerpt="Una mirada a las tendencias emergentes que están moldeando el futuro de la publicación en línea."
-            category="Tendencias"
-            tags={['futuro', 'web-descentralizada', 'innovación']}
-            reads={95}
-            votes={45}
-            hbdPayout="6.50 HBD"
-            comments={8}
-            slug="futuro-blogs-web3"
-          />
-          <PostCard
-            title="Consejos Avanzados de CSS para Desarrolladores"
-            date="20 de Jun, 2025"
-            author="elvis"
-            imageUrl="/images/placeholder-6.jpg"
-            excerpt="Técnicas avanzadas de CSS para mejorar el rendimiento y la estética de tus proyectos."
-            category="Desarrollo Web"
-            tags={['css', 'rendimiento', 'diseño']}
-            reads={310}
-            votes={110}
-            hbdPayout="18.90 HBD"
-            comments={30}
-            slug="consejos-css-avanzados"
-          />
-          <PostCard
-            title="Explorando Netlify Functions: Serverless al rescate"
-            date="19 de Jun, 2025"
-            author="usuario_x"
-            imageUrl="/images/placeholder-7.jpg"
-            excerpt="Cómo usar funciones serverless para añadir lógica dinámica a tus sitios estáticos con Netlify."
-            category="Cloud"
-            tags={['netlify', 'serverless', 'funciones']}
-            reads={150}
-            votes={60}
-            hbdPayout="7.25 HBD"
-            comments={12}
-            slug="netlify-functions"
-          />
-          <PostCard
-            title="Optimización SEO en Astro: Guía Esencial"
-            date="18 de Jun, 2025"
-            author="admin"
-            imageUrl="/images/placeholder-8.jpg"
-            excerpt="Mejora la visibilidad de tu blog Astro en los motores de búsqueda con estos consejos de SEO."
-            category="SEO"
-            tags={['seo', 'astro', 'visibilidad']}
-            reads={205}
-            votes={75}
-            hbdPayout="10.50 HBD"
-            comments={18}
-            slug="optimizacion-seo-astro"
-          />
-          <PostCard
-            title="La Comunidad de Hive: Un Ecosistema en Crecimiento"
-            date="17 de Jun, 2025"
-            author="quigua"
-            imageUrl="/images/placeholder-9.jpg"
-            excerpt="Descubre cómo la comunidad de Hive está construyendo un ecosistema robusto y vibrante."
-            category="Comunidad"
-            tags={['hive', 'comunidad', 'ecosistema']}
-            reads={70}
-            votes={40}
-            hbdPayout="4.99 HBD"
-            comments={7}
-            slug="comunidad-hive"
-          />
+          {latestPosts.map((post) => (
+            <PostCard post={post} />
+          ))}
         </div>
+        {/* Aquí puedes añadir un botón o enlace para ver más posts si tienes muchos */}
       </div>
+      {/* INICIO DEL SIDEBAR */}
       <aside class="sidebar-column">
-        <h2>Secciones del Blog</h2>
+        <h3>Categorías de Hive</h3>
         <nav class="categories-nav">
-          <ul class="categories-list">
-            <li><a href="#">Desarrollo Web</a></li>
+          <ul>
+            <li><a href="#">Tecnología</a></li>
             <li><a href="#">Blockchain</a></li>
-            <li><a href="#">Astro JS</a></li>
             <li><a href="#">Tutoriales</a></li>
-            <li><a href="#">Noticias Hive</a></li>
-            <li><a href="#">Comunidad</a></li>
-            <li><a href="#">CMS</a></li>
-            <li><a href="#">SEO</a></li>
+            <li><a href="#">Noticias</a></li>
           </ul>
         </nav>
         <div class="other-details-placeholder">
-          <h3>Acerca de este Blog</h3>
-          <p>Bienvenido al blog de ejemplo de HiveBlogs. Aquí encontrarás contenido sobre desarrollo web, la cadena de bloques de Hive, y mucho más.</p>
-          <p>Conéctate con nosotros en redes sociales:</p>
-          <ul>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">Discord</a></li>
-          </ul>
+          <h3>Acerca de {SITE_INFO.title.split(' - ')[0]}</h3>
+          <p>{SITE_INFO.description}</p>
         </div>
+        {/* Podrías añadir un módulo para posts populares o tags aquí */}
       </aside>
+      {/* FIN DEL SIDEBAR */}
     </div>
   </section>
 </Layout>

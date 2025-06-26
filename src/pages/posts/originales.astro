@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { SITE_INFO, POST_SETTINGS } from '../../config/site';
+
+// Obtener todos los posts originales de la carpeta de datos
+const allOriginalPosts = await Astro.glob('../../data/original-posts/*.md');
+
+// Ordenar los posts por fecha de creación (los más recientes primero)
+const sortedPosts = allOriginalPosts.sort((a, b) => {
+  const dateA = new Date(a.frontmatter.created);
+  const dateB = new Date(b.frontmatter.created);
+  return dateB.getTime() - dateA.getTime(); // Descendente
+});
+
+// Limitar el número de posts según la configuración
+const postsToShow = sortedPosts.slice(0, POST_SETTINGS.postsPerPage);
+---
+
+<Layout title="Posts Originales" description={`Explora los posts originales de ${SITE_INFO.author} en HiveBlogs.`}>
+  <section class="content-section">
+    <div class="container">
+      <div class="main-column">
+        <h2>Posts Originales de {SITE_INFO.author}</h2>
+        {postsToShow.length === 0 ? (
+          <p>No se encontraron posts originales. Ejecuta `node fetch-hive-posts.js` para obtenerlos.</p>
+        ) : (
+          <div class="posts-grid">
+            {postsToShow.map((post) => (
+              <PostCard post={post} />
+            ))}
+          </div>
+        )}
+      </div>
+      <aside class="sidebar-column">
+        <h3>Categorías de Hive</h3>
+        <nav class="categories-nav">
+          {/* Aquí puedes listar dinámicamente las categorías de tus posts */}
+          <ul>
+            <li><a href="#">Tecnología</a></li>
+            <li><a href="#">Blockchain</a></li>
+            <li><a href="#">Tutoriales</a></li>
+          </ul>
+        </nav>
+      </aside>
+    </div>
+  </section>
+</Layout>

@@ -1,28 +1,50 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro'; // Importa el layout general
-import PostLayout from '../../layouts/PostLayout.astro'; // Importa el layout específico del post
+import Layout from '../../layouts/Layout.astro';
+import { SITE_INFO } from '../../config/site';
 
+// 1. getStaticPaths: Astro necesita saber qué páginas debe generar.
+//    Esta función le dirá a Astro todas las rutas posibles para los posts.
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('blog');
+  // Obtener todos los posts originales y reblogueados
+  const allOriginalPosts = await Astro.glob('../../data/original-posts/*.md');
+  const allRebloggedPosts = await Astro.glob('../../data/reblogged-posts/*.md');
 
-  return blogEntries.map(entry => ({
-    params: { slug: entry.slug },
-    props: { entry },
+  // Combinar ambos tipos de posts
+  const allPosts = [...allOriginalPosts, ...allRebloggedPosts];
+
+  // Mapear los posts a los objetos de ruta que Astro espera
+  return allPosts.map((post) => ({
+    params: {
+      slug: post.frontmatter.permlink, // Usamos 'permlink' como el 'slug' de la URL
+    },
+    props: {
+      post, // Pasamos el objeto post completo a la página para que lo use
+    },
   }));
 }
 
-const { entry } = Astro.props;
+// 2. Props de la página: Recibimos el 'post' individual para esta página
+const { post } = Astro.props;
 
-const postFrontmatter = {
-  ...entry.data,
-};
+// Desestructurar propiedades del frontmatter del post para usarlas en la plantilla
+const { title, author, created, body, image, description } = post.frontmatter;
 
-const { Content } = await entry.render();
+// Formatear la fecha
+const formattedDate = created ? new Date(created).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Fecha desconocida';
 ---
 
-<Layout title={postFrontmatter.title}> {/* Layout.astro envuelve todo */}
-  <PostLayout frontmatter={postFrontmatter}> {/* PostLayout.astro es el layout del contenido del post */}
-    <Content />
-  </PostLayout>
+<Layout title={title} description={description || SITE_INFO.description}>
+  <article class="post-detail-container">
+    {image && <img src={image} alt={title} class="post-detail-image" />}
+    <h1 class="post-detail-title">{title}</h1>
+    <div class="post-detail-meta">
+      <span>Por <a href="#">{author}</a></span>
+      <span> el {formattedDate}</span>
+    </div>
+    <div class="post-content-body">
+      {/* Aquí inyectamos el contenido Markdown del post */}
+      <Fragment set:html={post.compiledContent()} />
+    </div>
+    </article>
 </Layout>
+
