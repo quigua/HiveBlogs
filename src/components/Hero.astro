@@ -1,14 +1,42 @@
 ---
-// No debe haber ningún código aquí, excepto las líneas de script si las tuvieras
-// pero para este componente, lo ideal es que esté vacío
+import { getUserProfile } from 'hiveblogkit';
+
+// Lee el nombre de usuario de Hive desde las variables de entorno
+const HIVE_USERNAME = import.meta.env.HIVE_USERNAME;
+
+// Define una imagen de fondo por defecto
+let coverImageUrl = '/background-placeholder.jpg';
+let heroDescription = 'Tu plataforma descentralizada para leer, escribir y conectar en la blockchain de Hive.';
+
+// Si el nombre de usuario está disponible, intenta obtener la imagen de portada
+if (HIVE_USERNAME) {
+  try {
+    // Llama a la función para obtener el perfil del usuario
+    const userProfile = await getUserProfile(HIVE_USERNAME);
+
+    // Verifica si la respuesta contiene los metadatos del perfil
+    if (userProfile && userProfile.posting_json_metadata) {
+      const metadata = JSON.parse(userProfile.posting_json_metadata);
+      
+      // Si existe una imagen de portada en el perfil, úsala
+      if (metadata.profile && metadata.profile.cover_image) {
+        coverImageUrl = metadata.profile.cover_image;
+      }
+      // Si existe un texto 'about' en el perfil, úsalo
+      if (metadata.profile && metadata.profile.about) {
+        heroDescription = metadata.profile.about;
+      }
+    }
+  } catch (error) {
+    // En caso de error, muestra un mensaje en la consola y usa la imagen por defecto
+    console.error(`Error al obtener el perfil de Hive para ${HIVE_USERNAME}:`, error);
+  }
+}
 ---
-<section class="hero" style="background-image: url('/background-placeholder.jpg');">
+<section class="hero" style={`background-image: url('${coverImageUrl}');`}>
   <div class="container">
-    <h1>Bienvenido a HiveBlogs</h1>
-    <p>Tu plataforma descentralizada para leer, escribir y conectar en la blockchain de Hive.</p>
+    <h1>Welcome to @{HIVE_USERNAME}'s blog</h1>
+    <p>{heroDescription}</p>
     <a href="/posts" class="call-to-action">Explora Posts</a>
   </div>
 </section>
-
-{/* ¡IMPORTANTE: ESTE BLOQUE <style> DEBE ESTAR COMPLETAMENTE AUSENTE! */}
-{/* Si tienes un bloque <style> aquí, bórralo por completo. */}

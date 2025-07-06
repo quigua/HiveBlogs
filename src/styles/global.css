@@ -1,6 +1,8 @@
 /* src/styles/global.css */
 
 @import './_variables.css'; /* IMPORTS YOUR COLOR VARIABLES */
+@import './components/CommentCard.css';
+
 
 /* --- 1. Reset Básico y Box-Sizing --- */
 *, *::before, *::after {
@@ -71,6 +73,13 @@ img {
 }
 
 /* --- 4. Header Principal --- */
+
+.main-header .logo .hive-logo {
+  height: 40px; /* Ajusta según sea necesario para que coincida con la altura del menú */
+  width: auto; /* Mantiene la relación de aspecto */
+  vertical-align: middle; /* Alinea el logo con el texto */
+  margin-right: 10px; /* Espacio entre el logo y el texto */
+}
 .main-header {
   background-color: var(--color-background-header-footer);
   color: var(--color-text-light);
@@ -93,6 +102,8 @@ img {
   text-decoration: none;
   font-size: 1.8rem;
   font-weight: bold;
+  display: flex; /* Make it a flex container */
+  align-items: center; /* Vertically align items in the middle */
 }
 
 .main-header .main-nav ul {
@@ -179,8 +190,10 @@ img {
 /* --- 5. Estilos para el componente Hero --- */
 .hero { /* Cambiado de .hero-section a .hero para consistencia con tu código */
   position: relative;
-  background-size: cover;
+  background-size: contain; /* Cambiado a contain */
   background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--color-white); /* Añadido para el espacio en blanco */
   color: var(--color-white);
   text-align: center;
   padding: 100px 20px;
@@ -198,14 +211,13 @@ img {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Overlay oscuro */
+  background-color: rgba(0, 0, 0, 0.3); /* Overlay oscuro sutil */
   z-index: 1;
 }
 
 .hero .container {
   position: relative;
   z-index: 2;
-  max-width: 800px;
 }
 
 .hero h1 {
@@ -251,12 +263,12 @@ img {
   align-items: flex-start;
 }
 
-.content-section .main-column {
+.main-column {
   flex: 3;
   min-width: 300px;
 }
 
-.content-section .sidebar-column {
+.sidebar-column {
   flex: 1;
   min-width: 250px;
   background-color: var(--color-background-card);
@@ -265,6 +277,72 @@ img {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 100px; /* Ajusta según la altura de tu header */
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.main-content {
+  flex-grow: 1;
+  max-width: 800px; /* Adjust as needed */
+}
+
+.active-communities-sidebar {
+  width: 280px;
+  padding: 1.5rem;
+  background-color: var(--color-card-background);
+  border-radius: 8px;
+  box-shadow: var(--shadow-elevation-low);
+  margin-left: 2rem;
+  align-self: flex-start; /* Aligns the sidebar to the top */
+  position: sticky;
+  top: 20px; /* Adjust as needed for sticky positioning */
+}
+
+@media (max-width: 1024px) {
+  .page-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .active-communities-sidebar {
+    margin-left: 0;
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 800px;
+  }
+}
+
+.active-communities-sidebar {
+  width: 280px;
+  padding: 1.5rem;
+  background-color: var(--color-card-background);
+  border-radius: 8px;
+  box-shadow: var(--shadow-elevation-low);
+  margin-left: 2rem;
+  align-self: flex-start; /* Aligns the sidebar to the top */
+  position: sticky;
+  top: 20px; /* Adjust as needed for sticky positioning */
+}
+
+@media (max-width: 1024px) {
+  .page-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .active-communities-sidebar {
+    margin-left: 0;
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 800px;
+  }
 }
 
 /* Títulos de sección */
@@ -420,7 +498,6 @@ img {
 
 .post-card .post-meta-bottom {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   font-size: 0.8rem;
   color: var(--color-text-muted); /* Usando text-muted */
@@ -429,10 +506,19 @@ img {
   border-top: 1px solid var(--color-border-light);
 }
 
+.post-card .post-author-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
 .post-card .post-author a {
   color: var(--color-primary);
   font-weight: bold;
   text-decoration: none;
+  font-size: 1.2rem;
 }
 
 .post-card .post-author a:hover {
@@ -440,6 +526,7 @@ img {
 }
 
 .post-card .post-date {
+  margin-left: auto;
   color: var(--color-text-muted); /* Usando text-muted */
 }
 
@@ -764,4 +851,122 @@ img {
   .post-content-body h1 { font-size: 2rem; }
   .post-content-body h2 { font-size: 1.8rem; }
   .post-content-body h3 { font-size: 1.3rem; }
+}
+
+/* --- 12. Estilos para la Navegación de Paginación --- */
+.pagination-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  gap: 15px;
+  padding: 20px;
+  background-color: var(--color-background-card);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.pagination-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-link:hover {
+  background-color: var(--color-tertiary);
+  text-decoration: none;
+}
+
+.pagination-link.prev {
+  margin-right: auto;
+}
+
+.pagination-link.next {
+  margin-left: auto;
+}
+
+.pagination-info {
+  font-size: 1.1rem;
+  color: var(--color-text-body);
+  font-weight: bold;
+}
+
+/* Media Queries para Responsive de Paginación */
+@media (max-width: 768px) {
+  .pagination-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .pagination-link.prev,
+  .pagination-link.next {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* --- Estilos para Páginas de Comunidad --- */
+.community-page {
+  padding: 40px 0;
+}
+
+.community-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.community-header img {
+  max-width: 100%;
+  height: 200px; /* Fixed height for banner */
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.community-stats p {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+.community-stats strong {
+  color: var(--color-primary);
+}
+
+.post-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.post-item {
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  background-color: var(--color-background-card);
+}
+
+.post-item h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+}
+
+.post-item a {
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
+.post-item a:hover {
+  text-decoration: underline;
+}
+
+.error-message {
+  color: var(--color-error);
+  font-weight: bold;
 }

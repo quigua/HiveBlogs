@@ -1,0 +1,43 @@
+.nested-comments {
+  margin-left: 1.5rem; /* Indent nested comments */
+  border-left: 2px solid var(--color-border-light); /* Visual cue for nesting */
+  padding-left: 1rem;
+  margin-top: 1rem;
+}
+
+.comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.comment-author {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.comment-meta {
+  display: flex;
+  align-items: center;
+}
+
+.comment-date {
+  margin-left: auto;
+}
+
+.comment-card:not(.is-nested) {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.comment-card:nth-child(odd):not(.is-nested) {
+  background-color: var(--color-background-card);
+}
+
+.comment-card:nth-child(even):not(.is-nested) {
+  background-color: var(--color-light-gray);
+}

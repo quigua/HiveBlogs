@@ -1,0 +1,90 @@
+---
+import allCommunities from '../data/all_communities.json';
+
+// Sort communities by num_authors (descending) and then by sum_pending (descending)
+const activeCommunities = allCommunities
+  .sort((a, b) => {
+    if (b.num_authors !== a.num_authors) {
+      return b.num_authors - a.num_authors;
+    }
+    return b.sum_pending - a.sum_pending;
+  })
+  .slice(0, 25); // Get the top 25
+
+const getCommunityImageUrl = (community) => {
+  if (community.cover_image) {
+    return community.cover_image;
+  }
+  if (community.avatar_url) {
+    return community.avatar_url;
+  }
+  return '/placeholders/community-placeholder.webp'; // Placeholder image
+};
+---
+
+<aside class="active-communities-sidebar">
+  <h3>Comunidades Más Activas</h3>
+  <ul>
+    {activeCommunities.map((community) => (
+      <li>
+        <a href={`/comunidades/${community.name}`}>
+          <img src={getCommunityImageUrl(community)} alt={community.title} class="community-avatar" />
+          <span>{community.title}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</aside>
+
+<style>
+  .active-communities-sidebar {
+    width: 280px;
+    padding: 1.5rem;
+    background-color: var(--color-card-background);
+    border-radius: 8px;
+    box-shadow: var(--shadow-elevation-low);
+    margin-left: 2rem;
+    align-self: flex-start; /* Aligns the sidebar to the top */
+    position: sticky;
+    top: 20px; /* Adjust as needed for sticky positioning */
+  }
+
+  .active-communities-sidebar h3 {
+    font-size: 1.5rem;
+    color: var(--color-heading-text);
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .active-communities-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .active-communities-sidebar li {
+    margin-bottom: 1rem;
+  }
+
+  .active-communities-sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .active-communities-sidebar a:hover {
+    color: var(--color-primary);
+  }
+
+  .active-communities-sidebar .community-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+  }
+</style>

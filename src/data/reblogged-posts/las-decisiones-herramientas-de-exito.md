@@ -7,7 +7,7 @@ category: "spanish"
 created: "2017-06-24T07:39:33.000Z"
 lastUpdate: "2017-06-24T07:41:42.000Z"
 url: "/spanish/@humoalex/las-decisiones-herramientas-de-exito"
-reputation: 59.9
+reputation: 59.86
 image: "https://cdn.pixabay.com/photo/2017/05/16/10/06/soledad-2317414_960_720.jpg"
 tags: ["spanish", "life", "motivacion", "decisiones", "self-improvement"]
 hbdPayout: "0.696 HBD"

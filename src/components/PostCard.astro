@@ -1,53 +1,121 @@
 ---
 export interface Props {
-  post: any; // Pasaremos el objeto post completo de Astro.glob()
+  post: any; // Pasaremos el objeto post completo
+  communityId?: string; // Opcional: para enlaces de posts de comunidad
 }
 
-const { post } = Astro.props;
+const { post, communityId } = Astro.props;
+console.log('PostCard received:', { post, communityId });
 
-// Desestructurar las propiedades del post.frontmatter con valores por defecto
-// Esto asegura que PostCard sea robusto incluso si algún dato falta en el frontmatter
-const {
-  title = 'Sin título',
-  description = 'Sin descripción disponible.',
-  author = 'Usuario Desconocido',
-  permlink = 'no-permlink-found', // Un slug por defecto si falta
-  category = 'General',
-  created, // La fecha de creación es fundamental
-  image = null, // Usaremos esto para la imagen principal del post
-  tags = [], // Es crucial que sea un array vacío por defecto
-  url = '#', // URL interna del post
-  // Nuevas propiedades que ahora se guardan en el frontmatter desde fetch-hive-posts.js
-  hbdPayout = '0.000 HBD',
-  votesCount = 0,
-  commentsCount = 0,
-} = post.frontmatter;
+let title, description, author, permlink, category, created, image, tags, url, hbdPayout, votesCount, commentsCount;
+
+// Determinar si el post viene de Astro.glob (con frontmatter) o directamente de la API
+if (post.frontmatter) {
+  // Caso: Post de Astro.glob (originales/reblogueados)
+  ({
+    title = 'Sin título',
+    description = 'Sin descripción disponible.',
+    author = 'Usuario Desconocido',
+    permlink = 'no-permlink-found',
+    category = 'General',
+    created,
+    image = null,
+    tags = [],
+    url = '#',
+    hbdPayout = '0.000 HBD',
+    votesCount = 0,
+    commentsCount = 0,
+  } = post.frontmatter);
+} else {
+  // Caso: Post directo de la API de Hive (posts de comunidad)
+  title = post.title || 'Sin título';
+  const cleanBody = post.body.replace(/!\[.*?\]\(.*?\)|<img[^>]+src="[^"]+"[^>]*>|(https?:[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg))|<\/?[^>]+(>|$)/gi, '');
+  description = cleanBody ? cleanBody.substring(0, 150).replace(/\n/g, ' ') + '...' : 'Sin descripción disponible.';
+  author = post.author || 'Usuario Desconocido';
+  permlink = post.permlink || 'no-permlink-found';
+  category = post.category || 'General';
+  created = post.created;
+  url = post.url || '#';
+
+  // Parsear json_metadata para imagen y tags
+  let metadata = {};
+  try {
+    metadata = typeof post.json_metadata === 'string' ? JSON.parse(post.json_metadata) : post.json_metadata;
+    console.log('PostCard: json_metadata for API post:', metadata);
+  } catch (e) {
+    console.warn(`Advertencia: No se pudo parsear json_metadata para el post ${post.permlink}:`, e);
+  }
+  image = metadata.image && metadata.image.length > 0 ? metadata.image[0] : null;
+  console.log('PostCard: Extracted image from metadata for API post:', image);
+
+  // If no image from metadata, try to extract the first image from the post body
+  if (!image && post.body) {
+    // Regex to find Markdown images: ![alt](url)
+    const markdownImageRegex = /!\[.*?\]\((https?:\/\/[^)]+\.(?:jpg|jpeg|png|gif|webp|svg))\)/i;
+    // Regex to find HTML images: <img src="url">
+    const htmlImageRegex = /<img[^>]+src=["\\](https?:\/\/[^"\\]+\.(?:jpg|jpeg|png|gif|webp|svg))["\\][^>]*>/i;
+    // Regex to find direct image URLs in text
+    const directImageUrlRegex = /(https?:\/\/[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg))/i;
+
+    let match;
+
+    // Try Markdown image first
+    match = post.body.match(markdownImageRegex);
+    if (match && match[1]) {
+      image = match[1];
+    } else {
+      // If no Markdown image, try HTML image
+      match = post.body.match(htmlImageRegex);
+      if (match && match[1]) {
+        image = match[1];
+      } else {
+        // If no HTML image, try direct URL in text
+        match = post.body.match(directImageUrlRegex);
+        if (match && match[1]) {
+          image = match[1];
+        }
+      }
+    }
+    console.log('PostCard: Extracted image from body for API post:', image);
+  }
+
+  tags = metadata.tags || [];
+
+  // Calcular hbdPayout, votesCount, commentsCount para posts de la API
+  hbdPayout = post.pending_payout_value || post.total_payout_value || '0.000 HBD';
+  votesCount = post.active_votes ? post.active_votes.length : 0;
+  commentsCount = post.children || 0;
+}
 
 // Formatear la fecha de creación para una visualización amigable
 const formattedDate = created ? new Date(created).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Fecha desconocida';
+
+// Construir la URL del avatar directamente
+const avatarUrl = `https://images.hive.blog/u/${author}/avatar`;
 
 // Mapeo a las variables de display usadas en el HTML para claridad
 const displayTitle = title;
 const displayDate = formattedDate;
 const displayAuthor = author;
-// Si no hay imagen en el frontmatter, usa una imagen de placeholder.
-// Asegúrate de tener un archivo 'placeholder-post.jpg' en tu carpeta 'public/'
 const displayImageUrl = image || '/placeholder-post.jpg';
 const displayExcerpt = description;
 const displayCategory = category;
 const displayTags = tags;
-const displaySlug = permlink; // Usamos el permlink como slug para la URL del post
 
-// Las propiedades de lectura, votos, HBD y comentarios ya vienen directamente del frontmatter
-// Reads (lecturas) no es proporcionado por Hive directamente, por eso lo mantenemos en 0.
-const displayReads = 0;
+// Determinar la URL del post basada en si es un post de comunidad o un post local
+const postLink = communityId
+  ? `/comunidades/${communityId}/${displayAuthor}/${permlink}`
+  : `/posts/${permlink}`; // Asumiendo que tus posts originales/reblogueados tienen una ruta base /posts/
+
+// Las propiedades de lectura, votos, HBD y comentarios ya vienen directamente del frontmatter o se calculan
+const displayReads = 0; // Reads (lecturas) no es proporcionado por Hive directamente
 const displayVotes = votesCount;
 const displayHbdPayout = hbdPayout;
 const displayComments = commentsCount;
 ---
 
 <div class="post-card">
-  <a href={`/posts/${displaySlug}`} class="post-image-link">
+  <a href={postLink} class="post-image-link">
     <img src={displayImageUrl} alt={displayTitle} class="post-thumbnail" />
   </a>
   <div class="post-content">
@@ -55,12 +123,13 @@ const displayComments = commentsCount;
       <span class="post-category">{displayCategory}</span>
       <span class="post-reads">{displayReads} Lecturas</span>
     </div>
-    <a href={`/posts/${displaySlug}`} class="post-title-link">
+    <a href={postLink} class="post-title-link">
       <h3>{displayTitle}</h3>
     </a>
     <p class="post-excerpt">{displayExcerpt}</p>
     <div class="post-meta-bottom">
-      <span class="post-author">Por <a href="#">{displayAuthor}</a></span>
+      <img src={avatarUrl} alt={`${displayAuthor}'s avatar`} class="post-author-avatar" />
+      <span class="post-author"><a href="#">@{displayAuthor}</a></span>
       <span class="post-date">{displayDate}</span>
     </div>
     <div class="post-actions">
@@ -75,7 +144,7 @@ const displayComments = commentsCount;
       </span>
     </div>
     <div class="post-tags">
-      {displayTags.map(tag => (
+      {displayTags.slice(0, 3).map(tag => (
         <a href="#" class="tag">#{tag}</a>
       ))}
     </div>

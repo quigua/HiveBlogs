@@ -7,7 +7,7 @@ category: "hive-13323"
 created: "2024-08-03T11:07:15.000Z"
 lastUpdate: "2024-08-03T11:07:15.000Z"
 url: "/hive-13323/@quigua/in-the-end-are-bot-farms-the-big-winners-with-this-way-of-unlocking-soulbounds-cards"
-reputation: 54.67
+reputation: 53.52
 image: "https://images.hive.blog/DQmacUQCgCT2NkcmXkY27ib4s2oeqroK73FsvLihZLuXRrB/soulbound.jpeg"
 tags: ["hive-13323", "splintertalk", "splinterlands", "sps", "spt", "thgaming", "blockchaingaming", "p2e", "game"]
 hbdPayout: "0.274 HBD"

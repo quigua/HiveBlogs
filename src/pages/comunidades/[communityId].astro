@@ -1,0 +1,79 @@
+---
+import { getRecentCommunityPosts } from 'hiveblogkit';
+import allCommunitiesData from '../../data/all_communities.json';
+import subscribedCommunitiesData from '../../data/subscribed_communities.json';
+import PostCard from '../../components/PostCard.astro'; // Import PostCard
+import Layout from '../../layouts/Layout.astro'; // Import Layout
+import ActiveCommunitiesSidebar from '../../components/ActiveCommunitiesSidebar.astro';
+
+export async function getStaticPaths() {
+  // Generate static paths only for communities in subscribed_communities.json
+  const staticPaths = subscribedCommunitiesData.map(community => ({
+    params: {
+      communityId: community.name,
+    },
+  }));
+
+  return staticPaths;
+}
+
+const { communityId } = Astro.params;
+
+let communityDetails = null;
+let recentPosts = [];
+let errorMessage = null;
+
+// Find community details from local JSON (all_communities.json)
+const localCommunity = allCommunitiesData.find(comm => comm.name === communityId);
+
+if (localCommunity) {
+  communityDetails = localCommunity;
+  try {
+    recentPosts = await getRecentCommunityPosts(communityId);
+  } catch (error) {
+    console.error(`Error fetching recent posts for ${communityId}:`, error);
+    errorMessage = "Error al cargar los posts recientes.";
+  }
+} else {
+  errorMessage = "Comunidad no encontrada.";
+}
+---
+
+<Layout title={communityDetails ? communityDetails.title : 'Comunidad'} description={communityDetails ? communityDetails.about : 'Página de comunidad de Hive.'}>
+  {communityDetails ? (
+    <>
+      <div class="hero" style={`background-image: url(${communityDetails.cover_image || '/placeholder-post.jpg'});`}>
+        <div class="container">
+          <h1>{communityDetails.title}</h1>
+          <p>{communityDetails.about}</p>
+          <div class="community-stats">
+            <p><strong>Suscriptores:</strong> {communityDetails.subscribers}</p>
+            <p><strong>Autores Activos:</strong> {communityDetails.num_authors}</p>
+            <p><strong>HBD Pendientes:</strong> {communityDetails.sum_pending}</p>
+          </div>
+        </div>
+      </div>
+
+      <section class="content-section">
+        <div class="container">
+          <main class="main-column">
+            <h2>Posts Recientes ({communityDetails.title})</h2>
+            {recentPosts.length > 0 ? (
+              <div class="posts-grid">
+                {recentPosts.map(post => (
+                  <PostCard post={post} communityId={communityId} />
+                ))}
+              </div>
+            ) : (
+              <p>{errorMessage || 'No se encontraron posts recientes para esta comunidad.'}</p>
+            )}
+          </main>
+          <ActiveCommunitiesSidebar />
+        </div>
+      </section>
+    </>
+  ) : (
+    <p class="error-message">{errorMessage || 'No se pudo cargar la información de la comunidad.'}</p>
+  )}
+  <p><a href={`/comunidades/${communityId}`}>Volver a esta Comunidad</a></p>
+</Layout>

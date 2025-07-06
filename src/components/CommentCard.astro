@@ -1,0 +1,93 @@
+---
+import { marked } from 'marked';
+import CommentCard from './CommentCard.astro';
+
+export interface Props {
+  comment: any;
+  isNested?: boolean; // Add isNested prop
+}
+
+const { comment, isNested = false } = Astro.props;
+
+// Formatear la fecha de creación para una visualización amigable
+const formattedDate = comment.created ? new Date(comment.created).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Fecha desconocida';
+
+// Construir la URL del avatar directamente
+const avatarUrl = `https://images.hive.blog/u/${comment.author}/avatar`;
+
+// Función para limpiar URLs de proxy 0x0/
+function processImageUrls(text) {
+  if (!text) return '';
+
+  let processedText = text;
+
+  // 1. Manejar la sintaxis [![](url)] primero
+  // Esto es un enlace Markdown donde el texto del enlace es una imagen Markdown.
+  // Queremos convertir esto directamente a una etiqueta <img>.
+  const nestedMarkdownImageLinkRegex = /\[!\[.*?\]\((https?:\/\/[^\s<>"]+\.(?:jpg|jpeg|png|gif|webp|svg))\)\]/gi;
+  processedText = processedText.replace(nestedMarkdownImageLinkRegex, (match, url) => {
+    return `<img src="${url}" alt="Image">`;
+  });
+
+
+  // 2. Manejar URLs de proxy de Hive (images.hive.blog/WIDTHxHEIGHT/ o steemitimages.com/WIDTHxHEIGHT/)
+  // y extraer la URL real de la imagen.
+  const hiveProxyRegex = /(https?:\/\/(?:images\.hive\.blog|steemitimages\.com)\/(\d+x\d+\/)?)(https?:\/\/.+?)(?=\s|$|<|\))/gi;
+  processedText = processedText.replace(hiveProxyRegex, (match, proxyBase, dimensions, innerUrl) => {
+    return `<img src="${innerUrl}" alt="Image">`;
+  });
+
+  // 3. Manejar cualquier URL de imagen directa restante que no haya sido parte de un proxy o markdown anidado
+  const directImageUrlRegex = /(https?:\/\/[^\s<>"]+\.(?:jpg|jpeg|png|gif|webp|svg))(?=\s|$|<|\))/gi;
+  processedText = processedText.replace(directImageUrlRegex, (match, url) => {
+    return `<img src="${url}" alt="Image">`;
+  });
+
+  return processedText;
+}
+
+// Sanitizar el cuerpo del comentario
+function sanitizeHtml(html) {
+  if (!html) return '';
+  // Eliminar etiquetas de script y atributos de evento
+  return html.replace(/<script\b[^<]*(?:(?!<\/script>)[^<]*)*<\/script>/gi, '')
+             .replace(/on\w+=["'][^"']*["']/gi, '');
+}
+
+// Procesar el cuerpo del comentario:
+// 1. Pre-procesar URLs de imágenes en el texto original a <img> tags
+let preProcessedBody = processImageUrls(comment.body);
+// 2. Convertir Markdown a HTML (esto manejará ![alt](url) y HTML existente)
+let processedCommentBody = marked(preProcessedBody);
+// 3. Sanitizar el HTML resultante
+const sanitizedBody = sanitizeHtml(processedCommentBody);
+---
+
+<div class="comment-card" class:list={{ 'is-nested': isNested }}>
+  <div class="comment-meta">
+    <img src={avatarUrl} alt={`${comment.author}'s avatar`} class="comment-avatar" />
+    <span class="comment-author">@{comment.author}</span>
+    <span class="comment-date">{formattedDate}</span>
+  </div>
+  <div class="comment-body" set:html={sanitizedBody}></div>
+  <div class="comment-actions">
+    <span class="action-item">
+      <span class="icon">👍</span> {comment.active_votes.length} Votos
+    </span>
+    <span class="action-item">
+      <span class="icon">💰</span> {comment.pending_payout_value}
+    </span>
+    <span class="action-item">
+      <span class="icon">💬</span> Responder
+    </span>
+  </div>
+
+  {comment.replies && comment.replies.length > 0 && (
+    <div class="nested-comments">
+      {comment.replies.map((nestedComment) => (
+        <CommentCard comment={nestedComment} isNested={true} />
+      ))}
+    </div>
+  )}
+</div>
+

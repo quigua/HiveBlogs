@@ -1,15 +1,43 @@
 ---
+// src/components/Header.astro
+import { SITE_INFO } from '../config/site'; // Importa SITE_INFO
+
+export interface Props {
+  currentLang: string;
+  currentLocale: any;
+}
+
+const { currentLang, currentLocale } = Astro.props;
 ---
 <header class="main-header">
-  <nav class="main-nav">
-    <a href="/" class="site-logo">HiveBlogs</a>
-    <ul class="nav-links">
-      <li><a href="#">Menú 1</a></li>
-      <li><a href="#">Menú 2</a></li>
-      <li><a href="#">Menú 3</a></li>
-      <li><a href="#">Menú 4</a></li>
-      <li><a href="#">Menú 5</a></li>
-    </ul>
-  </nav>
-</header>
+  <div class="container">
+    <div class="logo">
+      <a href="/"><img src="/hive-logo.svg" alt="Hive Logo" class="hive-logo"> @quigua's Hived Blog</a>
+    </div>
 
+    <nav class="main-nav">
+      <ul>
+        <li><a href="/">{currentLocale.home}</a></li>
+        <li class="has-submenu">
+          <a href="#">{currentLocale.posts} <span class="arrow-down"></span></a>
+          <ul class="submenu">
+            <li><a href="/posts/originales/">{currentLocale.originalPosts}</a></li>
+            <li><a href="/posts/reblogueados/">{currentLocale.rebloggedPosts}</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#">{currentLocale.worldWideHive} <span class="arrow-down"></span></a>
+          <ul class="submenu">
+            <li><a href="/comunidades">{currentLocale.communities}</a></li>
+            <li><a href="/seguidores">{currentLocale.followers}</a></li>
+            <li><a href="/hot-posts">{currentLocale.hotPosts}</a></li>
+            <li><a href="/posts-recientes">{currentLocale.recentPosts}</a></li>
+            <li><a href="/favoritos">{currentLocale.favorites}</a></li>
+          </ul>
+        </li>
+        <li><a href="/about">{currentLocale.about}</a></li>
+        <li><a href="/contact">{currentLocale.contact}</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>

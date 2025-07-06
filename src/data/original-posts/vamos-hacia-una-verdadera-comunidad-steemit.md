@@ -7,7 +7,7 @@ category: "steemit"
 created: "2016-07-21T05:04:39.000Z"
 lastUpdate: "2016-07-21T05:04:39.000Z"
 url: "/steemit/@quigua/vamos-hacia-una-verdadera-comunidad-steemit"
-reputation: 54.67
+reputation: 53.52
 
 tags: ["steemit", "spanish", "community"]
 hbdPayout: "0.000 HBD"

@@ -1,0 +1,58 @@
+---
+import allCommunitiesData from '../data/all_communities.json';
+
+export interface Props {
+  community: any; // Will pass the community object
+}
+
+const { community } = Astro.props;
+
+const communityId = community[0];
+const communityName = community[1];
+
+let displayTitle = communityName;
+let displayDescription = `Explora la comunidad de ${communityName} en Hive.`;
+let displayImage = '/placeholder-post.jpg'; // Reusing existing placeholder
+
+// Find the community in the locally stored data
+const localCommunity = allCommunitiesData.find(comm => comm.name === communityId);
+
+if (localCommunity) {
+  displayTitle = localCommunity.title || communityName;
+  displayDescription = localCommunity.description || displayDescription;
+  displayImage = localCommunity.cover_image || localCommunity.avatar_url || displayImage;
+} else {
+  console.warn(`Community ${communityId} not found in local all_communities.json. Falling back to API or defaults.`);
+  // Fallback to API if not found locally (optional, but good for robustness)
+  // For now, we'll just use the defaults if not found locally.
+}
+
+const displayUrl = `/comunidades/${communityId}`;
+const displayCategory = 'Comunidad';
+const displayTags = [communityName.toLowerCase().replace(/\s/g, '-')];
+---
+
+<div class="post-card"> {/* Reusing post-card class for styling */}
+  <a href={displayUrl} class="post-image-link">
+    <img src={displayImage} alt={displayTitle} class="post-thumbnail" />
+  </a>
+  <div class="post-content">
+    <div class="post-meta-top">
+      <span class="post-category">{displayCategory}</span>
+    </div>
+    <a href={displayUrl} class="post-title-link">
+      <h3>{displayTitle}</h3>
+    </a>
+    <p class="post-excerpt">{displayDescription}</p>
+    <div class="community-stats">
+      <p><strong>Suscriptores:</strong> {localCommunity?.subscribers || 0}</p>
+      <p><strong>Autores Activos:</strong> {localCommunity?.num_authors || 0}</p>
+      <p><strong>HBD Pendientes:</strong> {localCommunity?.sum_pending || 0}</p>
+    </div>
+    <div class="post-tags">
+      {displayTags.slice(0, 3).map(tag => (
+        <a href={`https://peakd.com/tags/${tag}`} target="_blank" rel="noopener noreferrer" class="tag">#{tag}</a>
+      ))}
+    </div>
+  </div>
+</div>

@@ -7,7 +7,7 @@ category: "hive-13323"
 created: "2024-09-10T05:48:57.000Z"
 lastUpdate: "2024-09-10T05:48:57.000Z"
 url: "/hive-13323/@quigua/splinterlands-has-become-so-boring-that-its-not-even-worth-complaining-about-anymore"
-reputation: 53.52
+reputation: 54.67
 image: "https://files.peakd.com/file/peakd-hive/quigua/AKAon4MxDo4zhz18wnCjkLwBKaAGRXQhkxw8nTiiRD2SEvQVRemcUCS6kjgVWDP.jpeg"
 tags: ["hive-13323", "splintertalk", "splinterlands", "sps", "spt", "thgaming", "blockchaingaming"]
 hbdPayout: "0.661 HBD"

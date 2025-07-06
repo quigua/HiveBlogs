@@ -1,88 +1,42 @@
 ---
-export interface Props {
-  title: string;
-  description?: string; // Hacemos la descripción opcional para que puedas pasarla o usar la global
-}
-
-import { SITE_INFO } from '../config/site'; // ¡Importa SITE_INFO aquí!
-
-// Si se pasa una descripción, úsala, si no, usa la global
-const { title, description = SITE_INFO.description } = Astro.props;
+// src/layouts/Layout.astro
+import Header from '../components/Header.astro'; // <-- Importa el Header
+import Footer from '../components/Footer.astro'; // <-- Importa el Footer
+import { SITE_INFO } from '../config/site.ts';
 
 import '../styles/global.css';
-import '../styles/post.css';
+import '../../src/styles/post.css';
+
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+// Si se pasa una descripción, úsala, si no, usa la global
+const currentLang = SITE_INFO.language; // For now, use the default language from SITE_INFO
+const currentLocale = SITE_INFO.locales[currentLang];
+const { title, description = currentLocale.siteDescription } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={SITE_INFO.language}> {/* Usamos el idioma de la config */}
+<html lang={currentLang}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} /> {/* Usamos la descripción */}
+    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title ? `${title} | ${SITE_INFO.title}` : SITE_INFO.title}</title> {/* Título dinámico */}
+    <title>{title ? `${title} | ${currentLocale.siteTitle}` : currentLocale.siteTitle}</title>
   </head>
   <body>
-    <header class="main-header">
-      <div class="container">
-        <div class="logo">
-          <a href="/">{SITE_INFO.title.split(' - ')[0]}</a> {/* Solo "HiveBlogs" */}
-        </div>
-        
-        <nav class="main-nav">
-          <ul>
-            <li><a href="/">Inicio</a></li>
-            <li class="has-submenu"> {/* Nueva clase para el elemento padre del submenú */}
-              <a href="#">Publicaciones <span class="arrow-down"></span></a> {/* Flecha para indicar submenú */}
-              <ul class="submenu"> {/* El submenú real */}
-                <li><a href="/posts/originales">Posts Originales</a></li>
-                <li><a href="/posts/reblogueados">Posts Reblogueados</a></li>
-              </ul>
-            </li>
-            <li><a href="/about">Acerca de</a></li>
-            <li><a href="/contact">Contacto</a></li>
-          </ul>
-        </nav>
+    <Header currentLang={currentLang} currentLocale={currentLocale} />
 
-      </div>
-    </header>
+    <slot currentLang={currentLang} currentLocale={currentLocale} />
 
-    <slot />
-
-    <footer class="main-footer">
-      <div class="container footer-grid">
-        <div class="footer-section">
-          <h3>{SITE_INFO.title.split(' - ')[0]}</h3>
-          <p>{SITE_INFO.description}</p>
-        </div>
-        <div class="footer-section">
-          <h3>Enlaces Rápidos</h3>
-          <ul>
-            <li><a href="/">Inicio</a></li>
-            <li><a href="/posts">Posts</a></li>
-            <li><a href="#">Categorías</a></li>
-            <li><a href="/about">Acerca de</a></li>
-            <li><a href="/contact">Contacto</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Síguenos</h3>
-          <ul>
-            <li><a href={SITE_INFO.socialLinks.twitter}>Twitter</a></li>
-            <li><a href={SITE_INFO.socialLinks.facebook}>Facebook</a></li>
-            <li><a href={SITE_INFO.socialLinks.github}>GitHub</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>{SITE_INFO.footer.copyright}</p>
-      </div>
-    </footer>
-
+    <Footer currentLang={currentLang} currentLocale={currentLocale} />
   </body>
 </html>
 
 <style is:global>
-  /* Este bloque debe estar vacío */
+  /* Este bloque debe estar vacío, el CSS global va en global.css */
 </style>

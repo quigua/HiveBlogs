@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { readFileSync } from 'fs';
+import path from 'path';
+import CommunityCard from '../components/CommunityCard.astro';
+import ActiveCommunitiesSidebar from '../components/ActiveCommunitiesSidebar.astro';
+
+const subscriptionsPath = path.resolve('./src/data/community-subscriptions/subscriptions.json');
+const subscriptions = JSON.parse(readFileSync(subscriptionsPath, 'utf-8'));
+---
+
+<Layout title="Comunidades Suscritas">
+  <div class="page-container">
+    <main class="main-content">
+      <h1>Comunidades Suscritas</h1>
+      <div class="posts-grid">
+        {
+          subscriptions.map((sub) => (
+            <CommunityCard community={sub} />
+          ))
+        }
+      </div>
+    </main>
+    <ActiveCommunitiesSidebar />
+  </div>
+</Layout>

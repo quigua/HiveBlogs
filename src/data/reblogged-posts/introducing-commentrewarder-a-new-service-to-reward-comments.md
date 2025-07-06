@@ -7,7 +7,7 @@ category: "hive"
 created: "2024-09-23T19:30:30.000Z"
 lastUpdate: "2024-10-01T18:57:06.000Z"
 url: "/hive/@commentrewarder/introducing-commentrewarder-a-new-service-to-reward-comments"
-reputation: 66.59
+reputation: 66.29
 image: "https://files.peakd.com/file/peakd-hive/commentrewarder/Eo4Js72AzQQCr57qWdZ7x1b8NEaahQfKE9AKBdT3EJZMjzDF1TD174TZubiv9EcBRCf.png"
 tags: ["hive", "tools", "engagement", "rewards"]
 hbdPayout: "69.516 HBD"

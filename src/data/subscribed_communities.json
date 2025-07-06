@@ -1,0 +1,131 @@
+[
+  {
+    "about": "Threshold-Guardian-Gaming is a Play-to-earn Guild obsessed with NFT Gaming ecosystems across multiple Blockchains.",
+    "admins": [
+      "entrepidus",
+      "thgaming"
+    ],
+    "avatar_url": "",
+    "context": {},
+    "created_at": "2021-11-14 06:48:27",
+    "id": 2254881,
+    "is_nsfw": false,
+    "lang": "en",
+    "name": "hive-184309",
+    "num_authors": 33,
+    "num_pending": 64,
+    "subscribers": 869,
+    "sum_pending": 37,
+    "title": "THGaming",
+    "type_id": 1,
+    "cover_image": "https://images.hive.blog/2048x512/https://files.peakd.com/file/peakd-hive/hive-184309/matrix-code-numbers-gold.jpg"
+  },
+  {
+    "about": "The best place to talk about blockchain-based video games and gaming platforms... especially those using Hive!",
+    "admins": [
+      "wagginston"
+    ],
+    "avatar_url": "",
+    "context": {},
+    "created_at": "2021-06-18 10:18:24",
+    "id": 1476192,
+    "is_nsfw": false,
+    "lang": "en",
+    "name": "hive-131619",
+    "num_authors": 3,
+    "num_pending": 9,
+    "subscribers": 3005,
+    "sum_pending": 20,
+    "title": "Blockchain Gaming",
+    "type_id": 1,
+    "cover_image": "https://images.hive.blog/2048x512/https://files.peakd.com/file/peakd-hive/hive-131619/bannerbig.jpg"
+  },
+  {
+    "about": "Comunidad para todos programadores (BackEnd, FrontEnd, FullStack, etc.) y los amantes de la tecnología",
+    "admins": [
+      "developspanish",
+      "shadowmyst"
+    ],
+    "avatar_url": "",
+    "context": {},
+    "created_at": "2020-08-28 01:33:09",
+    "id": 1406615,
+    "is_nsfw": false,
+    "lang": "es",
+    "name": "hive-154226",
+    "num_authors": 0,
+    "num_pending": 0,
+    "subscribers": 161,
+    "sum_pending": 0,
+    "title": "Develop Spanish",
+    "type_id": 1,
+    "cover_image": "https://images.hive.blog/u/hive-154226/avatar"
+  },
+  {
+    "about": "The community for all things Software Development. Tools, Open Source, Libraries welcomed too.",
+    "admins": [
+      "cadawg",
+      "deathwing",
+      "rishi556"
+    ],
+    "avatar_url": "",
+    "context": {},
+    "created_at": "2020-02-20 10:59:51",
+    "id": 1367318,
+    "is_nsfw": false,
+    "lang": "en",
+    "name": "hive-169321",
+    "num_authors": 0,
+    "num_pending": 0,
+    "subscribers": 1034,
+    "sum_pending": 0,
+    "title": "Programming & Dev",
+    "type_id": 1,
+    "cover_image": "https://images.hive.blog/2048x512/https://files.steempeak.com/file/steempeak/cadawg/1krz2FZA-programming-1873854_1280.png"
+  },
+  {
+    "about": "HiveDevs - A community of developers working on Hive related projects. Visit our Discord at https://discord.gg/cvnByhu",
+    "admins": [
+      "abit",
+      "acidyo",
+      "crimsonclad",
+      "gtg",
+      "netuoso"
+    ],
+    "avatar_url": "",
+    "context": {},
+    "created_at": "2020-01-23 16:27:36",
+    "id": 1357761,
+    "is_nsfw": false,
+    "lang": "en",
+    "name": "hive-139531",
+    "num_authors": 41,
+    "num_pending": 74,
+    "subscribers": 3348,
+    "sum_pending": 86,
+    "title": "HiveDevs",
+    "type_id": 1,
+    "cover_image": "https://images.hive.blog/2048x512/https://files.peakd.com/file/peakd-hive/hive-139531/iLg7EeV3-hivedevbanner.jpg"
+  },
+  {
+    "about": "The Future of Web3 Gaming. Battle Trade and Earn",
+    "admins": [
+      "clove71",
+      "threespeak"
+    ],
+    "avatar_url": "",
+    "context": {},
+    "created_at": "2019-11-26 17:34:36",
+    "id": 1341670,
+    "is_nsfw": false,
+    "lang": "en",
+    "name": "hive-13323",
+    "num_authors": 278,
+    "num_pending": 1397,
+    "subscribers": 12681,
+    "sum_pending": 1509,
+    "title": "Splinterlands",
+    "type_id": 1,
+    "cover_image": "https://images.hive.blog/2048x512/https://cdn.steemitimages.com/DQmfNpSF85RbvCyDETdGrfZ5pEx8oyoypz1kbcD7sf8Jttx/rexxieavatar.png"
+  }
+]

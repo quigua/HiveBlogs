@@ -7,7 +7,7 @@ category: "spanish"
 created: "2017-06-27T07:51:42.000Z"
 lastUpdate: "2017-06-27T07:51:42.000Z"
 url: "/spanish/@quigua/el-balance-entre-me-gusta-y-vale-la-pena-esta-llegando-al-equilibrio"
-reputation: 53.52
+reputation: 54.67
 image: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/equilibrio-de-la-razon.jpg"
 tags: ["spanish", "steemit", "vote", "blog", "steem"]
 hbdPayout: "11.076 HBD"

@@ -5,7 +5,13 @@ import { defineConfig } from 'astro/config';
 // Asegúrate de que tus colecciones de contenido estén definidas aquí si las tienes
 // import { collections } from './src/content/config'; // Esto podría ser diferente para ti
 
+import node from '@astrojs/node';
+
 export default defineConfig({
+  output: 'server',
+  adapter: node({ 
+    mode: 'standalone'
+  }),
   // Puedes tener otras configuraciones aquí (ej. site: 'https://tusitio.com')
   integrations: [], // Deja esto vacío si no tienes otras integraciones
   markdown: {

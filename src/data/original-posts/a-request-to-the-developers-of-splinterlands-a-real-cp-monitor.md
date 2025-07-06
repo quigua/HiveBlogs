@@ -7,7 +7,7 @@ category: "hive-13323"
 created: "2022-07-29T04:42:39.000Z"
 lastUpdate: "2022-07-29T04:42:39.000Z"
 url: "/hive-13323/@quigua/a-request-to-the-developers-of-splinterlands-a-real-cp-monitor"
-reputation: 54.67
+reputation: 53.52
 image: "https://images.hive.blog/DQmSGPyqkYLGPUsHbj6gAxoUk1YuN193R6yADQ4A5eafsnB/CP-image1.png"
 tags: ["hive-13323", "splintertalk", "splinterlands", "proofofbrain"]
 hbdPayout: "0.000 HBD"

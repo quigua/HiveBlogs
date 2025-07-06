@@ -1,6 +1,9 @@
 ---
+export const prerender = true;
 import Layout from '../../layouts/Layout.astro';
+import CommentCard from '/src/components/CommentCard.astro';
 import { SITE_INFO } from '../../config/site';
+import { getPostComments } from 'hiveblogkit';
 
 // 1. getStaticPaths: Astro necesita saber qué páginas debe generar.
 //    Esta función le dirá a Astro todas las rutas posibles para los posts.
@@ -13,24 +16,73 @@ export async function getStaticPaths() {
   const allPosts = [...allOriginalPosts, ...allRebloggedPosts];
 
   // Mapear los posts a los objetos de ruta que Astro espera
-  return allPosts.map((post) => ({
-    params: {
-      slug: post.frontmatter.permlink, // Usamos 'permlink' como el 'slug' de la URL
+  return allPosts.map((post) => {
+    console.log('Post object in [...slug].astro getStaticPaths:', post);
+    return {
+      params: {
+        slug: post.frontmatter.permlink, // Usamos 'permlink' como el 'slug' de la URL
     },
     props: {
-      post, // Pasamos el objeto post completo a la página para que lo use
-    },
-  }));
+        post, // Pasamos el objeto post completo a la página para que lo use
+      },
+    };
+  });
 }
 
 // 2. Props de la página: Recibimos el 'post' individual para esta página
 const { post } = Astro.props;
 
 // Desestructurar propiedades del frontmatter del post para usarlas en la plantilla
-const { title, author, created, body, image, description } = post.frontmatter;
+const { title, author, created, body, image, description, permlink } = post.frontmatter;
 
 // Formatear la fecha
 const formattedDate = created ? new Date(created).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Fecha desconocida';
+
+let comments = [];
+let errorMessage = null; // Asegurarse de que errorMessage esté declarado
+
+let processedBody = ''; // Inicializar aquí
+
+try {
+  const response = await condenser_api_get_content(author, permlink);
+  if (response && response.result) {
+    // post = response.result; // No reasignar post si ya viene de Astro.props
+
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    const postDate = new Date(post.created);
+
+    if (postDate < sevenDaysAgo) {
+      errorMessage = "Este post es demasiado antiguo para ser mostrado.";
+      // processedBody se mantiene como cadena vacía
+    } else {
+      // Process Markdown to HTML
+      let tempBody = marked(post.body);
+      processedBody = replaceImageUrlsWithImgTags(tempBody);
+    }
+
+    // Fetch comments for the post
+    comments = await getPostComments(author, permlink);
+    if (!comments) {
+      console.warn(`No comments found for ${author}/${permlink} or an error occurred.`);
+      comments = []; // Ensure comments is an empty array if null
+    }
+
+  } else {
+    errorMessage = "Post no encontrado o error al cargar.";
+  }
+} catch (error) {
+  console.error(`Error fetching post ${permlink}:`, error);
+  errorMessage = "Error al cargar el post.";
+}
+
+function sanitizeHtml(html) {
+  if (!html) return '';
+  return html.replace(/<script\b[^<]*(?:(?!<\/script>)[^<]*)*<\/script>/gi, '')
+             .replace(/on\w+=["'][^"']*["']/gi, '');
+}
+
+const sanitizedBody = sanitizeHtml(processedBody); // Siempre llamar con un processedBody definido
 ---
 
 <Layout title={title} description={description || SITE_INFO.description}>
@@ -38,13 +90,25 @@ const formattedDate = created ? new Date(created).toLocaleDateString('es-ES', { 
     {image && <img src={image} alt={title} class="post-detail-image" />}
     <h1 class="post-detail-title">{title}</h1>
     <div class="post-detail-meta">
-      <span>Por <a href="#">{author}</a></span>
+      <span>Por <a href="#">@{author}</a></span>
       <span> el {formattedDate}</span>
     </div>
     <div class="post-content-body">
       {/* Aquí inyectamos el contenido Markdown del post */}
       <Fragment set:html={post.compiledContent()} />
     </div>
-    </article>
-</Layout>
+  </article>
 
+  {comments && comments.length > 0 && (
+    <div class="post-detail-container">
+      <section class="post-comments-section">
+        <h2>Comentarios ({comments.length})</h2>
+        <div class="comments-list">
+          {comments.map((comment) => (
+            <CommentCard comment={comment} isNested={false} />
+          ))}
+        </div>
+      </section>
+    </div>
+  )}
+</Layout>

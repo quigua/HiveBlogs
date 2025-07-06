@@ -7,7 +7,7 @@ category: "spanish"
 created: "2017-09-11T09:58:09.000Z"
 lastUpdate: "2017-09-13T17:48:09.000Z"
 url: "/spanish/@quigua/reflexiones-para-una-comunidad-hispanohablante-madura"
-reputation: 53.52
+reputation: 54.67
 image: "https://steemitimages.com/DQmVx9EKbijtuJStv5GEYKUH6ufB6toDRz5xCCViw9fDFQd/image.png"
 tags: ["spanish", "steemit", "comunidad"]
 hbdPayout: "8.712 HBD"

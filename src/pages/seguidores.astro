@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Lista de usuarios de ejemplo
+const usuarios = [
+  { username: 'elvis' },
+  { username: 'gemini' },
+  { username: 'astro' },
+  { username: 'hive' },
+];
+---
+
+<Layout title="Otros Usuarios de Hive">
+  <div class="container">
+    <h1>Otros Usuarios</h1>
+    <p>Esta es una lista de otros usuarios de Hive que podrías encontrar interesantes.</p>
+    
+    <ul class="user-list">
+      {usuarios.map(user => (
+        <li>
+          <a href={`/user/${user.username}`}>{user.username}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Layout>
+
+<style>
+  .user-list {
+    list-style: none;
+    padding: 0;
+  }
+  .user-list li {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  .user-list a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+</style>

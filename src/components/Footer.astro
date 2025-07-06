@@ -1,99 +1,40 @@
 ---
+// src/components/Footer.astro
+import { SITE_INFO } from '../config/site'; // Importa SITE_INFO
+
+export interface Props {
+  currentLang: string;
+  currentLocale: any;
+}
+
+const { currentLang, currentLocale } = Astro.props;
 ---
 <footer class="main-footer">
-  <div class="footer-container">
+  <div class="container footer-grid">
     <div class="footer-section">
-      <h3>HiveBlogs</h3>
-      <p>Tu plataforma de blogging descentralizada en la cadena de bloques de Hive.</p>
+      <h3>{currentLocale.siteTitle.split(' - ')[0]}</h3>
+      <p>{currentLocale.siteDescription}</p>
     </div>
     <div class="footer-section">
-      <h3>Enlaces Rápidos</h3>
+      <h3>{currentLocale.quickLinks}</h3>
       <ul>
-        <li><a href="/">Inicio</a></li>
-        <li><a href="#">Posts</a></li>
-        <li><a href="#">Categorías</a></li>
-        <li><a href="#">Acerca de</a></li>
-        <li><a href="#">Contacto</a></li>
+        <li><a href="/">{currentLocale.home}</a></li>
+        <li><a href="/posts/originales/">{currentLocale.originalPosts}</a></li>
+        <li><a href="#">{currentLocale.categories}</a></li>
+        <li><a href="/about">{currentLocale.about}</a></li>
+        <li><a href="/contact">{currentLocale.contact}</a></li>
       </ul>
     </div>
     <div class="footer-section">
-      <h3>Síguenos</h3>
+      <h3>{currentLocale.followUs}</h3>
       <ul>
-        <li><a href="#">Twitter</a></li>
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">GitHub</a></li>
+        <li><a href={SITE_INFO.socialLinks.twitter}>Twitter</a></li>
+        <li><a href={SITE_INFO.socialLinks.facebook}>Facebook</a></li>
+        <li><a href={SITE_INFO.socialLinks.github}>GitHub</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>&copy; {new Date().getFullYear()} HiveBlogs. Todos los derechos reservados.</p>
+    <p>{currentLocale.footerCopyright}</p>
   </div>
 </footer>
-
-<style>
-  .main-footer {
-    background-color: #282c34;
-    color: var(--color-surface);
-    padding: 40px 20px 20px;
-    margin-top: 50px; /* Espacio para separar del contenido principal */
-    border-top: 1px solid #3a3f47;
-  }
-
-  .footer-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--spacing-lg);
-    max-width: 1200px;
-    margin: 0 auto var(--spacing-lg);
-  }
-
-  .footer-section h3 {
-    color: var(--color-primary);
-    margin-bottom: var(--spacing-md);
-    font-size: var(--font-size-md);
-  }
-
-  .footer-section p {
-    font-size: var(--font-size-sm);
-    line-height: 1.6;
-  }
-
-  .footer-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .footer-section ul li {
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .footer-section ul li a {
-    color: #cccccc;
-    text-decoration: none;
-    font-size: var(--font-size-base);
-    transition: color 0.3s ease;
-  }
-
-  .footer-section ul li a:hover {
-    color: var(--color-primary);
-  }
-
-  .footer-bottom {
-    text-align: center;
-    border-top: 1px solid #3a3f47;
-    padding-top: var(--spacing-md);
-    font-size: 0.8em;
-    color: #aaaaaa;
-  }
-
-  @media (max-width: 768px) {
-    .footer-container {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-    .footer-section ul {
-      margin-bottom: var(--spacing-lg);
-    }
-  }
-</style>

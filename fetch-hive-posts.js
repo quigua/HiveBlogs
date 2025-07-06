@@ -4,14 +4,15 @@
 
 // Importa tus métodos de hiveblogkit (asegúrate de que el nombre sea 'hiveblogkit' si así lo enlazaste)
 // Asegúrate de que 'hiveblogkit' esté correctamente `npm link`eado o instalado
-import { getUsersOriginalPosts, getUsersRebloggedPosts } from 'hiveblogkit';
+import { getUsersOriginalPosts, getUsersRebloggedPosts, getUserCommunitySubscriptions } from 'hiveblogkit';
 import fs from 'fs/promises'; // Para operaciones asíncronas con archivos
 import path from 'path';     // Para manejar rutas de archivos
 
 // --- CONFIGURACIÓN ---
-const HIVE_USERNAME = 'quigua'; // ¡IMPORTANTE: CAMBIA ESTO A TU USUARIO DE HIVE REAL!
+const HIVE_USERNAME = process.env.HIVE_USERNAME; // Lee el usuario de una variable de entorno
 const ORIGINAL_POSTS_DIR = path.join(process.cwd(), 'src', 'data', 'original-posts');
 const REBLOGGED_POSTS_DIR = path.join(process.cwd(), 'src', 'data', 'reblogged-posts');
+const COMMUNITY_SUBSCRIPTIONS_DIR = path.join(process.cwd(), 'src', 'data', 'community-subscriptions');
 // --- FIN CONFIGURACIÓN ---
 
 // Función para sanitizar nombres de archivo (quitar caracteres especiales)
@@ -88,8 +89,9 @@ commentsCount: ${commentsCount}
 async function fetchAndSavePosts() {
     console.log(`\n--- Obteniendo posts para el usuario: ${HIVE_USERNAME} ---\n`);
 
-    if (HIVE_USERNAME === 'TU_USUARIO_DE_HIVE' || !HIVE_USERNAME || HIVE_USERNAME.trim() === '') {
-        console.error('ERROR: Por favor, cambia "TU_USUARIO_DE_HIVE" en fetch-hive-posts.js a tu usuario de Hive real.');
+    if (!HIVE_USERNAME || HIVE_USERNAME.trim() === '') {
+        console.error('ERROR: La variable de entorno HIVE_USERNAME no está definida. Por favor, configúrala antes de ejecutar el script.');
+        console.error('Puedes hacerlo con: export HIVE_USERNAME=tu_usuario_de_hive');
         process.exit(1);
     }
 
@@ -144,3 +146,34 @@ async function fetchAndSavePosts() {
 fetchAndSavePosts();
 
 // --- FIN DEL CÓDIGO (NO RECORTAR DEBAJO DE ESTA LÍNEA) ---
+
+async function fetchAndSaveCommunitySubscriptions() {
+    console.log(`\n--- Obteniendo suscripciones de comunidad para el usuario: ${HIVE_USERNAME} ---\n`);
+
+    if (!HIVE_USERNAME || HIVE_USERNAME.trim() === '') {
+        console.error('ERROR: La variable de entorno HIVE_USERNAME no está definida. Por favor, configúrala antes de ejecutar el script.');
+        process.exit(1);
+    }
+
+    try {
+        console.log('Obteniendo suscripciones de comunidad...');
+        const subscriptions = await getUserCommunitySubscriptions(HIVE_USERNAME);
+
+        if (subscriptions && subscriptions.length > 0) {
+            console.log(`Encontradas ${subscriptions.length} suscripciones de comunidad.`);
+            await fs.mkdir(COMMUNITY_SUBSCRIPTIONS_DIR, { recursive: true });
+            const filepath = path.join(COMMUNITY_SUBSCRIPTIONS_DIR, 'subscriptions.json');
+            await fs.writeFile(filepath, JSON.stringify(subscriptions, null, 2), 'utf-8');
+            console.log(`Suscripciones de comunidad guardadas en: ${filepath}`);
+        } else {
+            console.log(`No se encontraron suscripciones de comunidad para '${HIVE_USERNAME}'.`);
+        }
+    } catch (error) {
+        console.error('\n¡Error al obtener o guardar las suscripciones de comunidad:', error);
+    } finally {
+        console.log('\n--- Proceso de obtención de suscripciones de comunidad finalizado ---');
+    }
+}
+
+// Llama a la nueva función para obtener y guardar las suscripciones de comunidad
+fetchAndSaveCommunitySubscriptions();

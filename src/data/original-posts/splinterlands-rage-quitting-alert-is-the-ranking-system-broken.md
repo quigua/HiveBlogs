@@ -7,7 +7,7 @@ category: "hive-13323"
 created: "2022-07-30T18:28:09.000Z"
 lastUpdate: "2022-07-30T18:28:09.000Z"
 url: "/hive-13323/@quigua/splinterlands-rage-quitting-alert-is-the-ranking-system-broken"
-reputation: 53.52
+reputation: 54.67
 image: "https://images.hive.blog/DQmRrq9PvCGm3norPRZgj8fFhLpCLK8TeKkVGUhhnVNqcKJ/battle-won-lost.png"
 tags: ["hive-13323", "splintertalk", "splinterlands", "rage-quitting", "ranking", "hive-gaming", "blockchaing-gaming"]
 hbdPayout: "0.000 HBD"

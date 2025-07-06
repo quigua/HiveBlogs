@@ -4,6 +4,8 @@ import Hero from '../components/Hero.astro';
 import PostCard from '../components/PostCard.astro';
 import { SITE_INFO, POST_SETTINGS } from '../config/site';
 
+const HIVE_USERNAME = import.meta.env.HIVE_USERNAME;
+
 // Ahora obtenemos los posts de la carpeta src/data/original-posts
 // Puedes elegir qué posts mostrar en la página principal, por ejemplo, solo originales
 const allPosts = await Astro.glob('../data/original-posts/*.md');
@@ -14,38 +16,36 @@ const sortedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.created).getT
 const latestPosts = sortedPosts.slice(0, POST_SETTINGS.postsPerPage);
 ---
 
-<Layout title={SITE_INFO.title} description={SITE_INFO.description}>
+<Layout title={HIVE_USERNAME} description={SITE_INFO.description}>
   <Hero />
 
-  <section class="content-section">
-    <div class="container">
-      <div class="main-column">
-        <h2>Últimos Posts Originales</h2>
-        <div class="posts-grid">
-          {latestPosts.map((post) => (
-            <PostCard post={post} />
-          ))}
-        </div>
-        {/* Aquí puedes añadir un botón o enlace para ver más posts si tienes muchos */}
+  <div class="page-container">
+    <main class="main-content">
+      <h2>Últimos Posts Originales</h2>
+      <div class="posts-grid">
+        {latestPosts.map((post) => (
+          <PostCard post={post} />
+        ))}
       </div>
-      {/* INICIO DEL SIDEBAR */}
-      <aside class="sidebar-column">
-        <h3>Categorías de Hive</h3>
-        <nav class="categories-nav">
-          <ul>
-            <li><a href="#">Tecnología</a></li>
-            <li><a href="#">Blockchain</a></li>
-            <li><a href="#">Tutoriales</a></li>
-            <li><a href="#">Noticias</a></li>
-          </ul>
-        </nav>
-        <div class="other-details-placeholder">
-          <h3>Acerca de {SITE_INFO.title.split(' - ')[0]}</h3>
-          <p>{SITE_INFO.description}</p>
-        </div>
-        {/* Podrías añadir un módulo para posts populares o tags aquí */}
-      </aside>
-      {/* FIN DEL SIDEBAR */}
-    </div>
-  </section>
+      {/* Aquí puedes añadir un botón o enlace para ver más posts si tienes muchos */}
+    </main>
+    {/* INICIO DEL SIDEBAR */}
+    <aside class="sidebar-column">
+      <h3>Categorías de Hive</h3>
+      <nav class="categories-nav">
+        <ul>
+          <li><a href="#">Tecnología</a></li>
+          <li><a href="#">Blockchain</a></li>
+          <li><a href="#">Tutoriales</a></li>
+          <li><a href="#">Noticias</a></li>
+        </ul>
+      </nav>
+      <div class="other-details-placeholder">
+        <h3>Acerca de {HIVE_USERNAME}</h3>
+        <p>{SITE_INFO.description}</p>
+      </div>
+      {/* Podrías añadir un módulo para posts populares o tags aquí */}
+    </aside>
+    {/* FIN DEL SIDEBAR */}
+  </div>
 </Layout>

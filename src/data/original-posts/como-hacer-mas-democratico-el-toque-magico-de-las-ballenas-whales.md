@@ -7,7 +7,7 @@ category: "steemit"
 created: "2016-07-22T01:58:03.000Z"
 lastUpdate: "2016-07-22T01:58:03.000Z"
 url: "/steemit/@quigua/como-hacer-mas-democratico-el-toque-magico-de-las-ballenas-whales"
-reputation: 53.52
+reputation: 54.67
 
 tags: ["steemit", "spanish", "whales", "virtual-whales"]
 hbdPayout: "0.000 HBD"
