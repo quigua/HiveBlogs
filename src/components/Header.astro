@@ -2,12 +2,16 @@
 // src/components/Header.astro
 import { SITE_INFO } from '../config/site'; // Importa SITE_INFO
 
+const HIVE_USERNAME = import.meta.env.HIVE_USERNAME;
+
 export interface Props {
   currentLang: string;
   currentLocale: any;
 }
 
 const { currentLang, currentLocale } = Astro.props;
+
+const avatarUrl = `https://images.hive.blog/u/${HIVE_USERNAME}/avatar`;
 ---
 <header class="main-header">
   <div class="container">
@@ -36,8 +40,16 @@ const { currentLang, currentLocale } = Astro.props;
           </ul>
         </li>
         <li><a href="/about">{currentLocale.about}</a></li>
-        <li><a href="/contact">{currentLocale.contact}</a></li>
+        <li><a href={currentLang === 'es' ? '/?lang=en' : '/?lang=es'} class="language-switcher">{currentLang}</a></li>
       </ul>
     </nav>
+    <div class="user-menu">
+      <img src={avatarUrl} alt="User Avatar" class="user-avatar">
+      <ul class="user-submenu">
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/wallet">Wallet</a></li>
+        <li><a href="/governance">Governance</a></li>
+      </ul>
+    </div>
   </div>
 </header>

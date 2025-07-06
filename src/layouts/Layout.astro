@@ -13,7 +13,9 @@ export interface Props {
 }
 
 // Si se pasa una descripción, úsala, si no, usa la global
-const currentLang = SITE_INFO.language; // For now, use the default language from SITE_INFO
+const url = new URL(Astro.request.url);
+const langParam = url.searchParams.get('lang');
+const currentLang = langParam && SITE_INFO.locales[langParam] ? langParam : SITE_INFO.language;
 const currentLocale = SITE_INFO.locales[currentLang];
 const { title, description = currentLocale.siteDescription } = Astro.props;
 ---

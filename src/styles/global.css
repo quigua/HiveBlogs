@@ -112,6 +112,7 @@ img {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .main-header .main-nav ul li {
@@ -969,4 +970,65 @@ img {
 .error-message {
   color: var(--color-error);
   font-weight: bold;
+}
+
+.language-switcher {
+  display: inline-block;
+  padding: 8px 20px; /* Ajustado para coincidir con el submenú */
+  background-color: transparent; /* Fondo transparente inicialmente */
+  color: var(--color-text-light); /* Color de texto claro */
+  text-decoration: none;
+  border-radius: 0; /* Sin borde redondeado */
+  margin-left: 20px; /* Ajustado para separación */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición para hover */
+}
+
+.language-switcher:hover {
+  /* Eliminamos el background-color para que no parezca un botón */
+  color: var(--color-secondary); /* Cambia solo el color del texto al pasar el ratón */
+}
+
+.user-menu {
+  position: relative;
+  margin-left: 20px; /* Espacio entre la navegación y el menú de usuario */
+}
+
+.user-avatar {
+  height: 40px; /* Mismo tamaño que el logo */
+  width: 40px; /* Mismo tamaño que el logo */
+  border-radius: 50%; /* Para hacerlo circular */
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.user-submenu {
+  display: none; /* Oculto por defecto */
+  position: absolute;
+  top: 100%; /* Debajo del avatar */
+  right: 0; /* Alineado a la derecha del avatar */
+  background-color: var(--color-background-header-footer);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  min-width: 150px;
+  z-index: 999;
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  border-radius: 5px;
+}
+
+.user-menu:hover .user-submenu {
+  display: block; /* Mostrar al pasar el ratón */
+}
+
+.user-submenu li a {
+  padding: 8px 20px;
+  display: block;
+  color: var(--color-text-light);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.user-submenu li a:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
 }
