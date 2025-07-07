@@ -1,34 +1,56 @@
 ---
-import { getCollection } from 'astro:content';
+export const prerender = true;
 import Layout from '../../../layouts/Layout.astro';
 import PostCard from '../../../components/PostCard.astro';
-import { POST_SETTINGS } from '../../../config/site';
+import { SITE_INFO, POST_SETTINGS } from '../../../config/site';
+
+const HIVE_USERNAME = import.meta.env.HIVE_USERNAME;
+const siteInfo = SITE_INFO;
 
 export async function getStaticPaths({ paginate }) {
-  // Aquí filtrarías los posts que son reblogueados
-  const allPosts = await getCollection('blog'); // Asumiendo que tienes una forma de distinguirlos
-  const rebloggedPosts = allPosts.filter(post => post.data.isReblogged); // Ejemplo
+  const allPosts = await Astro.glob('/src/data/reblogged-posts/*.md');
+  const sortedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.created).getTime() - new Date(a.frontmatter.created).getTime());
   
-  return paginate(rebloggedPosts, { pageSize: POST_SETTINGS.postsPerPage });
+  return paginate(sortedPosts, { pageSize: POST_SETTINGS.postsPerPage });
 }
 
 const { page } = Astro.props;
 ---
 
 <Layout title="Posts Reblogueados">
-  <div class="container">
-    <h1>Posts Reblogueados</h1>
-    <div class="posts-grid">
-      {page.data.map(post => (
-        <PostCard post={post} />
-      ))}
-    </div>
+  <div class="page-container">
+    <main class="main-content">
+      <h1>Posts Reblogueados</h1>
+      <div class="posts-grid">
+        {page.data.map(post => (
+          <PostCard post={post} />
+        ))}
+      </div>
 
-    <!-- Paginación -->
-    <div class="pagination">
-      {page.url.prev && <a href={page.url.prev}>&laquo; Anterior</a>}
-      <span>Página {page.currentPage} de {page.lastPage}</span>
-      {page.url.next && <a href={page.url.next}>Siguiente &raquo;</a>}
-    </div>
+      <!-- Paginación -->
+      <div class="pagination">
+        {page.url.prev && <a href={page.url.prev}>&laquo; Anterior</a>}
+        <span>Página {page.currentPage} de {page.lastPage}</span>
+        {page.url.next && <a href={page.url.next}>Siguiente &raquo;</a>}
+      </div>
+    </main>
+    {/* INICIO DEL SIDEBAR */}
+    <aside class="sidebar-column">
+      <h3>Categorías de Hive</h3>
+      <nav class="categories-nav">
+        <ul>
+          <li><a href="#">Tecnología</a></li>
+          <li><a href="#">Blockchain</a></li>
+          <li><a href="#">Tutoriales</a></li>
+          <li><a href="#">Noticias</a></li>
+        </ul>
+      </nav>
+      <div class="other-details-placeholder">
+        <h3>Acerca de {HIVE_USERNAME}</h3>
+        <p>{siteInfo.description}</p>
+      </div>
+      {/* Podrías añadir un módulo para posts populares o tags aquí */}
+    </aside>
+    {/* FIN DEL SIDEBAR */}
   </div>
 </Layout>

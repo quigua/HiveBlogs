@@ -3,7 +3,7 @@ export const prerender = true;
 import Layout from '../../layouts/Layout.astro';
 import CommentCard from '/src/components/CommentCard.astro';
 import { SITE_INFO } from '../../config/site';
-import { getPostComments } from 'hiveblogkit';
+import { getPostComments, condenser_api_get_content } from 'hiveblogkit';
 
 // 1. getStaticPaths: Astro necesita saber qué páginas debe generar.
 //    Esta función le dirá a Astro todas las rutas posibles para los posts.
@@ -39,41 +39,21 @@ const { title, author, created, body, image, description, permlink } = post.fron
 const formattedDate = created ? new Date(created).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Fecha desconocida';
 
 let comments = [];
-let errorMessage = null; // Asegurarse de que errorMessage esté declarado
+let errorMessage = null;
 
-let processedBody = ''; // Inicializar aquí
+// For Markdown posts, the content is already compiled to HTML
+const processedBody = await post.compiledContent();
 
+// Fetch comments for the post
 try {
-  const response = await condenser_api_get_content(author, permlink);
-  if (response && response.result) {
-    // post = response.result; // No reasignar post si ya viene de Astro.props
-
-    const sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-    const postDate = new Date(post.created);
-
-    if (postDate < sevenDaysAgo) {
-      errorMessage = "Este post es demasiado antiguo para ser mostrado.";
-      // processedBody se mantiene como cadena vacía
-    } else {
-      // Process Markdown to HTML
-      let tempBody = marked(post.body);
-      processedBody = replaceImageUrlsWithImgTags(tempBody);
-    }
-
-    // Fetch comments for the post
-    comments = await getPostComments(author, permlink);
-    if (!comments) {
-      console.warn(`No comments found for ${author}/${permlink} or an error occurred.`);
-      comments = []; // Ensure comments is an empty array if null
-    }
-
-  } else {
-    errorMessage = "Post no encontrado o error al cargar.";
+  comments = await getPostComments(author, permlink);
+  if (!comments) {
+    console.warn(`No comments found for ${author}/${permlink} or an error occurred.`);
+    comments = []; // Ensure comments is an empty array if null
   }
 } catch (error) {
-  console.error(`Error fetching post ${permlink}:`, error);
-  errorMessage = "Error al cargar el post.";
+  console.error(`Error fetching comments for post ${permlink}:`, error);
+  errorMessage = "Error al cargar los comentarios.";
 }
 
 function sanitizeHtml(html) {

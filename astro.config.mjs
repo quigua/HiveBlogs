@@ -12,6 +12,13 @@ export default defineConfig({
   adapter: node({ 
     mode: 'standalone'
   }),
+  i18n: {
+    defaultLocale: 'es',
+    locales: ['es', 'en'],
+    routing: {
+      prefixDefaultLocale: false, // Esto significa que /es/posts será /posts, y /en/posts será /en/en/posts
+    },
+  },
   // Puedes tener otras configuraciones aquí (ej. site: 'https://tusitio.com')
   integrations: [], // Deja esto vacío si no tienes otras integraciones
   markdown: {
