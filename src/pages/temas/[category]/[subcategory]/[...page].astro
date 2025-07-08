@@ -1,0 +1,65 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../../layouts/Layout.astro';
+import PostCard from '../../../../components/PostCard.astro';
+import { MAIN_CATEGORIES, POST_SETTINGS, SUBCATEGORIES } from '../../../../config/site';
+import SubcategorySidebar from '../../../../components/SubcategorySidebar.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths({ paginate }) {
+  const paginatedPaths = [];
+
+  for (const mainCategory of MAIN_CATEGORIES) {
+    const subcategories = SUBCATEGORIES[mainCategory] || [];
+
+    for (const subcategory of subcategories) {
+      const allPosts = await getCollection('blog', ({ data }) => {
+        return data.category === mainCategory && data.subcategory === subcategory;
+      });
+
+      const sortedPosts = allPosts.sort((a, b) => new Date(b.data.created).getTime() - new Date(a.data.created).getTime());
+
+      const categorySlug = mainCategory.toLowerCase().replace(/ /g, '-');
+      const subcategorySlug = subcategory.toLowerCase().replace(/ /g, '-');
+
+      const pages = paginate(sortedPosts, {
+        pageSize: POST_SETTINGS.postsPerPage,
+        params: {
+          category: categorySlug,
+          subcategory: subcategorySlug,
+        },
+        props: {
+          categoryTitle: mainCategory,
+          subcategoryTitle: subcategory,
+        },
+      });
+      paginatedPaths.push(...pages);
+    }
+  }
+
+  return paginatedPaths;
+}
+
+const { categoryTitle, subcategoryTitle, page } = Astro.props;
+---
+
+<Layout title={`Posts de ${categoryTitle} - ${subcategoryTitle}`}>
+  <div class="page-container">
+    <main class="main-content">
+      <h1>Posts de {categoryTitle} - {subcategoryTitle}</h1>
+      <div class="posts-grid">
+        {page.data.map(post => (
+          <PostCard post={post} />
+        ))}
+      </div>
+
+      <div class="pagination-nav">
+        {page.url.prev && <a href={page.url.prev} class="pagination-link prev">&laquo; Anteriores</a>}
+        <span class="pagination-info">Página {page.currentPage} de {page.lastPage}</span>
+        {page.url.next && <a href={page.url.next} class="pagination-link next">Siguientes &raquo;</a>}
+      </div>
+    </main>
+    <SubcategorySidebar category={categoryTitle} />
+  </div>
+</Layout>

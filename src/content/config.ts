@@ -10,10 +10,12 @@ const blogCollection = defineCollection({
     permlink: z.string(), // ¡Cambio importante aquí! Ahora es solo una cadena de texto
     description: z.string().optional(),
     category: z.string(),
+    subcategory: z.string().optional(),
     tags: z.array(z.string()).default([]),
     votesCount: z.number().default(0),
     hbdPayout: z.string().default("0.00 HBD"),
     commentsCount: z.number().default(0),
+    type: z.enum(['original', 'reblogged']).default('original'),
   }),
 });
 

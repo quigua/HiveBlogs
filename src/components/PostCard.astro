@@ -121,7 +121,7 @@ const displayTags = tags;
 // Determinar la URL del post basada en si es un post de comunidad o un post local
 const postLink = communityId
   ? `/comunidades/${communityId}/${displayAuthor}/${permlink}`
-  : `/posts/${permlink}`; // Asumiendo que tus posts originales/reblogueados tienen una ruta base /posts/
+  : `/posts/${post.slug}`;
 
 // Las propiedades de lectura, votos, HBD y comentarios ya vienen directamente del frontmatter o se calculan
 const displayReads = 0; // Reads (lecturas) no es proporcionado por Hive directamente

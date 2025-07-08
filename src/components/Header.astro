@@ -16,19 +16,12 @@ const avatarUrl = `https://images.hive.blog/u/${HIVE_USERNAME}/avatar`;
 <header class="main-header">
   <div class="container">
     <div class="logo">
-      <a href="/index/"><img src="/hive-logo.svg" alt="Hive Logo" class="hive-logo"> {currentLocale.headerTitle.replace('@quigua', '@' + HIVE_USERNAME)}</a>
+      <a href="/"><img src="/hive-logo.svg" alt="Hive Logo" class="hive-logo"> {currentLocale.headerTitle.replace('@quigua', '@' + HIVE_USERNAME)}</a>
     </div>
 
     <nav class="main-nav">
       <ul>
-        <li><a href="/index/">{currentLocale.home}</a></li>
-        <li class="has-submenu">
-          <a href="#">{currentLocale.posts} <span class="arrow-down"></span></a>
-          <ul class="submenu">
-            <li><a href="/posts/originales/">{currentLocale.originalPosts}</a></li>
-            <li><a href="/posts/reblogueados/">{currentLocale.rebloggedPosts}</a></li>
-          </ul>
-        </li>
+        <li><a href="/">{currentLocale.home}</a></li>
         <li class="has-submenu">
           <a href="#">{currentLocale.worldWideHive} <span class="arrow-down"></span></a>
           <ul class="submenu">
@@ -37,10 +30,11 @@ const avatarUrl = `https://images.hive.blog/u/${HIVE_USERNAME}/avatar`;
             <li><a href="/hot-posts">{currentLocale.hotPosts}</a></li>
             <li><a href="/posts-recientes">{currentLocale.recentPosts}</a></li>
             <li><a href="/favoritos">{currentLocale.favorites}</a></li>
+            <li><a href="/posts/reblogueados/">{currentLocale.rebloggedPosts}</a></li>
           </ul>
         </li>
         <li><a href="/about">{currentLocale.about}</a></li>
-        <li><a href={currentLang === 'es' ? '/?lang=en' : '/?lang=es'} class="language-switcher">{currentLang === 'es' ? 'en' : 'es'}</a></li>
+        <li><a href={currentLang === 'es' ? `${Astro.url.pathname}?lang=en` : `${Astro.url.pathname}?lang=es`} class="language-switcher">{currentLang === 'es' ? 'en' : 'es'}</a></li>
       </ul>
     </nav>
     <div class="user-menu">

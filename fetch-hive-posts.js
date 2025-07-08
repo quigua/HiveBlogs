@@ -11,7 +11,7 @@ import path from 'path';     // Para manejar rutas de archivos
 // --- CONFIGURACIÓN ---
 const HIVE_USERNAME = process.env.HIVE_USERNAME; // Lee el usuario de una variable de entorno
 const ORIGINAL_POSTS_DIR = path.join(process.cwd(), 'src', 'content', 'blog');
-const REBLOGGED_POSTS_DIR = path.join(process.cwd(), 'src', 'data', 'reblogged-posts');
+const REBLOGGED_POSTS_DIR = path.join(process.cwd(), 'src', 'content', 'blog', 'reblogged');
 const COMMUNITY_SUBSCRIPTIONS_DIR = path.join(process.cwd(), 'src', 'data', 'community-subscriptions');
 // --- FIN CONFIGURACIÓN ---
 
@@ -105,7 +105,32 @@ async function fetchAndSavePosts() {
         for (const post of originalPosts) {
             console.log(`Processing post: ${post.permlink}, Active Votes: ${post.active_votes ? post.active_votes.length : 0}`);
             const filename = sanitizeFilename(post.title, post.permlink);
-            const filepath = path.join(ORIGINAL_POSTS_DIR, filename);
+            
+            // Determinar la ruta de destino basada en la categoría y subcategoría
+            let categorySlug = 'general'; // Por defecto
+            let subcategorySlug = '';
+
+            // Asignar categoría y subcategoría si existen en el postData
+            // Nota: fetch-hive-posts.js no categoriza, solo guarda lo que viene de la API.
+            // La categorización se hace con categorize-posts.js.
+            // Por ahora, usaremos una categoría por defecto o la que venga de la API si está disponible.
+            // Para una categorización precisa, se debe ejecutar categorize-posts.js después.
+            if (post.category) {
+                categorySlug = post.category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+            }
+            // Si la API de Hive proporciona subcategoría, la usaríamos aquí.
+            // Como no lo hace, la subcategoría se asignará después con categorize-posts.js.
+
+            let targetDir = path.join(ORIGINAL_POSTS_DIR, categorySlug);
+            // Si tuvieras subcategorías de la API, las añadirías aquí:
+            // if (post.subcategory) {
+            //     subcategorySlug = post.subcategory.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+            //     targetDir = path.join(targetDir, subcategorySlug);
+            // }
+
+            await fs.mkdir(targetDir, { recursive: true });
+
+            const filepath = path.join(targetDir, filename);
             const frontmatter = formatFrontmatter(post);
             const content = post.body; // El cuerpo del post ya está en Markdown
 
@@ -126,7 +151,7 @@ async function fetchAndSavePosts() {
             const frontmatter = formatFrontmatter(post);
             const content = post.body; // El cuerpo del post ya está en Markdown
 
-            await fs.writeFile(filepath, `${frontmatter}\n\n${content}`, 'utf-8');
+            await fs.writeFile(filepath, `${frontmatter.slice(0, -3)}type: "reblogged"\n---\n${content}`, 'utf-8');
             console.log(`Guardado: ${filepath}`);
         }
         console.log('Posts reblogueados guardados correctamente.');
