@@ -8,7 +8,7 @@ created: "2017-06-25T01:52:18.000Z"
 lastUpdate: "2017-06-25T01:52:18.000Z"
 url: "/money/@rach/steem-today-servicio-de-cambio-de-steem-dollar-por-bolivares-documento-de-referencia"
 reputation: 56.24
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/transfer.png"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/transfer.png"
 tags: ["money", "spanish", "steemit", "steem", "venezuela"]
 hbdPayout: "0.373 HBD"
 votesCount: 28

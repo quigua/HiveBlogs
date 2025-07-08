@@ -8,7 +8,7 @@ created: "2017-06-30T09:16:39.000Z"
 lastUpdate: "2017-06-30T09:16:39.000Z"
 url: "/spanish/@rach/spanishchallenge-15-entrada-01-el-impuesto-de-energia-descentralizada"
 reputation: 56.24
-image: "http://lagranrevista.com/wp-content/uploads/2017/06/spanishchallenge15.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/06/spanishchallenge15.jpg"
 tags: ["spanish", "spanishchallenge", "blog", "story", "rach-relatos"]
 hbdPayout: "1.749 HBD"
 votesCount: 23

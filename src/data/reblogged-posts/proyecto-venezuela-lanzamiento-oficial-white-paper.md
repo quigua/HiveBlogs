@@ -8,7 +8,7 @@ created: "2017-06-11T01:49:33.000Z"
 lastUpdate: "2017-06-11T01:49:33.000Z"
 url: "/spanish/@provenezuela/proyecto-venezuela-lanzamiento-oficial-white-paper"
 reputation: 62.49
-image: "https://s24.postimg.org/gfczpew79/IMG_20161004_114834.jpg"
+imageUrl: "https://s24.postimg.org/gfczpew79/IMG_20161004_114834.jpg"
 tags: ["spanish", "venezuela", "steemit", "blockchain", "introduceyourself"]
 hbdPayout: "95.708 HBD"
 votesCount: 173

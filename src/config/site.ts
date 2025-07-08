@@ -158,3 +158,22 @@ export const POST_SETTINGS = {
   postsPerPage: 6,
   showExcerpt: true,
 };
+
+export const MAIN_CATEGORIES = [
+  "Splinterlands",
+  "Hived Blogs",
+  "La Web 3.0",
+  "Servicios de @quigua"
+];
+
+export const SUBCATEGORIES = {
+  "Splinterlands": [
+    "Tutoriales",
+    "Batallas y Estrategias",
+    "Estadísticas",
+    "Sugerencias y Fallos"
+  ],
+  "Hived Blogs": [],
+  "La Web 3.0": [],
+  "Servicios de @quigua": []
+};

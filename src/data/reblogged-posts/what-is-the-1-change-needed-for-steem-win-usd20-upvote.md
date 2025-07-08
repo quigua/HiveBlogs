@@ -8,7 +8,7 @@ created: "2018-07-09T18:01:06.000Z"
 lastUpdate: "2018-07-09T18:02:24.000Z"
 url: "/steem/@themarkymark/what-is-the-1-change-needed-for-steem-win-usd20-upvote"
 reputation: 81.09
-image: "https://ipfs.busy.org/ipfs/QmS6ouGxHkSiyWLo2BGTKvZJNBwwTxtUgGAf2ZchMQGxXh"
+imageUrl: "https://ipfs.busy.org/ipfs/QmS6ouGxHkSiyWLo2BGTKvZJNBwwTxtUgGAf2ZchMQGxXh"
 tags: ["steem", "steemit", "discussion", "moon", "busy"]
 hbdPayout: "262.278 HBD"
 votesCount: 921

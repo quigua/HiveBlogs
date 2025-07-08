@@ -8,7 +8,7 @@ created: "2017-08-16T00:00:00.000Z"
 lastUpdate: "2017-08-16T00:00:00.000Z"
 url: "/spanish/@spokerman12/evitable"
 reputation: 52.52
-image: "https://itself.files.wordpress.com/2016/02/2001-a-space-odyssey-382-body-image-1417612304.jpg?w=640"
+imageUrl: "https://itself.files.wordpress.com/2016/02/2001-a-space-odyssey-382-body-image-1417612304.jpg?w=640"
 tags: ["spanish"]
 hbdPayout: "0.148 HBD"
 votesCount: 14

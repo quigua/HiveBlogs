@@ -8,7 +8,7 @@ created: "2017-06-28T08:04:27.000Z"
 lastUpdate: "2017-06-28T09:33:54.000Z"
 url: "/spanish/@cardumen/concurso-cardumen-no-02-del-26-de-junio-al-02-de-julio-de-2017"
 reputation: 41.25
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/cup-1615074_640.png"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/cup-1615074_640.png"
 tags: ["spanish", "contest", "steemit", "writing", "blog"]
 hbdPayout: "0.720 HBD"
 votesCount: 19

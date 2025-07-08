@@ -8,7 +8,7 @@ created: "2017-06-09T03:47:12.000Z"
 lastUpdate: "2017-06-09T03:47:12.000Z"
 url: "/spanish/@unatalmaria/el-ultimo-timbre"
 reputation: 56.42
-image: "http://lagranrevista.com/wp-content/uploads/2017/06/ultimo-timbre.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/06/ultimo-timbre.jpg"
 tags: ["spanish", "life", "story", "writing", "blog"]
 hbdPayout: "15.208 HBD"
 votesCount: 24

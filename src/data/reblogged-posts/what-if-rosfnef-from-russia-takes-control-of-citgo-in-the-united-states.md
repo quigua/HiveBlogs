@@ -8,7 +8,7 @@ created: "2017-05-19T05:15:00.000Z"
 lastUpdate: "2017-05-19T08:22:54.000Z"
 url: "/news/@rach/what-if-rosfnef-from-russia-takes-control-of-citgo-in-the-united-states"
 reputation: 56.24
-image: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Citgo-Petrol_Station.jpg"
+imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Citgo-Petrol_Station.jpg"
 tags: ["news", "politics", "energy", "venezuela"]
 hbdPayout: "0.000 HBD"
 votesCount: 6

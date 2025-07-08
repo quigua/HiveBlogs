@@ -8,7 +8,7 @@ created: "2017-08-02T10:45:36.000Z"
 lastUpdate: "2017-08-06T09:50:12.000Z"
 url: "/spanish/@rach/bitcoin-cash-la-nueva-oportunidad-para-crear-nuevos-millonarios-parte-i"
 reputation: 56.24
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/08/bitcoin-cash.png"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/08/bitcoin-cash.png"
 tags: ["spanish", "bitcoin", "bitcoin-cash", "cryptocurrency", "cervantes"]
 hbdPayout: "4.781 HBD"
 votesCount: 41

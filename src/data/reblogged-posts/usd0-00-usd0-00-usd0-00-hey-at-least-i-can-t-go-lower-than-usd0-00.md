@@ -8,7 +8,7 @@ created: "2016-09-19T20:38:03.000Z"
 lastUpdate: "2016-09-19T20:38:03.000Z"
 url: "/life/@lifeworship/usd0-00-usd0-00-usd0-00-hey-at-least-i-can-t-go-lower-than-usd0-00"
 reputation: 66.32
-image: "https://upload.wikimedia.org/wikipedia/commons/c/c6/Hypnotic-spiral.jpg"
+imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c6/Hypnotic-spiral.jpg"
 tags: ["life", "steemit", "value", "thoughts", "poverty"]
 hbdPayout: "0.154 HBD"
 votesCount: 32

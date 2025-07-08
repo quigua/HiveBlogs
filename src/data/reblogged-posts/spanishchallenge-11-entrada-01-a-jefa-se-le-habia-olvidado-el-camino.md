@@ -8,7 +8,7 @@ created: "2017-06-03T07:52:06.000Z"
 lastUpdate: "2017-06-04T21:05:45.000Z"
 url: "/spanishchallenge/@rach/spanishchallenge-11-entrada-01-a-jefa-se-le-habia-olvidado-el-camino"
 reputation: 56.24
-image: "http://lagranrevista.com/wp-content/uploads/2017/06/elefantes.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/06/elefantes.jpg"
 tags: ["spanishchallenge", "spanish", "writing", "rach-relatos", "blog"]
 hbdPayout: "0.234 HBD"
 votesCount: 29

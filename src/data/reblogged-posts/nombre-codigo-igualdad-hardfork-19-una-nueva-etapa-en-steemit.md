@@ -8,7 +8,7 @@ created: "2017-06-15T14:55:00.000Z"
 lastUpdate: "2017-06-15T14:55:00.000Z"
 url: "/spanish/@rach/nombre-codigo-igualdad-hardfork-19-una-nueva-etapa-en-steemit"
 reputation: 56.24
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/engranajes.jpg"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/engranajes.jpg"
 tags: ["spanish", "steemit", "steem", "rewards", "hardfork"]
 hbdPayout: "76.678 HBD"
 votesCount: 69

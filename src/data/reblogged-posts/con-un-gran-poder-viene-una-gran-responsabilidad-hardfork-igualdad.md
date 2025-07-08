@@ -8,7 +8,7 @@ created: "2017-06-17T05:49:03.000Z"
 lastUpdate: "2017-06-17T06:00:15.000Z"
 url: "/spanish/@rach/con-un-gran-poder-viene-una-gran-responsabilidad-hardfork-igualdad"
 reputation: 56.24
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/multitud.jpg"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/multitud.jpg"
 tags: ["spanish", "steemit", "steem", "rewards", "hardfork"]
 hbdPayout: "2.535 HBD"
 votesCount: 29

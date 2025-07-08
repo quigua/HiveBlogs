@@ -8,7 +8,7 @@ created: "2024-10-24T01:00:09.000Z"
 lastUpdate: "2024-10-24T01:00:09.000Z"
 url: "/psychology/@por500bolos/sentience-vs-consciousness-vs-self-awareness"
 reputation: 67.94
-image: "https://img.youtube.com/vi/PGhTBqLkrZ4/0.jpg"
+imageUrl: "https://img.youtube.com/vi/PGhTBqLkrZ4/0.jpg"
 tags: ["psychology", "philosophy", "mentalhealth", "mindset", "proofofbrain", "health", "content", "curation"]
 hbdPayout: "0.032 HBD"
 votesCount: 11

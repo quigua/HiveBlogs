@@ -8,7 +8,7 @@ created: "2017-05-17T00:05:30.000Z"
 lastUpdate: "2017-05-17T00:42:27.000Z"
 url: "/proyectovenezuela/@rach/proyecto-venezuela-organizar-la-informacion-para-masificar-steemit"
 reputation: 56.24
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/05/archive-1850170_640.jpg"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/05/archive-1850170_640.jpg"
 tags: ["proyectovenezuela", "rach-guibasica", "steemit", "spanish", "rach-guiabasica"]
 hbdPayout: "0.762 HBD"
 votesCount: 11

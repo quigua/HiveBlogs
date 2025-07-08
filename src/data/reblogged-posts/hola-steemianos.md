@@ -8,7 +8,7 @@ created: "2017-06-03T22:38:42.000Z"
 lastUpdate: "2017-06-03T22:38:42.000Z"
 url: "/introduceyourself/@marcevhc/hola-steemianos"
 reputation: 44.99
-
+imageUrl: "/placeholder-post.jpg"
 tags: ["introduceyourself", "spanish", "life", "steemit", "introducemyself"]
 hbdPayout: "9.412 HBD"
 votesCount: 37

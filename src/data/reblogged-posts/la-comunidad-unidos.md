@@ -8,7 +8,7 @@ created: "2018-05-17T05:23:48.000Z"
 lastUpdate: "2018-05-17T05:23:48.000Z"
 url: "/unidos/@unidos/la-comunidad-unidos"
 reputation: 32.08
-image: "https://steembank.com/wp-content/uploads/2018/05/community-309932_1280-e1525665762843.png"
+imageUrl: "https://steembank.com/wp-content/uploads/2018/05/community-309932_1280-e1525665762843.png"
 tags: ["unidos", "spanish", "blog", "steem", "comunidad"]
 hbdPayout: "1.162 HBD"
 votesCount: 34

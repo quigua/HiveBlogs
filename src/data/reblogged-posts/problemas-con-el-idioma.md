@@ -8,7 +8,7 @@ created: "2017-06-07T03:34:21.000Z"
 lastUpdate: "2017-06-07T03:34:21.000Z"
 url: "/spanish/@unatalmaria/problemas-con-el-idioma"
 reputation: 56.42
-image: "http://lagranrevista.com/wp-content/uploads/2017/06/manhattan-1026248_640.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/06/manhattan-1026248_640.jpg"
 tags: ["spanish", "life", "story", "writing", "blog"]
 hbdPayout: "0.096 HBD"
 votesCount: 19

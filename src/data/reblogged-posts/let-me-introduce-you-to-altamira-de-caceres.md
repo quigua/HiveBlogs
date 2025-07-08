@@ -8,7 +8,7 @@ created: "2017-08-12T04:39:39.000Z"
 lastUpdate: "2017-08-12T04:39:39.000Z"
 url: "/photography/@unatalmaria/let-me-introduce-you-to-altamira-de-caceres"
 reputation: 56.42
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/05/FB_IMG_14954616992790032.jpg"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/05/FB_IMG_14954616992790032.jpg"
 tags: ["photography", "nature", "travel", "life", "blog"]
 hbdPayout: "3.437 HBD"
 votesCount: 21

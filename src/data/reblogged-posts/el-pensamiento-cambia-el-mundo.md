@@ -8,7 +8,7 @@ created: "2017-05-27T04:41:15.000Z"
 lastUpdate: "2017-05-27T15:39:51.000Z"
 url: "/spanish/@monoc/el-pensamiento-cambia-el-mundo"
 reputation: 46.4
-image: "http://lagranrevista.com/wp-content/uploads/2017/05/thought-2123970_640.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/05/thought-2123970_640.jpg"
 tags: ["philosophy", "spanish"]
 hbdPayout: "0.058 HBD"
 votesCount: 11

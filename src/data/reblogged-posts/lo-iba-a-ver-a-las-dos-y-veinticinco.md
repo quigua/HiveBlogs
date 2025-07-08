@@ -8,7 +8,7 @@ created: "2017-05-25T05:51:27.000Z"
 lastUpdate: "2017-05-31T15:43:45.000Z"
 url: "/spanish/@rach/lo-iba-a-ver-a-las-dos-y-veinticinco"
 reputation: 56.24
-image: "http://lagranrevista.com/wp-content/uploads/2017/05/devil-38148_640-e1495674749632.png"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/05/devil-38148_640-e1495674749632.png"
 tags: ["spanish", "writing", "story", "blog", "rach-relatos"]
 hbdPayout: "7.138 HBD"
 votesCount: 45

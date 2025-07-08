@@ -8,7 +8,7 @@ created: "2017-05-23T07:46:54.000Z"
 lastUpdate: "2017-05-23T23:25:21.000Z"
 url: "/spanish/@unatalmaria/si-no-ponen-las-meto-en-la-olla"
 reputation: 56.42
-image: "http://lagranrevista.com/wp-content/uploads/2017/05/gallina-te-mira.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/05/gallina-te-mira.jpg"
 tags: ["spanish", "life", "food", "story", "nature"]
 hbdPayout: "10.166 HBD"
 votesCount: 54

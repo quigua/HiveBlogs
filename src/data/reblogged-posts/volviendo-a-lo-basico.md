@@ -8,7 +8,7 @@ created: "2017-06-04T08:12:24.000Z"
 lastUpdate: "2017-06-04T08:12:24.000Z"
 url: "/spanish/@unatalmaria/volviendo-a-lo-basico"
 reputation: 56.42
-image: "http://lagranrevista.com/wp-content/uploads/2017/06/14141529_10209313239443381_1365918401517336583_n-e1496549355590.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/06/14141529_10209313239443381_1365918401517336583_n-e1496549355590.jpg"
 tags: ["spanish", "life", "story", "writing", "blog"]
 hbdPayout: "18.736 HBD"
 votesCount: 57

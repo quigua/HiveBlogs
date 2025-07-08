@@ -8,7 +8,7 @@ created: "2017-06-26T02:20:12.000Z"
 lastUpdate: "2017-07-02T22:04:00.000Z"
 url: "/money/@rach/steem-today-oferta-sbd-02-servicio-de-conversion-de-sbd-a-bolivares"
 reputation: 56.24
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/transfer.png"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/transfer.png"
 tags: ["money", "spanish", "steemit", "steem", "venezuela"]
 hbdPayout: "0.257 HBD"
 votesCount: 12

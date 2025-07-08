@@ -8,7 +8,7 @@ created: "2017-06-15T03:51:51.000Z"
 lastUpdate: "2017-06-15T04:32:21.000Z"
 url: "/hf19/@aggroed/shaved-whale-balls-and-mega-circle-jerks-the-economics-of-hf-19-a-witness-update"
 reputation: 80.04
-image: "https://steemitimages.com/DQmUEfowjD5Ch4WeFTX4WamcEhaRGb6UWSpfhjEbM3EGgpK/image.png"
+imageUrl: "https://steemitimages.com/DQmUEfowjD5Ch4WeFTX4WamcEhaRGb6UWSpfhjEbM3EGgpK/image.png"
 tags: ["hf19", "whaleballs", "circlejerk", "rewardpoolrape", "witness"]
 hbdPayout: "740.172 HBD"
 votesCount: 697

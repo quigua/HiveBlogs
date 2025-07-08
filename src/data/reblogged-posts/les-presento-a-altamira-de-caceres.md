@@ -8,7 +8,7 @@ created: "2017-05-21T23:51:36.000Z"
 lastUpdate: "2017-05-22T22:50:30.000Z"
 url: "/spanish/@unatalmaria/les-presento-a-altamira-de-caceres"
 reputation: 56.42
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/05/FB_IMG_14954616992790032.jpg"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/05/FB_IMG_14954616992790032.jpg"
 tags: ["spanish", "photography", "nature", "travel", "life"]
 hbdPayout: "11.928 HBD"
 votesCount: 57

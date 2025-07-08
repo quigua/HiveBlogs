@@ -1,48 +1,36 @@
 ---
-export const prerender = true;
+import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import CommentCard from '/src/components/CommentCard.astro';
+import CommentCard from '../../components/CommentCard.astro';
 import { SITE_INFO } from '../../config/site';
 import { getPostComments, condenser_api_get_content } from 'hiveblogkit';
 
-// 1. getStaticPaths: Astro necesita saber qué páginas debe generar.
-//    Esta función le dirá a Astro todas las rutas posibles para los posts.
+export const prerender = true;
+
 export async function getStaticPaths() {
-  // Obtener todos los posts originales y reblogueados
-  const allOriginalPosts = await Astro.glob('../../data/original-posts/*.md');
-  const allRebloggedPosts = await Astro.glob('../../data/reblogged-posts/*.md');
+  const allPosts = await getCollection('blog');
 
-  // Combinar ambos tipos de posts
-  const allPosts = [...allOriginalPosts, ...allRebloggedPosts];
-
-  // Mapear los posts a los objetos de ruta que Astro espera
   return allPosts.map((post) => {
-    console.log('Post object in [...slug].astro getStaticPaths:', post);
     return {
       params: {
-        slug: post.frontmatter.permlink, // Usamos 'permlink' como el 'slug' de la URL
-    },
-    props: {
-        post, // Pasamos el objeto post completo a la página para que lo use
+        slug: post.slug,
+      },
+      props: {
+        post,
       },
     };
   });
 }
 
-// 2. Props de la página: Recibimos el 'post' individual para esta página
 const { post } = Astro.props;
 
-// Desestructurar propiedades del frontmatter del post para usarlas en la plantilla
-const { title, author, created, body, image, description, permlink } = post.frontmatter;
+const { title, author, created, description, imageUrl, permlink } = post.data;
 
 // Formatear la fecha
 const formattedDate = created ? new Date(created).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Fecha desconocida';
 
 let comments = [];
 let errorMessage = null;
-
-// For Markdown posts, the content is already compiled to HTML
-const processedBody = await post.compiledContent();
 
 // Fetch comments for the post
 try {
@@ -62,12 +50,12 @@ function sanitizeHtml(html) {
              .replace(/on\w+=["'][^"']*["']/gi, '');
 }
 
-const sanitizedBody = sanitizeHtml(processedBody); // Siempre llamar con un processedBody definido
+const sanitizedBody = sanitizeHtml(post.body); // Siempre llamar con un processedBody definido
 ---
 
 <Layout title={title} description={description || SITE_INFO.description}>
   <article class="post-detail-container">
-    {image && <img src={image} alt={title} class="post-detail-image" />}
+    {imageUrl && <img src={imageUrl} alt={title} class="post-detail-image" />}
     <h1 class="post-detail-title">{title}</h1>
     <div class="post-detail-meta">
       <span>Por <a href="#">@{author}</a></span>
@@ -75,7 +63,7 @@ const sanitizedBody = sanitizeHtml(processedBody); // Siempre llamar con un proc
     </div>
     <div class="post-content-body">
       {/* Aquí inyectamos el contenido Markdown del post */}
-      <Fragment set:html={post.compiledContent()} />
+      <Fragment set:html={sanitizedBody} />
     </div>
   </article>
 

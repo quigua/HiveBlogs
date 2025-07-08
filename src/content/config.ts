@@ -4,15 +4,16 @@ const blogCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    date: z.string(),
+    created: z.string(),
     author: z.string(),
-    imageUrl: z.string(), // ¡Cambio importante aquí! Ahora es solo una cadena de texto
-    excerpt: z.string().optional(),
+    imageUrl: z.string(),
+    permlink: z.string(), // ¡Cambio importante aquí! Ahora es solo una cadena de texto
+    description: z.string().optional(),
     category: z.string(),
     tags: z.array(z.string()).default([]),
-    votes: z.number().default(0),
+    votesCount: z.number().default(0),
     hbdPayout: z.string().default("0.00 HBD"),
-    comments: z.number().default(0),
+    commentsCount: z.number().default(0),
   }),
 });
 

@@ -8,7 +8,7 @@ created: "2017-05-13T17:40:03.000Z"
 lastUpdate: "2017-05-13T17:40:03.000Z"
 url: "/spanish/@efrageek/proyecto-venezuela-que-podemos-hacer-3-ideas"
 reputation: 56.84
-image: "https://i.imgur.com/pGiMHHU.jpg"
+imageUrl: "https://i.imgur.com/pGiMHHU.jpg"
 tags: ["spanish", "steemit", "blockchain", "venezuela", "blog"]
 hbdPayout: "17.493 HBD"
 votesCount: 59

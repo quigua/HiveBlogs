@@ -8,7 +8,7 @@ created: "2024-09-28T16:17:39.000Z"
 lastUpdate: "2024-09-28T16:28:57.000Z"
 url: "/hive-139531/@pharesim/re-introducing-hiveinvite-invite-your-friends"
 reputation: 73.41
-image: "https://files.peakd.com/file/peakd-hive/pharesim/EqqwLkRWKRHgJYrBDfAW7qQ6abhzSwK13QofqeoayG8j1LRUgt7QUoGmT5eJXrKamFZ.png"
+imageUrl: "https://files.peakd.com/file/peakd-hive/pharesim/EqqwLkRWKRHgJYrBDfAW7qQ6abhzSwK13QofqeoayG8j1LRUgt7QUoGmT5eJXrKamFZ.png"
 tags: ["hive", "onboarding", "hiveinvite", "account-creation"]
 hbdPayout: "71.424 HBD"
 votesCount: 1000

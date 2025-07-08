@@ -8,7 +8,7 @@ created: "2018-04-03T22:20:57.000Z"
 lastUpdate: "2018-04-03T22:20:57.000Z"
 url: "/spanish/@kerlys/para-los-amantes-del-clima-tropical-les-presento-el-parque-nacional-morrocoy"
 reputation: 36.62
-image: "https://steemitimages.com/DQmSJL5tek5fYhJRDSoaCHdGR1AeZHUeeYC7yWDEJkuVdMd/Parque-Morrocoy-858x536.jpg"
+imageUrl: "https://steemitimages.com/DQmSJL5tek5fYhJRDSoaCHdGR1AeZHUeeYC7yWDEJkuVdMd/Parque-Morrocoy-858x536.jpg"
 tags: ["spanish", "cervantes", "venezuela", "nature"]
 hbdPayout: "0.224 HBD"
 votesCount: 14

@@ -8,7 +8,7 @@ created: "2017-06-28T02:43:33.000Z"
 lastUpdate: "2017-06-28T02:43:33.000Z"
 url: "/spanishchallenge/@monoc/spanishchallenge-15-entrada-1-suenos-de-amistad"
 reputation: 46.4
-image: "http://lagranrevista.com/wp-content/uploads/2017/06/spanishchallenge15.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/06/spanishchallenge15.jpg"
 tags: ["spanishchallenge", "spanish", "writng", "blog", "story"]
 hbdPayout: "2.557 HBD"
 votesCount: 13

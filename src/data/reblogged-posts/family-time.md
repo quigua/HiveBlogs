@@ -8,7 +8,7 @@ created: "2017-05-26T08:10:45.000Z"
 lastUpdate: "2017-05-26T12:59:27.000Z"
 url: "/life/@pgarcgo/family-time"
 reputation: 70.65
-image: "https://s29.postimg.org/lask1k0uf/90_BB4_A39-0_EB7-4_E1_C-8_B18-_D7_FB1_ADF987_C-1176-000001.jpg"
+imageUrl: "https://s29.postimg.org/lask1k0uf/90_BB4_A39-0_EB7-4_E1_C-8_B18-_D7_FB1_ADF987_C-1176-000001.jpg"
 tags: ["life", "e-bikes", "outdoors", "family", "tour"]
 hbdPayout: "26.322 HBD"
 votesCount: 140

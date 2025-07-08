@@ -8,7 +8,7 @@ created: "2017-06-13T10:08:39.000Z"
 lastUpdate: "2017-06-13T10:13:30.000Z"
 url: "/spanish/@rach/presentacion-del-compendio-de-relatos-cortos-de-rach-13-junio-2017"
 reputation: 56.24
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/relatos.png"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/relatos.png"
 tags: ["spanish", "writing", "steemit", "blog", "rach-relatos"]
 hbdPayout: "7.984 HBD"
 votesCount: 58

@@ -8,7 +8,7 @@ created: "2017-06-12T01:29:39.000Z"
 lastUpdate: "2017-06-13T05:23:39.000Z"
 url: "/spanishchallenge/@rach/spanishchallenge-12-entrada-1-saber-que-decision-tomar"
 reputation: 56.24
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/spanishchallege12.jpg"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/spanishchallege12.jpg"
 tags: ["spanishchallenge", "spanish", "writing", "rach-relatos", "story"]
 hbdPayout: "5.138 HBD"
 votesCount: 38

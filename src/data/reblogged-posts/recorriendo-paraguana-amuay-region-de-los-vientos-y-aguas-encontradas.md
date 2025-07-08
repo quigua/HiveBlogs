@@ -8,7 +8,7 @@ created: "2017-06-05T05:27:48.000Z"
 lastUpdate: "2017-06-05T05:27:48.000Z"
 url: "/spanish/@unatalmaria/recorriendo-paraguana-amuay-region-de-los-vientos-y-aguas-encontradas"
 reputation: 56.42
-image: "http://lagranrevista.com/wp-content/uploads/2017/06/Amuay.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/06/Amuay.jpg"
 tags: ["spanish", "travel", "life", "photography", "nature"]
 hbdPayout: "0.694 HBD"
 votesCount: 18

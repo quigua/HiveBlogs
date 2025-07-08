@@ -8,7 +8,7 @@ created: "2017-07-06T11:24:42.000Z"
 lastUpdate: "2017-07-12T07:41:06.000Z"
 url: "/spanish/@rach/guia-basica-de-introduccion-para-nuevos-usuarios-de-steemit"
 reputation: 56.24
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/07/social-2.jpg"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/07/social-2.jpg"
 tags: ["spanish", "steemit", "blockchain", "cryptocurrency", "guias-cardumen"]
 hbdPayout: "9.086 HBD"
 votesCount: 86

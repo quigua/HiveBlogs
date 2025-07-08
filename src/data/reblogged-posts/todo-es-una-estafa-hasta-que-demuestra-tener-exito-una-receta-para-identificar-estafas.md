@@ -8,7 +8,7 @@ created: "2017-06-10T03:25:45.000Z"
 lastUpdate: "2017-06-10T03:25:45.000Z"
 url: "/spanish/@rach/todo-es-una-estafa-hasta-que-demuestra-tener-exito-una-receta-para-identificar-estafas"
 reputation: 56.24
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/scam.jpg"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/scam.jpg"
 tags: ["spanish", "steemit", "bitcoin", "cryptocurrency", "money"]
 hbdPayout: "11.360 HBD"
 votesCount: 67

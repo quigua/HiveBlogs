@@ -8,7 +8,7 @@ created: "2018-06-01T04:58:03.000Z"
 lastUpdate: "2018-06-01T04:58:03.000Z"
 url: "/blockchain/@rach/propiedad-y-derechos-de-uso-del-contenido-en-la-cadena-de-bloques-del-steem"
 reputation: 56.24
-image: "http://i.imgur.com/ow7sHn0.jpg"
+imageUrl: "http://i.imgur.com/ow7sHn0.jpg"
 tags: ["blockchain", "steem", "spanish", "steemit", "blog"]
 hbdPayout: "11.748 HBD"
 votesCount: 76

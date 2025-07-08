@@ -7,8 +7,8 @@ category: "hive-139531"
 created: "2024-11-27T19:01:00.000Z"
 lastUpdate: "2024-11-27T19:01:00.000Z"
 url: "/hive-139531/@dalz/hive-tokenomics-improvement-proposal-for-the-next-hardfork"
-reputation: 80.53
-image: "https://files.peakd.com/file/peakd-hive/dalz/23tkhkyM3rj77nsvTJSxrVKZtmqGUMDwFdkGZDij5GEhDyMnogLK7YSNVUUayKeUUbqBD.jpg"
+reputation: 80.57
+imageUrl: "https://files.peakd.com/file/peakd-hive/dalz/23tkhkyM3rj77nsvTJSxrVKZtmqGUMDwFdkGZDij5GEhDyMnogLK7YSNVUUayKeUUbqBD.jpg"
 tags: ["hive", "tokenomics", "inflation"]
 hbdPayout: "47.316 HBD"
 votesCount: 839

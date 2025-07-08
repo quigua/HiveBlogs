@@ -8,7 +8,7 @@ created: "2016-10-23T18:08:03.000Z"
 lastUpdate: "2016-10-24T05:19:27.000Z"
 url: "/steemit/@hyperbolicist/one-usdusdhole-s-hope-for-steemit-warning-boring-offensive-and-possibly-incoherent-post"
 reputation: 61.25
-image: "http://i.imgur.com/rgt2Ibx.png"
+imageUrl: "http://i.imgur.com/rgt2Ibx.png"
 tags: ["steemit", "freedom", "writing", "curie", "psychology"]
 hbdPayout: "15.573 HBD"
 votesCount: 66

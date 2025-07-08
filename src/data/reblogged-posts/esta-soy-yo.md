@@ -8,7 +8,7 @@ created: "2017-05-21T04:00:51.000Z"
 lastUpdate: "2017-05-21T04:00:51.000Z"
 url: "/introduceyourself/@unatalmaria/esta-soy-yo"
 reputation: 56.42
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/05/IMG-20160825-WA0015-1024x576.jpg"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/05/IMG-20160825-WA0015-1024x576.jpg"
 tags: ["introduceyourself", "spanish", "steemit", "life", "travel"]
 hbdPayout: "13.648 HBD"
 votesCount: 52

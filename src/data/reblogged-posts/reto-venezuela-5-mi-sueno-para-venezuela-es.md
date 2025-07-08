@@ -8,7 +8,7 @@ created: "2017-08-11T22:05:48.000Z"
 lastUpdate: "2017-08-11T22:36:06.000Z"
 url: "/retovenezuela/@unatalmaria/reto-venezuela-5-mi-sueno-para-venezuela-es"
 reputation: 56.42
-image: "http://lagranrevista.com/wp-content/uploads/2017/05/10398546_1105209425833_7082536_n.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/05/10398546_1105209425833_7082536_n.jpg"
 tags: ["retovenezuela", "venezuela", "spanish", "cervantes-venezuela", "cervantes"]
 hbdPayout: "4.616 HBD"
 votesCount: 43

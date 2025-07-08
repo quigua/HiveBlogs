@@ -8,7 +8,7 @@ created: "2017-06-24T02:33:45.000Z"
 lastUpdate: "2017-06-24T02:33:45.000Z"
 url: "/spanish/@monoc/huellas-en-la-nieve"
 reputation: 46.4
-image: "http://lagranrevista.com/wp-content/uploads/2017/06/huellas-nieve.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/06/huellas-nieve.jpg"
 tags: ["spanish", "writting", "story", "blog", "creepypasta"]
 hbdPayout: "16.378 HBD"
 votesCount: 69

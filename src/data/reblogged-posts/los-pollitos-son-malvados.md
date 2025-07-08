@@ -8,7 +8,7 @@ created: "2017-05-28T06:08:42.000Z"
 lastUpdate: "2017-05-28T06:08:42.000Z"
 url: "/spanish/@unatalmaria/los-pollitos-son-malvados"
 reputation: 56.42
-image: "http://lagranrevista.com/wp-content/uploads/2017/05/pollitomalvado.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/05/pollitomalvado.jpg"
 tags: ["spanish", "life", "story", "writing", "blog"]
 hbdPayout: "8.093 HBD"
 votesCount: 50

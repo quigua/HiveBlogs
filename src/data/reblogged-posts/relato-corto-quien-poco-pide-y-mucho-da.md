@@ -8,7 +8,7 @@ created: "2017-06-02T08:20:18.000Z"
 lastUpdate: "2017-06-02T08:20:18.000Z"
 url: "/spanish/@rach/relato-corto-quien-poco-pide-y-mucho-da"
 reputation: 56.24
-image: "http://lagranrevista.com/wp-content/uploads/2017/06/arbol-moringa.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/06/arbol-moringa.jpg"
 tags: ["spanish", "writing", "story", "blog", "rach-relatos"]
 hbdPayout: "15.637 HBD"
 votesCount: 51

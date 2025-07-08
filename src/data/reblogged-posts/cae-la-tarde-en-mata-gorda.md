@@ -8,7 +8,7 @@ created: "2017-05-21T08:14:18.000Z"
 lastUpdate: "2017-05-21T08:14:18.000Z"
 url: "/spanish/@unatalmaria/cae-la-tarde-en-mata-gorda"
 reputation: 56.42
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/05/Mata-gorda-lancha.jpg"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/05/Mata-gorda-lancha.jpg"
 tags: ["spanish", "photography", "nature", "travel", "life"]
 hbdPayout: "21.644 HBD"
 votesCount: 73

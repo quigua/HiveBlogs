@@ -8,7 +8,7 @@ created: "2017-05-30T07:37:09.000Z"
 lastUpdate: "2017-05-30T07:37:09.000Z"
 url: "/spanish/@unatalmaria/alcanzando-nuevamente-el-equilibrio"
 reputation: 56.42
-image: "http://lagranrevista.com/wp-content/uploads/2017/05/microimagen-zno.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/05/microimagen-zno.jpg"
 tags: ["spanish", "life", "steemit", "introduceyourself", "blog"]
 hbdPayout: "11.148 HBD"
 votesCount: 51

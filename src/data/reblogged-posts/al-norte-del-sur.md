@@ -8,7 +8,7 @@ created: "2017-05-29T07:41:06.000Z"
 lastUpdate: "2017-05-29T07:41:06.000Z"
 url: "/spanish/@unatalmaria/al-norte-del-sur"
 reputation: 56.42
-image: "http://lagranrevista.com/wp-content/uploads/2017/05/2951_1117012560904_6961965_n.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/05/2951_1117012560904_6961965_n.jpg"
 tags: ["spanish", "travel", "life", "photography", "nature"]
 hbdPayout: "24.620 HBD"
 votesCount: 58

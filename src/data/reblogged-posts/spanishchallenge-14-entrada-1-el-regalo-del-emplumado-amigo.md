@@ -8,7 +8,7 @@ created: "2017-06-23T04:16:36.000Z"
 lastUpdate: "2017-06-23T04:17:45.000Z"
 url: "/spanishchallenge/@monoc/spanishchallenge-14-entrada-1-el-regalo-del-emplumado-amigo"
 reputation: 46.4
-image: "http://lagranrevista.com/wp-content/uploads/2017/06/spanishchallenge14.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/06/spanishchallenge14.jpg"
 tags: ["spanishchallenge", "spanish", "writng", "blog", "story"]
 hbdPayout: "4.458 HBD"
 votesCount: 17

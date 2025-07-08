@@ -8,7 +8,7 @@ created: "2017-06-07T07:22:33.000Z"
 lastUpdate: "2017-06-07T07:22:33.000Z"
 url: "/spanish/@rach/relato-corto-jose-llego-tarde-al-aeropuerto"
 reputation: 56.24
-image: "http://lagranrevista.com/wp-content/uploads/2017/06/aeropuerto.png"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/06/aeropuerto.png"
 tags: ["spanish", "writing", "story", "blog", "rach-relatos"]
 hbdPayout: "0.533 HBD"
 votesCount: 17

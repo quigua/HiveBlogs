@@ -8,7 +8,7 @@ created: "2017-05-15T14:30:21.000Z"
 lastUpdate: "2017-05-15T14:30:21.000Z"
 url: "/proyectovenezuela/@efrageek/proyectovenezuela-pasemos-a-la-accion"
 reputation: 56.84
-image: "http://i.imgur.com/mRgUsJU.jpg"
+imageUrl: "http://i.imgur.com/mRgUsJU.jpg"
 tags: ["proyectovenezuela", "venezuela", "spanish", "blockchain", "steemit"]
 hbdPayout: "2.448 HBD"
 votesCount: 21

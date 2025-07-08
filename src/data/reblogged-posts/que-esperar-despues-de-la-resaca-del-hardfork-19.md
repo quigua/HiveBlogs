@@ -8,7 +8,7 @@ created: "2017-06-24T05:33:51.000Z"
 lastUpdate: "2017-06-24T05:33:51.000Z"
 url: "/spanish/@rach/que-esperar-despues-de-la-resaca-del-hardfork-19"
 reputation: 56.24
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/resaca.jpg"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/resaca.jpg"
 tags: ["spanish", "steemit", "steem", "rewards", "hardfork"]
 hbdPayout: "1.263 HBD"
 votesCount: 19

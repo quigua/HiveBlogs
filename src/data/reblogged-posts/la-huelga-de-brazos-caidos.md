@@ -8,7 +8,7 @@ created: "2017-05-24T08:23:03.000Z"
 lastUpdate: "2017-05-24T08:23:03.000Z"
 url: "/spanish/@unatalmaria/la-huelga-de-brazos-caidos"
 reputation: 56.42
-image: "http://lagranrevista.com/wp-content/uploads/2017/05/10398546_1105222986172_2810494_n.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/05/10398546_1105222986172_2810494_n.jpg"
 tags: ["spanish", "life", "story", "venezuela", "family"]
 hbdPayout: "8.782 HBD"
 votesCount: 58

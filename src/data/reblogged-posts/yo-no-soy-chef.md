@@ -8,7 +8,7 @@ created: "2017-05-26T06:55:24.000Z"
 lastUpdate: "2017-05-26T06:55:24.000Z"
 url: "/spanish/@unatalmaria/yo-no-soy-chef"
 reputation: 56.42
-image: "http://lagranrevista.com/wp-content/uploads/2017/05/papa.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/05/papa.jpg"
 tags: ["spanish", "life", "food", "story", "venezuela"]
 hbdPayout: "5.576 HBD"
 votesCount: 48

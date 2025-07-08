@@ -8,7 +8,7 @@ created: "2017-05-31T07:28:45.000Z"
 lastUpdate: "2017-05-31T15:46:42.000Z"
 url: "/spanish/@rach/relato-corto-el-atraco"
 reputation: 56.24
-image: "http://lagranrevista.com/wp-content/uploads/2017/05/white-male-1856200_640-e1496200930210.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/05/white-male-1856200_640-e1496200930210.jpg"
 tags: ["spanish", "writing", "story", "blog", "rach-relatos"]
 hbdPayout: "15.103 HBD"
 votesCount: 51

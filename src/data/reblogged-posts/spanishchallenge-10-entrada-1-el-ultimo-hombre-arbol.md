@@ -8,7 +8,7 @@ created: "2017-05-26T09:02:15.000Z"
 lastUpdate: "2017-05-31T15:43:12.000Z"
 url: "/spanishchallenge/@rach/spanishchallenge-10-entrada-1-el-ultimo-hombre-arbol"
 reputation: 56.24
-image: "http://lagranrevista.com/wp-content/uploads/2017/05/spanish-challenge-10-e1495773852158.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/05/spanish-challenge-10-e1495773852158.jpg"
 tags: ["spanishchallenge", "spanish", "writing", "rach-relatos", "blog"]
 hbdPayout: "3.221 HBD"
 votesCount: 24

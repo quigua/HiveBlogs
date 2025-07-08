@@ -8,7 +8,7 @@ created: "2024-10-15T10:54:30.000Z"
 lastUpdate: "2024-10-15T10:59:09.000Z"
 url: "/multisig/@stoodkev/multisig-2fa-bot-beta"
 reputation: 71.82
-image: "https://files.peakd.com/file/peakd-hive/stoodkev/23uFrzBuyyLBUMSrqxGjaMH7TVgwwmqyZxvtM7WqqCet3vv4aVPdDUfCXAMuWGvFgzAmb.png"
+imageUrl: "https://files.peakd.com/file/peakd-hive/stoodkev/23uFrzBuyyLBUMSrqxGjaMH7TVgwwmqyZxvtM7WqqCet3vv4aVPdDUfCXAMuWGvFgzAmb.png"
 tags: ["multisig", "dev", "hivedev", "hive-multisig", "dhf"]
 hbdPayout: "51.540 HBD"
 votesCount: 506

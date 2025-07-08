@@ -10,7 +10,23 @@ console.log('PostCard received:', { post, communityId });
 let title, description, author, permlink, category, created, image, tags, url, hbdPayout, votesCount, commentsCount;
 
 // Determinar si el post viene de Astro.glob (con frontmatter) o directamente de la API
-if (post.frontmatter) {
+if (post.data) {
+  // Caso: Post de getCollection (posts de categoría)
+  ({
+    title = 'Sin título',
+    description = 'Sin descripción disponible.',
+    author = 'Usuario Desconocido',
+    permlink = 'no-permlink-found',
+    category = 'General',
+    created,
+    imageUrl: image = null,
+    tags = [],
+    hbdPayout = '0.000 HBD',
+    votesCount = 0,
+    commentsCount = 0,
+  } = post.data);
+  url = post.slug ? `/posts/${post.slug}` : '#';
+} else if (post.frontmatter) {
   // Caso: Post de Astro.glob (originales/reblogueados)
   ({
     title = 'Sin título',
@@ -112,6 +128,7 @@ const displayReads = 0; // Reads (lecturas) no es proporcionado por Hive directa
 const displayVotes = votesCount;
 const displayHbdPayout = hbdPayout;
 const displayComments = commentsCount;
+console.log('PostCard - displayVotes:', displayVotes);
 ---
 
 <div class="post-card">

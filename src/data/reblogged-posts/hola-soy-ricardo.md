@@ -8,7 +8,7 @@ created: "2017-05-27T03:07:51.000Z"
 lastUpdate: "2017-05-27T03:07:51.000Z"
 url: "/introduceyourself/@monoc/hola-soy-ricardo"
 reputation: 46.4
-image: "http://lagranrevista.com/wp-content/uploads/2017/05/ric.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/05/ric.jpg"
 tags: ["introduceyourself", "spanish", "writing", "blog"]
 hbdPayout: "1.894 HBD"
 votesCount: 53

@@ -8,7 +8,7 @@ created: "2017-06-29T06:16:48.000Z"
 lastUpdate: "2017-06-29T06:16:48.000Z"
 url: "/spanish/@rach/informacion-y-funcionamiento-en-una-comunidad-descentralizada"
 reputation: 56.24
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/visiones.jpg"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/06/visiones.jpg"
 tags: ["spanish", "steemit", "blog", "life", "blockchain"]
 hbdPayout: "11.261 HBD"
 votesCount: 78

@@ -8,7 +8,7 @@ created: "2017-06-30T07:28:18.000Z"
 lastUpdate: "2017-06-30T07:28:18.000Z"
 url: "/spanish/@monoc/el-poder-del-odio"
 reputation: 46.4
-image: "http://lagranrevista.com/wp-content/uploads/2017/06/magicpoison.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/06/magicpoison.jpg"
 tags: ["spanish", "writting", "story", "blog"]
 hbdPayout: "0.336 HBD"
 votesCount: 12

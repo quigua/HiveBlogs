@@ -8,7 +8,7 @@ created: "2017-06-11T10:05:48.000Z"
 lastUpdate: "2017-06-11T10:05:48.000Z"
 url: "/spanish/@unatalmaria/si-tu-tocas-yo-canto"
 reputation: 56.42
-image: "http://lagranrevista.com/wp-content/uploads/2017/06/cuatro.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/06/cuatro.jpg"
 tags: ["spanish", "life", "music", "introducemyself", "blog"]
 hbdPayout: "31.872 HBD"
 votesCount: 63

@@ -8,7 +8,7 @@ created: "2017-07-11T11:12:03.000Z"
 lastUpdate: "2017-07-11T11:13:57.000Z"
 url: "/spanish/@rach/lo-que-todo-miembro-de-steemit-debe-saber-de-la-cadena-de-bloques-o-blockchain"
 reputation: 56.24
-image: "http://energiaydesarrollo.com/wp-content/uploads/2017/07/social-1.jpg"
+imageUrl: "http://energiaydesarrollo.com/wp-content/uploads/2017/07/social-1.jpg"
 tags: ["spanish", "blockchain", "steemit", "bitcoin", "guias-cardumen"]
 hbdPayout: "10.384 HBD"
 votesCount: 76

@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { MAIN_CATEGORIES, POST_SETTINGS } from '../../../config/site';
+import SubcategorySidebar from '../../../components/SubcategorySidebar.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths({ paginate }) {
+  const paths = MAIN_CATEGORIES.map(category => ({
+    params: { category: category.toLowerCase().replace(/ /g, '-') },
+    props: { categoryTitle: category }
+  }));
+
+  const paginatedPaths = [];
+  for (const { params, props } of paths) {
+    const allPosts = await getCollection('blog', ({ data }) => {
+      return data.category === props.categoryTitle;
+    });
+
+    const sortedPosts = allPosts.sort((a, b) => new Date(b.data.created).getTime() - new Date(a.data.created).getTime());
+
+    const pages = paginate(sortedPosts, {
+      pageSize: POST_SETTINGS.postsPerPage,
+      params: { category: params.category },
+      props: { categoryTitle: props.categoryTitle } // Pasamos categoryTitle como prop de paginación
+    });
+    paginatedPaths.push(...pages);
+  }
+
+  return paginatedPaths;
+}
+
+const { categoryTitle, page } = Astro.props;
+// console.log('Page prop in component:', page); // Eliminar console.log de depuración
+---
+
+<Layout title={`Posts de ${categoryTitle}`}>
+  <div class="page-container">
+    <main class="main-content">
+      <h1>Posts de {categoryTitle}</h1>
+      <div class="posts-grid">
+        {page.data.map(post => (
+          <PostCard post={post} />
+        ))}
+      </div>
+
+      <div class="pagination-nav">
+        {page.url.prev && <a href={page.url.prev} class="pagination-link prev">&laquo; Anteriores</a>}
+        <span class="pagination-info">Página {page.currentPage} de {page.lastPage}</span>
+        {page.url.next && <a href={page.url.next} class="pagination-link next">Siguientes &raquo;</a>}
+      </div>
+    </main>
+    <SubcategorySidebar category={categoryTitle} />
+  </div>
+</Layout>

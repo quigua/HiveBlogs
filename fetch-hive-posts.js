@@ -10,7 +10,7 @@ import path from 'path';     // Para manejar rutas de archivos
 
 // --- CONFIGURACIÓN ---
 const HIVE_USERNAME = process.env.HIVE_USERNAME; // Lee el usuario de una variable de entorno
-const ORIGINAL_POSTS_DIR = path.join(process.cwd(), 'src', 'data', 'original-posts');
+const ORIGINAL_POSTS_DIR = path.join(process.cwd(), 'src', 'content', 'blog');
 const REBLOGGED_POSTS_DIR = path.join(process.cwd(), 'src', 'data', 'reblogged-posts');
 const COMMUNITY_SUBSCRIPTIONS_DIR = path.join(process.cwd(), 'src', 'data', 'community-subscriptions');
 // --- FIN CONFIGURACIÓN ---
@@ -38,7 +38,7 @@ function formatFrontmatter(postData) {
     }
 
     const tags = metadata.tags || [];
-    const image = metadata.image && metadata.image.length > 0 ? metadata.image[0] : null;
+    const image = metadata.image && metadata.image.length > 0 ? metadata.image[0] : '/placeholder-post.jpg';
     const description = metadata.description || (postData.body ? postData.body.substring(0, 150).replace(/\n/g, ' ') + '...' : 'Sin descripción.');
 
     // Asegúrate de escapar comillas dobles dentro de los valores para evitar errores en el frontmatter
@@ -78,7 +78,7 @@ created: "${new Date(postData.created).toISOString()}"
 lastUpdate: "${new Date(postData.last_update).toISOString()}"
 url: "${escapedUrl}"
 reputation: ${postData.author_reputation_calculated}
-${escapedImage ? `image: "${escapedImage}"` : ''}
+${escapedImage ? `imageUrl: "${escapedImage}"` : ''}
 tags: [${tags.map(tag => `"${tag.replace(/"/g, '\\"')}"`).join(', ')}]
 hbdPayout: "${hbdPayout}"
 votesCount: ${votesCount}
@@ -101,8 +101,9 @@ async function fetchAndSavePosts() {
         const originalPosts = await getUsersOriginalPosts(HIVE_USERNAME);
         console.log(`Encontrados ${originalPosts.length} posts originales.`);
 
-        await fs.mkdir(ORIGINAL_POSTS_DIR, { recursive: true });
+        // await fs.mkdir(ORIGINAL_POSTS_DIR, { recursive: true });
         for (const post of originalPosts) {
+            console.log(`Processing post: ${post.permlink}, Active Votes: ${post.active_votes ? post.active_votes.length : 0}`);
             const filename = sanitizeFilename(post.title, post.permlink);
             const filepath = path.join(ORIGINAL_POSTS_DIR, filename);
             const frontmatter = formatFrontmatter(post);

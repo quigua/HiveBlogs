@@ -8,7 +8,7 @@ created: "2017-06-30T04:02:21.000Z"
 lastUpdate: "2017-06-30T21:05:42.000Z"
 url: "/spanish/@unatalmaria/bien-zapateao"
 reputation: 56.42
-image: "http://lagranrevista.com/wp-content/uploads/2017/06/Florentino-y-el-diablo.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/06/Florentino-y-el-diablo.jpg"
 tags: ["spanish", "cervantes-venezuela", "life", "music", "video"]
 hbdPayout: "0.352 HBD"
 votesCount: 18

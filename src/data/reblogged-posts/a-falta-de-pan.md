@@ -7,9 +7,8 @@ category: "spanish"
 created: "2017-06-01T07:53:33.000Z"
 lastUpdate: "2017-06-01T07:53:33.000Z"
 url: "/spanish/@unatalmaria/a-falta-de-pan"
-isReblogged: true
 reputation: 56.42
-image: "http://lagranrevista.com/wp-content/uploads/2017/06/12208752_10207014077205762_3192239570599420376_n.jpg"
+imageUrl: "http://lagranrevista.com/wp-content/uploads/2017/06/12208752_10207014077205762_3192239570599420376_n.jpg"
 tags: ["spanish", "life", "food", "blog", "unatalmaria-receta"]
 hbdPayout: "0.614 HBD"
 votesCount: 18
