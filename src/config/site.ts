@@ -30,10 +30,10 @@ export const SITE_INFO = {
   // New locales object for translations
   locales: {
     es: {
-      siteTitle: "Hived Blogs",
+      siteTitle: "El Blog de @quigua en Hive",
       siteDescription: "Explora, lee, escribe y conecta en la blockchain de Hive. Contenido libre, descentralizado y recompensado.",
       communityName: "Comunidad Hive Latam",
-      footerCopyright: `© ${new Date().getFullYear()} HiveBlogs. Todos los derechos reservados.`,
+      footerCopyright: `© ${new Date().getFullYear()} El Blog de @quigua en Hive. Todos los derechos reservados.`,
       quickLinks: "Enlaces Rápidos",
       home: "Inicio",
       originalPosts: "Posts Originales",
@@ -52,10 +52,10 @@ export const SITE_INFO = {
       latestOriginalPosts: "Últimos Posts Originales",
       recentPublications: "Publicaciones Recientes de @quigua",
       hiveCategories: "Temas y Secciones",
-      technology: "Tecnología",
-      blockchain: "Blockchain",
-      tutorials: "Tutoriales",
-      news: "Noticias",
+      splinterlands: "Splinterlands",
+      hivedBlogs: "Hived Blogs",
+      hiveTutorials: "La Web 3.0",
+      quiguaServices: "Servicios de @quigua",
       aboutUser: "Acerca de",
       subscribedCommunities: "Comunidades Suscritas",
       community: "Comunidad",
@@ -90,10 +90,10 @@ export const SITE_INFO = {
       heroButton: "¿Quieres tener un blog monetizado?"
     },
     en: {
-      siteTitle: "Hived Blogs", // Keeping the same for now, but can be changed
+      siteTitle: "@quigua's Hived Blog", // Keeping the same for now, but can be changed
       siteDescription: "Explore, read, write, and connect on the Hive blockchain. Free, decentralized, and rewarded content.",
       communityName: "Hive Latam Community",
-      footerCopyright: `© ${new Date().getFullYear()} HiveBlogs. All rights reserved.`,
+      footerCopyright: `© ${new Date().getFullYear()} @quigua's Hived Blog. All rights reserved.`,
       quickLinks: "Quick Links",
       home: "Home",
       originalPosts: "Original Posts",
@@ -112,10 +112,10 @@ export const SITE_INFO = {
       latestOriginalPosts: "Latest Original Posts",
       recentPublications: "Recent Publications by @quigua",
       hiveCategories: "Topics and Sections",
-      technology: "Technology",
-      blockchain: "Blockchain",
-      tutorials: "Tutorials",
-      news: "News",
+      splinterlands: "Splinterlands",
+      hivedBlogs: "Hived Blogs",
+      hiveTutorials: "The Web 3.0",
+      quiguaServices: "@quigua's Services",
       aboutUser: "About",
       subscribedCommunities: "Subscribed Communities",
       community: "Community",
