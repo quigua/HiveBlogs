@@ -16,7 +16,7 @@ const avatarUrl = `https://images.hive.blog/u/${HIVE_USERNAME}/avatar`;
 <header class="main-header">
   <div class="container">
     <div class="logo">
-      <a href="/"><img src="/hive-logo.svg" alt="Hive Logo" class="hive-logo"> @quigua's Hived Blog</a>
+      <a href="/"><img src="/hive-logo.svg" alt="Hive Logo" class="hive-logo"> {currentLocale.headerTitle.replace('@quigua', '@' + HIVE_USERNAME)}</a>
     </div>
 
     <nav class="main-nav">
@@ -40,7 +40,7 @@ const avatarUrl = `https://images.hive.blog/u/${HIVE_USERNAME}/avatar`;
           </ul>
         </li>
         <li><a href="/about">{currentLocale.about}</a></li>
-        <li><a href={currentLang === 'es' ? '/?lang=en' : '/?lang=es'} class="language-switcher">{currentLang}</a></li>
+        <li><a href={currentLang === 'es' ? '/?lang=en' : '/?lang=es'} class="language-switcher">{currentLang === 'es' ? 'en' : 'es'}</a></li>
       </ul>
     </nav>
     <div class="user-menu">

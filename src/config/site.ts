@@ -50,6 +50,7 @@ export const SITE_INFO = {
       recentPosts: "Posts recientes",
       favorites: "Favoritos",
       latestOriginalPosts: "Últimos Posts Originales",
+      recentPublications: "Publicaciones Recientes de @quigua",
       hiveCategories: "Categorías de Hive",
       technology: "Tecnología",
       blockchain: "Blockchain",
@@ -82,7 +83,10 @@ export const SITE_INFO = {
       previous: "Anterior",
       page: "Página",
       of: "de",
-      next: "Siguiente"
+      next: "Siguiente",
+      heroDescription: "Desarrollador de aplicaciones para la cadena de bloques de Hive",
+      heroTitle: "Bienvenido al blog de @quigua",
+      headerTitle: "El Blog de @quigua en Hive"
     },
     en: {
       siteTitle: "Hived Blogs", // Keeping the same for now, but can be changed
@@ -105,6 +109,7 @@ export const SITE_INFO = {
       recentPosts: "Recent Posts",
       favorites: "Favorites",
       latestOriginalPosts: "Latest Original Posts",
+      recentPublications: "Recent Publications by @quigua",
       hiveCategories: "Hive Categories",
       technology: "Technology",
       blockchain: "Blockchain",
@@ -137,7 +142,10 @@ export const SITE_INFO = {
       previous: "Previous",
       page: "Page",
       of: "of",
-      next: "Next"
+      next: "Next",
+      heroDescription: "Became an application developer for the Hive blockchain",
+      heroTitle: "Welcome to @quigua's blog",
+      headerTitle: "@quigua's Hived Blog"
     }
   }
 };

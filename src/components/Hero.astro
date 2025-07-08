@@ -1,12 +1,19 @@
 ---
 import { getUserProfile } from 'hiveblogkit';
+import type { SITE_INFO } from '../config/site';
+
+export interface Props {
+  currentLocale: typeof SITE_INFO.locales.es; 
+}
+
+const { currentLocale } = Astro.props;
 
 // Lee el nombre de usuario de Hive desde las variables de entorno
 const HIVE_USERNAME = import.meta.env.HIVE_USERNAME;
 
 // Define una imagen de fondo por defecto
 let coverImageUrl = '/background-placeholder.jpg';
-let heroDescription = 'Tu plataforma descentralizada para leer, escribir y conectar en la blockchain de Hive.';
+let heroDescription = currentLocale.heroDescription;
 
 // Si el nombre de usuario está disponible, intenta obtener la imagen de portada
 if (HIVE_USERNAME) {
@@ -22,10 +29,7 @@ if (HIVE_USERNAME) {
       if (metadata.profile && metadata.profile.cover_image) {
         coverImageUrl = metadata.profile.cover_image;
       }
-      // Si existe un texto 'about' en el perfil, úsalo
-      if (metadata.profile && metadata.profile.about) {
-        heroDescription = metadata.profile.about;
-      }
+      
     }
   } catch (error) {
     // En caso de error, muestra un mensaje en la consola y usa la imagen por defecto
@@ -35,7 +39,7 @@ if (HIVE_USERNAME) {
 ---
 <section class="hero" style={`background-image: url('${coverImageUrl}');`}>
   <div class="container">
-    <h1>Welcome to @{HIVE_USERNAME}'s blog</h1>
+    <h1>{currentLocale.heroTitle.replace('@quigua', '@' + HIVE_USERNAME)}</h1>
     <p>{heroDescription}</p>
     <a href="/posts" class="call-to-action">Explora Posts</a>
   </div>

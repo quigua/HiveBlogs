@@ -6,6 +6,11 @@ import { SITE_INFO, POST_SETTINGS } from '../config/site';
 
 const HIVE_USERNAME = import.meta.env.HIVE_USERNAME;
 
+const url = new URL(Astro.request.url);
+const langParam = url.searchParams.get('lang');
+const currentLang = langParam && SITE_INFO.locales[langParam] ? langParam : SITE_INFO.language;
+const currentLocale = SITE_INFO.locales[currentLang];
+
 // Ahora obtenemos los posts de la carpeta src/data/original-posts
 // Puedes elegir qué posts mostrar en la página principal, por ejemplo, solo originales
 const allPosts = await Astro.glob('../data/original-posts/*.md');
@@ -17,11 +22,11 @@ const latestPosts = sortedPosts.slice(0, POST_SETTINGS.postsPerPage);
 ---
 
 <Layout title={HIVE_USERNAME} description={SITE_INFO.description}>
-  <Hero />
+  <Hero currentLocale={currentLocale} />
 
   <div class="page-container">
     <main class="main-content">
-      <h2>Últimos Posts Originales</h2>
+      <h2>{currentLocale.recentPublications.replace('@quigua', '@' + HIVE_USERNAME)}</h2>
       <div class="posts-grid">
         {latestPosts.map((post) => (
           <PostCard post={post} />
