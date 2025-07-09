@@ -277,7 +277,7 @@ img {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: sticky;
-  top: 100px; /* Ajusta según la altura de tu header */
+  top: 120px; /* Ajusta según la altura de tu header + breadcrumbs */
 }
 
 .page-container {
@@ -362,12 +362,12 @@ img {
 }
 
 .categories-nav li {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .categories-nav a {
   display: block;
-  padding: 8px 10px;
+  padding: 12px 10px;
   background-color: var(--color-light-gray);
   border-radius: 5px;
   color: var(--color-text-body);
@@ -1031,4 +1031,101 @@ img {
 .user-submenu li a:hover {
   background-color: var(--color-secondary);
   color: var(--color-white);
+}
+
+.layout-container {
+  display: flex;
+  gap: 20px; /* Ajusta el espacio entre el contenido y la barra lateral */
+}
+
+.main-content {
+  flex: 3; /* El contenido principal ocupa 3/4 del espacio */
+}
+
+.sidebar {
+  flex: 1; /* La barra lateral ocupa 1/4 del espacio */
+}
+
+/* --- 13. Breadcrumbs Styles --- */
+.breadcrumbs {
+  background-color: var(--color-background-body);
+  padding: 10px 20px; /* Vertical and horizontal padding */
+  position: sticky;
+  top: 72px; /* Height of the header */
+  z-index: 990; /* Below header (1000) */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow to show elevation */
+}
+
+.breadcrumbs ol {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto; /* Center the list */
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  max-width: 1200px; /* Match the main container width */
+}
+
+.breadcrumbs li {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbs a {
+  color: var(--color-primary);
+  text-decoration: none;
+  padding: 0 5px;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumbs span {
+  padding: 0 5px;
+}
+
+.breadcrumbs .separator {
+  color: var(--color-text-muted);
+}
+
+.home-sidebar {
+  max-height: calc(100vh - 140px); /* Ajusta según la altura del header y breadcrumbs */
+  overflow-y: auto;
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+}
+.user-list li {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 5px;
+}
+.user-list a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.post-comments-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.post-comments-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-text-body);
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }

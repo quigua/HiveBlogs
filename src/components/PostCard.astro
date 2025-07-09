@@ -1,4 +1,7 @@
 ---
+import { getCollection } from 'astro:content';
+import allCommunities from '../data/all_communities.json';
+
 export interface Props {
   post: any; // Pasaremos el objeto post completo
   communityId?: string; // Opcional: para enlaces de posts de comunidad
@@ -7,7 +10,13 @@ export interface Props {
 const { post, communityId } = Astro.props;
 console.log('PostCard received:', { post, communityId });
 
-let title, description, author, permlink, category, created, image, tags, url, hbdPayout, votesCount, commentsCount;
+// Crear un mapa de comunidades para búsqueda rápida
+const communityMap = new Map(allCommunities.map(comm => [comm.name, comm.title]));
+
+let title, description, author, permlink, category, created, image, tags, hbdPayout, votesCount, commentsCount;
+
+// Determinar la URL canónica del post
+let postLink;
 
 // Determinar si el post viene de Astro.glob (con frontmatter) o directamente de la API
 if (post.data) {
@@ -25,7 +34,20 @@ if (post.data) {
     votesCount = 0,
     commentsCount = 0,
   } = post.data);
-  url = post.slug ? `/posts/${post.slug}` : '#';
+  // Obtener el nombre legible de la comunidad para posts de colección
+  category = communityMap.get(category) || category || 'General';
+
+  // Lógica para postLink cuando viene de post.data (getCollection)
+  if (post.data.category && post.data.category.startsWith('hive-')) {
+    postLink = `/comunidades/${post.data.category}/${post.data.author}/${post.data.permlink}`;
+  } else if (post.data.type === 'reblogged') {
+    postLink = `/posts/reblogueados/${post.data.permlink}`;
+  } else {
+    const categorySlug = category.toLowerCase().replace(/ /g, '-');
+    const subcategorySlug = post.data.subcategory ? `/${post.data.subcategory.toLowerCase().replace(/ /g, '-')}` : '';
+    postLink = `/posts/${categorySlug}${subcategorySlug}/${post.data.permlink}`;
+  }
+
 } else if (post.frontmatter) {
   // Caso: Post de Astro.glob (originales/reblogueados)
   ({
@@ -37,11 +59,23 @@ if (post.data) {
     created,
     image = null,
     tags = [],
-    url = '#',
+    url: originalUrl = '#',
     hbdPayout = '0.000 HBD',
     votesCount = 0,
     commentsCount = 0,
   } = post.frontmatter);
+
+  // Lógica para postLink cuando viene de post.frontmatter (Astro.glob)
+  if (post.frontmatter.category && post.frontmatter.category.startsWith('hive-')) {
+    postLink = `/comunidades/${post.frontmatter.category}/${post.frontmatter.author}/${post.frontmatter.permlink}`;
+  } else if (post.frontmatter.type === 'reblogged') {
+    postLink = `/posts/reblogueados/${post.frontmatter.permlink}`;
+  } else {
+    const categorySlug = category.toLowerCase().replace(/ /g, '-');
+    const subcategorySlug = post.frontmatter.subcategory ? `/${post.frontmatter.subcategory.toLowerCase().replace(/ /g, '-')}` : '';
+    postLink = `/posts/${categorySlug}${subcategorySlug}/${post.frontmatter.permlink}`;
+  }
+
 } else {
   // Caso: Post directo de la API de Hive (posts de comunidad)
   title = post.title || 'Sin título';
@@ -49,9 +83,11 @@ if (post.data) {
   description = cleanBody ? cleanBody.substring(0, 150).replace(/\n/g, ' ') + '...' : 'Sin descripción disponible.';
   author = post.author || 'Usuario Desconocido';
   permlink = post.permlink || 'no-permlink-found';
-  category = post.category || 'General';
   created = post.created;
-  url = post.url || '#';
+  const originalUrl = post.url || '#';
+
+  // Obtener el nombre legible de la comunidad
+  category = communityMap.get(post.category) || post.category || 'General';
 
   // Parsear json_metadata para imagen y tags
   let metadata = {};
@@ -67,11 +103,11 @@ if (post.data) {
   // If no image from metadata, try to extract the first image from the post body
   if (!image && post.body) {
     // Regex to find Markdown images: ![alt](url)
-    const markdownImageRegex = /!\[.*?\]\((https?:\/\/[^)]+\.(?:jpg|jpeg|png|gif|webp|svg))\)/i;
-    // Regex to find HTML images: <img src="url">
-    const htmlImageRegex = /<img[^>]+src=["\\](https?:\/\/[^"\\]+\.(?:jpg|jpeg|png|gif|webp|svg))["\\][^>]*>/i;
+    const markdownImageRegex = /!\[.*?\]\((https?:[^)]+\.(?:jpg|jpeg|png|gif|webp|svg))\)/i;
+    // Regex to find HTML images: <img[^>]+src="url">
+    const htmlImageRegex = /<img[^>]+src=["\\](https?:[^"\\]+\.(?:jpg|jpeg|png|gif|webp|svg))["\\][^>]*>/i;
     // Regex to find direct image URLs in text
-    const directImageUrlRegex = /(https?:\/\/[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg))/i;
+    const directImageUrlRegex = /(https?:[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg))/i;
 
     let match;
 
@@ -101,6 +137,11 @@ if (post.data) {
   hbdPayout = post.pending_payout_value || post.total_payout_value || '0.000 HBD';
   votesCount = post.active_votes ? post.active_votes.length : 0;
   commentsCount = post.children || 0;
+
+  // Lógica para postLink cuando viene directamente de la API
+  postLink = communityId
+    ? `/comunidades/${communityId}/${author}/${permlink}`
+    : originalUrl; // Fallback to original Hive URL if no communityId
 }
 
 // Formatear la fecha de creación para una visualización amigable
@@ -117,11 +158,6 @@ const displayImageUrl = image || '/placeholder-post.jpg';
 const displayExcerpt = description;
 const displayCategory = category;
 const displayTags = tags;
-
-// Determinar la URL del post basada en si es un post de comunidad o un post local
-const postLink = communityId
-  ? `/comunidades/${communityId}/${displayAuthor}/${permlink}`
-  : `/posts/${post.slug}`;
 
 // Las propiedades de lectura, votos, HBD y comentarios ya vienen directamente del frontmatter o se calculan
 const displayReads = 0; // Reads (lecturas) no es proporcionado por Hive directamente

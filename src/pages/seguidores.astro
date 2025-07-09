@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE_INFO } from '../config/site';
 
 // Lista de usuarios de ejemplo
 const usuarios = [
@@ -8,9 +10,22 @@ const usuarios = [
   { username: 'astro' },
   { username: 'hive' },
 ];
+
+const url = new URL(Astro.request.url);
+const langParam = url.searchParams.get('lang');
+const currentLang = langParam && SITE_INFO.locales[langParam] ? langParam : SITE_INFO.language;
+const currentLocale = SITE_INFO.locales[currentLang];
+
+const breadcrumbs = [
+  { label: currentLocale.home, href: '/' },
+  { label: currentLocale.followers, href: '/seguidores' }
+];
 ---
 
 <Layout title="Otros Usuarios de Hive">
+  <Fragment slot="breadcrumbs">
+    <Breadcrumbs items={breadcrumbs} />
+  </Fragment>
   <div class="container">
     <h1>Otros Usuarios</h1>
     <p>Esta es una lista de otros usuarios de Hive que podrías encontrar interesantes.</p>
@@ -24,22 +39,3 @@ const usuarios = [
     </ul>
   </div>
 </Layout>
-
-<style>
-  .user-list {
-    list-style: none;
-    padding: 0;
-  }
-  .user-list li {
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-    padding: 15px;
-    border-radius: 5px;
-  }
-  .user-list a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-  }
-</style>

@@ -2,10 +2,16 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import CommentCard from '../../components/CommentCard.astro';
-import { SITE_INFO } from '../../config/site';
+import { SITE_INFO, MAIN_CATEGORIES, SUBCATEGORIES } from '../../config/site';
 import { getPostComments, condenser_api_get_content } from 'hiveblogkit';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
 export const prerender = true;
+
+export interface Props {
+  post: any;
+  currentLocale: any;
+}
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
@@ -24,7 +30,29 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 
-const { title, author, created, description, imageUrl, permlink } = post.data;
+const url = new URL(Astro.request.url);
+const langParam = url.searchParams.get('lang');
+const currentLang = langParam && SITE_INFO.locales[langParam] ? langParam : SITE_INFO.language;
+const currentLocale = SITE_INFO.locales[currentLang];
+
+const { title, author, created, description, imageUrl, permlink, category, subcategory } = post.data;
+
+const breadcrumbs = [
+  { label: currentLocale.home, href: '/' },
+];
+
+if (category) {
+  const categorySlug = category.toLowerCase().replace(/ /g, '-');
+  breadcrumbs.push({ label: category, href: `/temas/${categorySlug}/` });
+}
+
+if (subcategory) {
+  const categorySlug = category.toLowerCase().replace(/ /g, '-');
+  const subcategorySlug = subcategory.toLowerCase().replace(/ /g, '-');
+  breadcrumbs.push({ label: subcategory, href: `/temas/${categorySlug}/${subcategorySlug}/` });
+}
+
+breadcrumbs.push({ label: title, href: `#` }); // El enlace del post actual no es navegable
 
 // Formatear la fecha
 const formattedDate = created ? new Date(created).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Fecha desconocida';
@@ -53,7 +81,10 @@ function sanitizeHtml(html) {
 const sanitizedBody = sanitizeHtml(post.body); // Siempre llamar con un processedBody definido
 ---
 
-<Layout title={title} description={description || SITE_INFO.description}>
+<Layout title={title} description={description || SITE_INFO.description} currentLocale={currentLocale}>
+  <Fragment slot="breadcrumbs">
+    <Breadcrumbs items={breadcrumbs} />
+  </Fragment>
   <article class="post-detail-container">
     {imageUrl && <img src={imageUrl} alt={title} class="post-detail-image" />}
     <h1 class="post-detail-title">{title}</h1>

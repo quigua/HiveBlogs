@@ -5,6 +5,8 @@ import subscribedCommunitiesData from '../../data/subscribed_communities.json';
 import PostCard from '../../components/PostCard.astro'; // Import PostCard
 import Layout from '../../layouts/Layout.astro'; // Import Layout
 import ActiveCommunitiesSidebar from '../../components/ActiveCommunitiesSidebar.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { SITE_INFO } from '../../config/site';
 
 export async function getStaticPaths() {
   // Generate static paths only for communities in subscribed_communities.json
@@ -37,9 +39,23 @@ if (localCommunity) {
 } else {
   errorMessage = "Comunidad no encontrada.";
 }
+
+const url = new URL(Astro.request.url);
+const langParam = url.searchParams.get('lang');
+const currentLang = langParam && SITE_INFO.locales[langParam] ? langParam : SITE_INFO.language;
+const currentLocale = SITE_INFO.locales[currentLang];
+
+const breadcrumbs = [
+  { label: currentLocale.home, href: '/' },
+  { label: currentLocale.communities, href: '/comunidades' },
+  { label: communityDetails ? communityDetails.title : 'Comunidad', href: `/comunidades/${communityId}` }
+];
 ---
 
 <Layout title={communityDetails ? communityDetails.title : 'Comunidad'} description={communityDetails ? communityDetails.about : 'Página de comunidad de Hive.'}>
+  <Fragment slot="breadcrumbs">
+    <Breadcrumbs items={breadcrumbs} />
+  </Fragment>
   {communityDetails ? (
     <>
       <div class="hero" style={`background-image: url(${communityDetails.cover_image || '/placeholder-post.jpg'});`}>

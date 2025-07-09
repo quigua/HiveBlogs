@@ -2,6 +2,7 @@
 // src/layouts/Layout.astro
 import Header from '../components/Header.astro'; // <-- Importa el Header
 import Footer from '../components/Footer.astro'; // <-- Importa el Footer
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { SITE_INFO } from '../config/site.ts';
 
 import '../styles/global.css';
@@ -32,6 +33,8 @@ const { title, description = currentLocale.siteDescription } = Astro.props;
   </head>
   <body>
     <Header currentLang={currentLang} currentLocale={currentLocale} />
+
+    <slot name="breadcrumbs" />
 
     <slot currentLang={currentLang} currentLocale={currentLocale} />
 

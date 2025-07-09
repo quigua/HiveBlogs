@@ -4,6 +4,7 @@ import Hero from '../components/Hero.astro';
 import PostCard from '../components/PostCard.astro';
 import { SITE_INFO, POST_SETTINGS, MAIN_CATEGORIES } from '../config/site';
 import { getCollection } from 'astro:content';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 const HIVE_USERNAME = import.meta.env.HIVE_USERNAME;
 
@@ -21,8 +22,14 @@ const latestPosts = sortedPosts.slice(0, POST_SETTINGS.postsPerPage);
 
 const activeCategories = new Set(allPosts.map(post => post.data.category));
 
+const breadcrumbs = [
+  { label: currentLocale.home, href: '/' }
+];
 ---
 <Layout title={HIVE_USERNAME} description={SITE_INFO.description}>
+  <Fragment slot="breadcrumbs">
+    <Breadcrumbs items={breadcrumbs} />
+  </Fragment>
   <Hero currentLocale={currentLocale} />
 
   <div class="page-container">
@@ -35,7 +42,6 @@ const activeCategories = new Set(allPosts.map(post => post.data.category));
       </div>
       {/* Aquí puedes añadir un botón o enlace para ver más posts si tienes muchos */}
     </main>
-    {/* INICIO DEL SIDEBAR */}
     <aside class="sidebar-column">
       <h3>{currentLocale.hiveCategories}</h3>
       <nav class="categories-nav">
@@ -51,6 +57,5 @@ const activeCategories = new Set(allPosts.map(post => post.data.category));
       </div>
       {/* Podrías añadir un módulo para posts populares o tags aquí */}
     </aside>
-    {/* FIN DEL SIDEBAR */}
   </div>
 </Layout>

@@ -3,6 +3,9 @@ import { condenser_api_get_content, getPostComments } from 'hiveblogkit';
 import { marked } from 'marked';
 import Layout from '../../../../layouts/Layout.astro'; // Import Layout
 import CommentCard from '/src/components/CommentCard.astro';
+import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
+import { SITE_INFO } from '../../../../config/site';
+import allCommunitiesData from '../../../../data/all_communities.json';
 
 export async function getStaticPaths() {
   return [];
@@ -62,9 +65,26 @@ function sanitizeHtml(html) {
 }
 
 const sanitizedBody = post ? sanitizeHtml(processedBody) : '';
+
+const url = new URL(Astro.request.url);
+const langParam = url.searchParams.get('lang');
+const currentLang = langParam && SITE_INFO.locales[langParam] ? langParam : SITE_INFO.language;
+const currentLocale = SITE_INFO.locales[currentLang];
+
+const communityTitle = allCommunitiesData.find(comm => comm.name === communityId)?.title || communityId;
+
+const breadcrumbs = [
+  { label: currentLocale.home, href: '/' },
+  { label: currentLocale.communities, href: '/comunidades' },
+  { label: communityTitle, href: `/comunidades/${communityId}` },
+  { label: post ? post.title : 'Post', href: `#` }
+];
 ---
 
 <Layout title={post ? post.title : 'Post no encontrado'} description={post ? post.description : ''}>
+  <Fragment slot="breadcrumbs">
+    <Breadcrumbs items={breadcrumbs} />
+  </Fragment>
   <article class="post-detail-container">
     {post && post.image && <img src={post.image} alt={post.title} class="post-detail-image" />}
     <h1 class="post-detail-title">{post ? post.title : ''}</h1>
@@ -89,23 +109,3 @@ const sanitizedBody = post ? sanitizeHtml(processedBody) : '';
   )}
 
   <p><a href={`/comunidades/${communityId}`}>Volver a la Comunidad</a></p>
-
-<style>
-  .post-comments-section {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .post-comments-section h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    color: var(--color-heading);
-  }
-
-  .comments-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-</style>

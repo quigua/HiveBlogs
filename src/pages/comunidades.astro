@@ -4,12 +4,27 @@ import { readFileSync } from 'fs';
 import path from 'path';
 import CommunityCard from '../components/CommunityCard.astro';
 import ActiveCommunitiesSidebar from '../components/ActiveCommunitiesSidebar.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE_INFO } from '../config/site';
 
 const subscriptionsPath = path.resolve('./src/data/community-subscriptions/subscriptions.json');
 const subscriptions = JSON.parse(readFileSync(subscriptionsPath, 'utf-8'));
+
+const url = new URL(Astro.request.url);
+const langParam = url.searchParams.get('lang');
+const currentLang = langParam && SITE_INFO.locales[langParam] ? langParam : SITE_INFO.language;
+const currentLocale = SITE_INFO.locales[currentLang];
+
+const breadcrumbs = [
+  { label: currentLocale.home, href: '/' },
+  { label: currentLocale.communities, href: '/comunidades' }
+];
 ---
 
 <Layout title="Comunidades Suscritas">
+  <Fragment slot="breadcrumbs">
+    <Breadcrumbs items={breadcrumbs} />
+  </Fragment>
   <div class="page-container">
     <main class="main-content">
       <h1>Comunidades Suscritas</h1>

@@ -2,10 +2,18 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../../../layouts/Layout.astro';
 import PostCard from '../../../../components/PostCard.astro';
-import { MAIN_CATEGORIES, POST_SETTINGS, SUBCATEGORIES } from '../../../../config/site';
+import { MAIN_CATEGORIES, POST_SETTINGS, SUBCATEGORIES, SITE_INFO } from '../../../../config/site';
 import SubcategorySidebar from '../../../../components/SubcategorySidebar.astro';
+import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
 
 export const prerender = true;
+
+export interface Props {
+  categoryTitle: string;
+  subcategoryTitle: string;
+  page: any;
+  currentLocale: any;
+}
 
 export async function getStaticPaths({ paginate }) {
   const paginatedPaths = [];
@@ -42,10 +50,24 @@ export async function getStaticPaths({ paginate }) {
 }
 
 const { categoryTitle, subcategoryTitle, page } = Astro.props;
+
+const url = new URL(Astro.request.url);
+const langParam = url.searchParams.get('lang');
+const currentLang = langParam && SITE_INFO.locales[langParam] ? langParam : SITE_INFO.language;
+const currentLocale = SITE_INFO.locales[currentLang];
+
+const breadcrumbs = [
+  { label: currentLocale.home, href: '/' },
+  { label: categoryTitle, href: `/temas/${categoryTitle.toLowerCase().replace(/ /g, '-')}/` },
+  { label: subcategoryTitle, href: `/temas/${categoryTitle.toLowerCase().replace(/ /g, '-')}/${subcategoryTitle.toLowerCase().replace(/ /g, '-')}/` }
+];
 ---
 
-<Layout title={`Posts de ${categoryTitle} - ${subcategoryTitle}`}>
-  <div class="page-container">
+<Layout title={`Posts de ${categoryTitle} - ${subcategoryTitle}`} currentLocale={currentLocale}>
+  <Fragment slot="breadcrumbs">
+    <Breadcrumbs items={breadcrumbs} />
+  </Fragment>
+    <div class="page-container">
     <main class="main-content">
       <h1>Posts de {categoryTitle} - {subcategoryTitle}</h1>
       <div class="posts-grid">
@@ -60,6 +82,8 @@ const { categoryTitle, subcategoryTitle, page } = Astro.props;
         {page.url.next && <a href={page.url.next} class="pagination-link next">Siguientes &raquo;</a>}
       </div>
     </main>
-    <SubcategorySidebar category={categoryTitle} />
+    <aside class="sidebar-column">
+      <SubcategorySidebar category={categoryTitle} />
+    </aside>
   </div>
 </Layout>

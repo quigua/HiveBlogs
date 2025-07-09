@@ -3,6 +3,7 @@ export const prerender = true;
 import Layout from '../../../layouts/Layout.astro';
 import PostCard from '../../../components/PostCard.astro';
 import { SITE_INFO, POST_SETTINGS } from '../../../config/site';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 
 const HIVE_USERNAME = import.meta.env.HIVE_USERNAME;
 const siteInfo = SITE_INFO;
@@ -15,9 +16,22 @@ export async function getStaticPaths({ paginate }) {
 }
 
 const { page } = Astro.props;
+
+const url = new URL(Astro.request.url);
+const langParam = url.searchParams.get('lang');
+const currentLang = langParam && SITE_INFO.locales[langParam] ? langParam : SITE_INFO.language;
+const currentLocale = SITE_INFO.locales[currentLang];
+
+const breadcrumbs = [
+  { label: currentLocale.home, href: '/' },
+  { label: currentLocale.originalPosts, href: '/posts/originales' }
+];
 ---
 
 <Layout title="Posts Originales">
+  <Fragment slot="breadcrumbs">
+    <Breadcrumbs items={breadcrumbs} />
+  </Fragment>
   <div class="page-container">
     <main class="main-content">
       <h1>Posts Originales</h1>

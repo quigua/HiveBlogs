@@ -7,6 +7,7 @@
 import { getUsersOriginalPosts, getUsersRebloggedPosts, getUserCommunitySubscriptions } from 'hiveblogkit';
 import fs from 'fs/promises'; // Para operaciones asíncronas con archivos
 import path from 'path';     // Para manejar rutas de archivos
+import { MAIN_CATEGORIES, SUBCATEGORIES } from './src/config/site.ts';
 
 // --- CONFIGURACIÓN ---
 const HIVE_USERNAME = process.env.HIVE_USERNAME; // Lee el usuario de una variable de entorno
@@ -27,8 +28,81 @@ function sanitizeFilename(title, permlink) {
     return `${baseName}.md`;
 }
 
+// Función para categorizar el post basada en tags, título y cuerpo
+const categorizePost = (postData) => {
+  const title = postData.title ? postData.title.toLowerCase() : '';
+  const body = postData.body ? postData.body.toLowerCase() : '';
+  const tags = postData.json_metadata && JSON.parse(postData.json_metadata).tags ? JSON.parse(postData.json_metadata).tags.map(tag => tag.toLowerCase()) : [];
+  const community = postData.category ? postData.category.toLowerCase() : ''; // La categoría de la API es el ID de la comunidad
+
+  let category = 'General'; // Categoría por defecto
+  let subcategory = null;
+
+  // Reglas para Splinterlands
+  const isSplinterlands = tags.includes('splinterlands') || community === 'hive-13323' || title.includes('splinterlands') || body.includes('splinterlands');
+
+  if (isSplinterlands) {
+    category = 'Splinterlands';
+
+    // Subcategorías de Splinterlands
+    if (
+      title.includes('tutorial') || body.includes('tutorial') ||
+      title.includes('guia') || body.includes('guia') ||
+      title.includes('como hacer') || body.includes('how to') ||
+      title.includes('beginner') || body.includes('principiante')
+    ) {
+      subcategory = 'Tutoriales';
+    } else if (
+      title.includes('batalla') || body.includes('batalla') ||
+      title.includes('estrategia') || body.includes('estrategia') ||
+      title.includes('battle') || body.includes('battle') ||
+      title.includes('strategy') || body.includes('strategy') ||
+      title.includes('lineup') || body.includes('lineup') ||
+      title.includes('combate') || body.includes('combate')
+    ) {
+      subcategory = 'Batallas y Estrategias';
+    } else if (
+      title.includes('estadistica') || body.includes('estadistica') ||
+      title.includes('stats') || body.includes('stats') ||
+      title.includes('data') || body.includes('data') ||
+      title.includes('reporte') || body.includes('reporte') ||
+      title.includes('analisis') || body.includes('analisis') ||
+      title.includes('metrics') || body.includes('metrics')
+    ) {
+      subcategory = 'Estadísticas';
+    } else if (
+      title.includes('sugerencia') || body.includes('sugerencia') ||
+      title.includes('bug') || body.includes('bug') ||
+      title.includes('error') || body.includes('error') ||
+      title.includes('fallo') || body.includes('fallo') ||
+      title.includes('suggestion') || body.includes('suggestion') ||
+      title.includes('issue') || body.includes('issue') ||
+      title.includes('report') || body.includes('report')
+    ) {
+      subcategory = 'Sugerencias y Fallos';
+    }
+  } else if (
+    tags.includes('servicio') || body.includes('servicio') || title.includes('servicio') ||
+    tags.includes('consultoria') || body.includes('consultoria') || title.includes('consultoria') ||
+    tags.includes('desarrollo') || body.includes('desarrollo') || title.includes('desarrollo') ||
+    tags.includes('aplicacion') || body.includes('aplicacion') || title.includes('aplicacion') ||
+    tags.includes('freelance') || body.includes('freelance') || title.includes('freelance') ||
+    tags.includes('oferta') || body.includes('oferta') || title.includes('oferta') ||
+    tags.includes('ayuda') || body.includes('ayuda') || title.includes('ayuda') ||
+    tags.includes('soporte') || body.includes('soporte') || title.includes('soporte')
+  ) {
+    category = 'Servicios de @quigua';
+  } else if (tags.includes('hive') || title.includes('hive') || body.includes('hive')) {
+    category = 'Hived Blogs';
+  } else if (tags.includes('web3') || title.includes('web 3.0') || body.includes('web 3.0')) {
+    category = 'La Web 3.0';
+  }
+
+  return { category, subcategory };
+};
+
 // Función para formatear los metadatos para el frontmatter de Astro
-function formatFrontmatter(postData) {
+function formatFrontmatter(postData, category, subcategory, type = 'original') {
     // Parsear json_metadata para obtener tags, imagen, descripción
     let metadata = {};
     try {
@@ -39,25 +113,21 @@ function formatFrontmatter(postData) {
 
     const tags = metadata.tags || [];
     const image = metadata.image && metadata.image.length > 0 ? metadata.image[0] : '/placeholder-post.jpg';
-    const description = metadata.description || (postData.body ? postData.body.substring(0, 150).replace(/\n/g, ' ') + '...' : 'Sin descripción.');
+    const description = postData.description || (postData.body ? postData.body.substring(0, 150).replace(/\n/g, ' ') + '...' : 'Sin descripción.');
 
     // Asegúrate de escapar comillas dobles dentro de los valores para evitar errores en el frontmatter
-    const escapedTitle = postData.title.replace(/"/g, '\\"');
-    const escapedDescription = description.replace(/"/g, '\\"');
-    const escapedAuthor = postData.author.replace(/"/g, '\\"');
-    const escapedPermlink = postData.permlink.replace(/"/g, '\\"');
-    const escapedCategory = postData.category.replace(/"/g, '\\"');
-    const escapedUrl = postData.url.replace(/"/g, '\\"');
-    const escapedImage = image ? image.replace(/"/g, '\\"') : null;
+    const escapedTitle = postData.title.replace(/"/g, '\"');
+    const escapedDescription = description.replace(/"/g, '\"');
+    const escapedAuthor = postData.author.replace(/"/g, '\"');
+    const escapedPermlink = postData.permlink.replace(/"/g, '\"');
+    const escapedCategory = category.replace(/"/g, '\"');
+    const escapedSubcategory = subcategory ? subcategory.replace(/"/g, '\"') : '';
+    const escapedUrl = postData.url.replace(/"/g, '\"');
+    const escapedImage = image ? image.replace(/"/g, '\"') : null;
 
     // --- PROPIEDADES AÑADIDAS AL FRONTMATTER PARA EL POSTCARD ---
-    // total_payout_value ya debería estar en HBD o al menos en un formato legible.
-    // Determinar el valor del pago según si el post ya ha sido pagado o está pendiente
     let hbdPayout;
     const now = new Date();
-    // postData.cashout_time es la fecha en que se espera el pago.
-    // Si cashout_time es futuro o está muy cerca del futuro (es decir, aún no ha pagado),
-    // usamos pending_payout_value. De lo contrario, usamos total_payout_value.
     if (new Date(postData.cashout_time) > now) {
         hbdPayout = postData.pending_payout_value || '0.000 HBD (Pendiente)';
     } else {
@@ -74,15 +144,17 @@ description: "${escapedDescription}"
 author: "${escapedAuthor}"
 permlink: "${escapedPermlink}"
 category: "${escapedCategory}"
+${escapedSubcategory ? `subcategory: "${escapedSubcategory}"` : ''}
 created: "${new Date(postData.created).toISOString()}"
 lastUpdate: "${new Date(postData.last_update).toISOString()}"
 url: "${escapedUrl}"
 reputation: ${postData.author_reputation_calculated}
 ${escapedImage ? `imageUrl: "${escapedImage}"` : ''}
-tags: [${tags.map(tag => `"${tag.replace(/"/g, '\\"')}"`).join(', ')}]
+tags: [${tags.map(tag => `"${tag.replace(/"/g, '\"')}"`).join(', ')}]
 hbdPayout: "${hbdPayout}"
 votesCount: ${votesCount}
 commentsCount: ${commentsCount}
+type: "${type}"
 ---`;
 }
 
@@ -101,37 +173,21 @@ async function fetchAndSavePosts() {
         const originalPosts = await getUsersOriginalPosts(HIVE_USERNAME);
         console.log(`Encontrados ${originalPosts.length} posts originales.`);
 
-        // await fs.mkdir(ORIGINAL_POSTS_DIR, { recursive: true });
         for (const post of originalPosts) {
             console.log(`Processing post: ${post.permlink}, Active Votes: ${post.active_votes ? post.active_votes.length : 0}`);
             const filename = sanitizeFilename(post.title, post.permlink);
             
-            // Determinar la ruta de destino basada en la categoría y subcategoría
-            let categorySlug = 'general'; // Por defecto
-            let subcategorySlug = '';
+            const { category, subcategory } = categorizePost(post);
 
-            // Asignar categoría y subcategoría si existen en el postData
-            // Nota: fetch-hive-posts.js no categoriza, solo guarda lo que viene de la API.
-            // La categorización se hace con categorize-posts.js.
-            // Por ahora, usaremos una categoría por defecto o la que venga de la API si está disponible.
-            // Para una categorización precisa, se debe ejecutar categorize-posts.js después.
-            if (post.category) {
-                categorySlug = post.category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+            let targetDir = path.join(ORIGINAL_POSTS_DIR, category.toLowerCase().replace(/ /g, '-'));
+            if (subcategory) {
+                targetDir = path.join(targetDir, subcategory.toLowerCase().replace(/ /g, '-'));
             }
-            // Si la API de Hive proporciona subcategoría, la usaríamos aquí.
-            // Como no lo hace, la subcategoría se asignará después con categorize-posts.js.
-
-            let targetDir = path.join(ORIGINAL_POSTS_DIR, categorySlug);
-            // Si tuvieras subcategorías de la API, las añadirías aquí:
-            // if (post.subcategory) {
-            //     subcategorySlug = post.subcategory.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-            //     targetDir = path.join(targetDir, subcategorySlug);
-            // }
 
             await fs.mkdir(targetDir, { recursive: true });
 
             const filepath = path.join(targetDir, filename);
-            const frontmatter = formatFrontmatter(post);
+            const frontmatter = formatFrontmatter(post, category, subcategory, 'original');
             const content = post.body; // El cuerpo del post ya está en Markdown
 
             await fs.writeFile(filepath, `${frontmatter}\n\n${content}`, 'utf-8');
@@ -148,10 +204,10 @@ async function fetchAndSavePosts() {
         for (const post of rebloggedPosts) {
             const filename = sanitizeFilename(post.title, post.permlink);
             const filepath = path.join(REBLOGGED_POSTS_DIR, filename);
-            const frontmatter = formatFrontmatter(post);
+            const frontmatter = formatFrontmatter(post, 'reblogged', null, 'reblogged'); // Categoría fija para reblogueados
             const content = post.body; // El cuerpo del post ya está en Markdown
 
-            await fs.writeFile(filepath, `${frontmatter.slice(0, -3)}type: "reblogged"\n---\n${content}`, 'utf-8');
+            await fs.writeFile(filepath, `${frontmatter}\n\n${content}`, 'utf-8');
             console.log(`Guardado: ${filepath}`);
         }
         console.log('Posts reblogueados guardados correctamente.');
@@ -194,7 +250,8 @@ async function fetchAndSaveCommunitySubscriptions() {
         } else {
             console.log(`No se encontraron suscripciones de comunidad para '${HIVE_USERNAME}'.`);
         }
-    } catch (error) {
+    }
+    catch (error) {
         console.error('\n¡Error al obtener o guardar las suscripciones de comunidad:', error);
     } finally {
         console.log('\n--- Proceso de obtención de suscripciones de comunidad finalizado ---');
