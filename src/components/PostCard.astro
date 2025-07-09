@@ -38,10 +38,10 @@ if (post.data) {
   category = communityMap.get(category) || category || 'General';
 
   // Lógica para postLink cuando viene de post.data (getCollection)
-  if (post.data.category && post.data.category.startsWith('hive-')) {
+  if (post.data.type === 'reblogged') {
+    postLink = `/posts/reblogged/${post.data.permlink}`;
+  } else if (post.data.category && post.data.category.startsWith('hive-')) {
     postLink = `/comunidades/${post.data.category}/${post.data.author}/${post.data.permlink}`;
-  } else if (post.data.type === 'reblogged') {
-    postLink = `/posts/reblogueados/${post.data.permlink}`;
   } else {
     const categorySlug = category.toLowerCase().replace(/ /g, '-');
     const subcategorySlug = post.data.subcategory ? `/${post.data.subcategory.toLowerCase().replace(/ /g, '-')}` : '';
@@ -69,7 +69,7 @@ if (post.data) {
   if (post.frontmatter.category && post.frontmatter.category.startsWith('hive-')) {
     postLink = `/comunidades/${post.frontmatter.category}/${post.frontmatter.author}/${post.frontmatter.permlink}`;
   } else if (post.frontmatter.type === 'reblogged') {
-    postLink = `/posts/reblogueados/${post.frontmatter.permlink}`;
+    postLink = `/posts/reblogged/${post.frontmatter.permlink}`;
   } else {
     const categorySlug = category.toLowerCase().replace(/ /g, '-');
     const subcategorySlug = post.frontmatter.subcategory ? `/${post.frontmatter.subcategory.toLowerCase().replace(/ /g, '-')}` : '';

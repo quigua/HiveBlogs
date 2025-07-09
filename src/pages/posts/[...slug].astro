@@ -41,7 +41,9 @@ const breadcrumbs = [
   { label: currentLocale.home, href: '/' },
 ];
 
-if (category) {
+if (post.data.type === 'reblogged') {
+  breadcrumbs.push({ label: currentLocale.rebloggedPosts, href: '/posts/reblogueados' });
+} else if (category) {
   const categorySlug = category.toLowerCase().replace(/ /g, '-');
   breadcrumbs.push({ label: category, href: `/temas/${categorySlug}/` });
 }
