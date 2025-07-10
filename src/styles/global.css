@@ -191,18 +191,22 @@ img {
 /* --- 5. Estilos para el componente Hero --- */
 .hero { /* Cambiado de .hero-section a .hero para consistencia con tu código */
   position: relative;
-  background-size: contain; /* Cambiado a contain */
+  background-size: cover; /* Usar cover para llenar el espacio */
   background-position: center;
   background-repeat: no-repeat;
-  background-color: var(--color-white); /* Añadido para el espacio en blanco */
+  background-color: var(--color-background-dark); /* Color de fondo oscuro */
   color: var(--color-white);
   text-align: center;
-  padding: 100px 20px;
+  padding: 60px 20px; /* Padding vertical reducido */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 500px;
+  height: 300px; /* Altura fija más apropiada para banners 4:1 */
+}
+
+.community-hero {
+  background-size: 100% auto;
 }
 
 .hero::before {
