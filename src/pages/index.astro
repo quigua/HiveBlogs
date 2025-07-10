@@ -25,6 +25,14 @@ const activeCategories = new Set(allPosts.map(post => post.data.category));
 const breadcrumbs = [
   { label: currentLocale.home, href: '/' }
 ];
+
+const categoryToLocaleKeyMap = {
+  "Splinterlands": "splinterlands",
+  "Hived Blogs": "hivedBlogs",
+  "La Web 3.0": "hiveTutorials",
+  "Servicios de quigua": "quiguaServices", // Actualizado para coincidir con MAIN_CATEGORIES
+  "Test Category": "testCategory"
+};
 ---
 <Layout title={HIVE_USERNAME} description={SITE_INFO.description}>
   <Fragment slot="breadcrumbs">
@@ -46,9 +54,15 @@ const breadcrumbs = [
       <h3>{currentLocale.hiveCategories}</h3>
       <nav class="categories-nav">
         <ul>
-          {MAIN_CATEGORIES.filter(cat => activeCategories.has(cat)).map(category => (
-            <li><a href={`/temas/${category.toLowerCase().replace(/ /g, '-')}/`}>{currentLocale[category.replace(/ /g, '').toLowerCase()]}</a></li>
-          ))}
+          {MAIN_CATEGORIES.filter(cat => activeCategories.has(cat)).map(category => {
+            const localeKey = categoryToLocaleKeyMap[category];
+            const displayCategory = localeKey ? currentLocale[localeKey] : category; // Usa la traducción o el nombre original si no hay mapeo
+            const slug = category.toLowerCase().replace(/ /g, '-'); // El slug actual funciona para la URL
+
+            return (
+              <li><a href={`/temas/${slug}/`}>{displayCategory}</a></li>
+            );
+          })}
         </ul>
       </nav>
       <div class="other-details-placeholder">

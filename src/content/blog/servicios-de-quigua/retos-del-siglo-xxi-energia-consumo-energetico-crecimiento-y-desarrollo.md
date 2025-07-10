@@ -5,7 +5,7 @@ description: >-
   de nosotros sabe qué es, pero la mencionamos todo el tiempo para casi to...
 author: quigua
 permlink: retos-del-siglo-xxi-energia-consumo-energetico-crecimiento-y-desarrollo
-category: Servicios de @quigua
+category: Servicios de quigua
 created: '2016-09-02T10:56:36.000Z'
 lastUpdate: '2016-09-02T10:56:36.000Z'
 url: >-

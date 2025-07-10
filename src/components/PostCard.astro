@@ -43,7 +43,7 @@ if (post.data) {
   } else if (post.data.category && post.data.category.startsWith('hive-')) {
     postLink = `/comunidades/${post.data.category}/${post.data.author}/${post.data.permlink}`;
   } else {
-    const categorySlug = category.toLowerCase().replace(/ /g, '-');
+    const categorySlug = post.data.category.toLowerCase().replace(/ /g, '-'); // Usar post.data.category directamente para mantener el '@'
     const subcategorySlug = post.data.subcategory ? `/${post.data.subcategory.toLowerCase().replace(/ /g, '-')}` : '';
     postLink = `/posts/${categorySlug}${subcategorySlug}/${post.data.permlink}`;
   }

@@ -5,7 +5,7 @@ description: >-
   src="https://steemitimages.com/DQmPnMtrAif157cmsj7ueQhJ7PsL5iVVjCaxkkwUa7oxKU7/image....
 author: quigua
 permlink: el-objetivo-de-crear-tu-propia-comunidad
-category: Servicios de @quigua
+category: Servicios de quigua
 created: '2017-10-21T07:24:33.000Z'
 lastUpdate: '2017-10-21T07:24:33.000Z'
 url: /spanish/@quigua/el-objetivo-de-crear-tu-propia-comunidad

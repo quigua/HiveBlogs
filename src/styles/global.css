@@ -377,6 +377,9 @@ img {
   color: var(--color-text-body);
   text-decoration: none;
   transition: background-color 0.2s ease;
+  white-space: normal; /* Asegura que el texto se envuelva */
+  word-break: break-word; /* Permite que las palabras largas se rompan si es necesario */
+  text-align: left; /* Asegura que el texto se alinee a la izquierda */
 }
 
 .categories-nav a:hover {

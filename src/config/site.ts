@@ -55,6 +55,7 @@ export const SITE_INFO = {
       hivedBlogs: "Hived Blogs",
       hiveTutorials: "La Web 3.0",
       quiguaServices: "Servicios de @quigua",
+      testCategory: "Categoría de Prueba", // Traducción para la categoría de prueba
       aboutUser: "Acerca de",
       subscribedCommunities: "Comunidades Suscritas",
       community: "Comunidad",
@@ -161,7 +162,8 @@ export const MAIN_CATEGORIES = [
   "Splinterlands",
   "Hived Blogs",
   "La Web 3.0",
-  "Servicios de @quigua"
+  "Servicios de quigua", // Cambiado de "Servicios de @quigua"
+  "Test Category"
 ];
 
 export const SUBCATEGORIES = {
@@ -173,5 +175,6 @@ export const SUBCATEGORIES = {
   ],
   "Hived Blogs": [],
   "La Web 3.0": [],
-  "Servicios de @quigua": []
+  "Servicios de @quigua": [],
+  "Test Category": []
 };

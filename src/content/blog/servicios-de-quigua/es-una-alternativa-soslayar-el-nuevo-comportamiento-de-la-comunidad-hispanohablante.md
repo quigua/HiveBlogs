@@ -9,7 +9,7 @@ description: >-
 author: quigua
 permlink: >-
   es-una-alternativa-soslayar-el-nuevo-comportamiento-de-la-comunidad-hispanohablante
-category: Servicios de @quigua
+category: Servicios de quigua
 created: '2017-09-18T09:39:00.000Z'
 lastUpdate: '2017-09-18T09:39:00.000Z'
 url: >-

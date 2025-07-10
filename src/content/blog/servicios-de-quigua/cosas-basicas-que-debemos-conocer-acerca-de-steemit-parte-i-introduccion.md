@@ -5,7 +5,7 @@ description: >-
   criptomonedas, es que he decidido realizar una serie de artículos básic...
 author: quigua
 permlink: cosas-basicas-que-debemos-conocer-acerca-de-steemit-parte-i-introduccion
-category: Servicios de @quigua
+category: Servicios de quigua
 created: '2016-09-14T00:41:06.000Z'
 lastUpdate: '2016-09-14T00:44:06.000Z'
 url: >-

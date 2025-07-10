@@ -6,7 +6,7 @@ description: >-
   cues...
 author: quigua
 permlink: el-balance-entre-me-gusta-y-vale-la-pena-esta-llegando-al-equilibrio
-category: Servicios de @quigua
+category: Servicios de quigua
 created: '2017-06-27T07:51:42.000Z'
 lastUpdate: '2017-06-27T07:51:42.000Z'
 url: >-

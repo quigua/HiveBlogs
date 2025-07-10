@@ -5,7 +5,7 @@ description: >-
   src="https://steemitimages.com/DQmPnMtrAif157cmsj7ueQhJ7PsL5iVVjCaxkkwUa7oxKU7/image....
 author: quigua
 permlink: el-secreto-para-la-creacion-de-una-comunidad-exitosa
-category: Servicios de @quigua
+category: Servicios de quigua
 created: '2017-10-27T07:19:30.000Z'
 lastUpdate: '2017-10-27T07:19:30.000Z'
 url: /spanish/@quigua/el-secreto-para-la-creacion-de-una-comunidad-exitosa

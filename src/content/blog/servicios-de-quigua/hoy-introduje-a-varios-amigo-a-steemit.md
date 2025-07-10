@@ -6,7 +6,7 @@ description: >-
   funciona...
 author: quigua
 permlink: hoy-introduje-a-varios-amigo-a-steemit
-category: Servicios de @quigua
+category: Servicios de quigua
 created: '2016-09-22T21:59:03.000Z'
 lastUpdate: '2016-09-22T22:09:54.000Z'
 url: /spanish/@quigua/hoy-introduje-a-varios-amigo-a-steemit

@@ -5,7 +5,7 @@ description: >-
   por miles en Steemit, y comienza a sentirse fuertemente su influencia en t...
 author: quigua
 permlink: reflexiones-para-una-comunidad-hispanohablante-madura
-category: Servicios de @quigua
+category: Servicios de quigua
 created: '2017-09-11T09:58:09.000Z'
 lastUpdate: '2017-09-13T17:48:09.000Z'
 url: /spanish/@quigua/reflexiones-para-una-comunidad-hispanohablante-madura

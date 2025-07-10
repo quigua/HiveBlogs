@@ -5,7 +5,7 @@ description: >-
   rápidamente, y para este primero de junio de 2017 ya supera los [ciento ...
 author: quigua
 permlink: estrategia-de-largo-plazo-para-la-creacion-de-contenidos-steempolis
-category: Servicios de @quigua
+category: Servicios de quigua
 created: '2017-06-01T20:54:42.000Z'
 lastUpdate: '2017-06-01T23:47:21.000Z'
 url: >-

@@ -5,7 +5,7 @@ description: >-
   Comunidad que es tan necesaria para los usuarios que tenemos poca influen...
 author: quigua
 permlink: hoy-me-uni-a-la-comunidad-unidos
-category: Servicios de @quigua
+category: Servicios de quigua
 created: '2018-05-20T07:40:00.000Z'
 lastUpdate: '2018-05-20T07:40:00.000Z'
 url: /unidos/@quigua/hoy-me-uni-a-la-comunidad-unidos

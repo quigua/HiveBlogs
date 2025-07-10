@@ -5,7 +5,7 @@ description: >-
   **Steemit** y que he decidido volver a publicar porque no ha perdido vigenc...
 author: quigua
 permlink: que-deben-saber-los-nuevos-usuarios-de-steemit
-category: Servicios de @quigua
+category: Servicios de quigua
 created: '2017-06-29T01:29:36.000Z'
 lastUpdate: '2017-06-29T01:29:36.000Z'
 url: /spanish/@quigua/que-deben-saber-los-nuevos-usuarios-de-steemit
