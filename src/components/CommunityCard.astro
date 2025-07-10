@@ -10,21 +10,19 @@ const { community } = Astro.props;
 const communityId = community[0];
 const communityName = community[1];
 
-let displayTitle = communityName;
-let displayDescription = `Explora la comunidad de ${communityName} en Hive.`;
-let displayImage = '/placeholder-post.jpg'; // Reusing existing placeholder
-
 // Find the community in the locally stored data
 const localCommunity = allCommunitiesData.find(comm => comm.name === communityId);
+
+let displayTitle = communityName;
+let displayDescription = `Explora la comunidad de ${communityName} en Hive.`;
+// Use the new URL structure for the cover image
+let displayImage = `https://images.hive.blog/u/${communityId}/cover`;
 
 if (localCommunity) {
   displayTitle = localCommunity.title || communityName;
   displayDescription = localCommunity.description || displayDescription;
-  displayImage = localCommunity.cover_image || localCommunity.avatar_url || displayImage;
 } else {
   console.warn(`Community ${communityId} not found in local all_communities.json. Falling back to API or defaults.`);
-  // Fallback to API if not found locally (optional, but good for robustness)
-  // For now, we'll just use the defaults if not found locally.
 }
 
 const displayUrl = `/comunidades/${communityId}`;

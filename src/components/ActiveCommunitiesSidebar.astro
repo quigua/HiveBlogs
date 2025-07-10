@@ -12,13 +12,8 @@ const activeCommunities = allCommunities
   .slice(0, 25); // Get the top 25
 
 const getCommunityImageUrl = (community) => {
-  if (community.cover_image) {
-    return community.cover_image;
-  }
-  if (community.avatar_url) {
-    return community.avatar_url;
-  }
-  return '/placeholders/community-placeholder.webp'; // Placeholder image
+  // Use images.hive.blog to fetch the avatar directly
+  return `https://images.hive.blog/u/${community.name}/avatar`;
 };
 ---
 
