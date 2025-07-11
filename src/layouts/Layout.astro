@@ -11,14 +11,17 @@ import '../../src/styles/post.css';
 export interface Props {
   title: string;
   description?: string;
+  lang?: string; // Añadir la prop de idioma
 }
 
 // Si se pasa una descripción, úsala, si no, usa la global
 const url = new URL(Astro.request.url);
 const langParam = url.searchParams.get('lang');
-const currentLang = langParam && SITE_INFO.locales[langParam] ? langParam : SITE_INFO.language;
+// Priorizar la prop 'lang' de Astro.props, luego el parámetro de URL, y finalmente el idioma por defecto de SITE_INFO
+const currentLang = (langParam && SITE_INFO.locales[langParam]) ? langParam : (Astro.props.lang || SITE_INFO.language);
 const currentLocale = SITE_INFO.locales[currentLang];
-const { title, description = currentLocale.siteDescription } = Astro.props;
+
+const { title, description = currentLocale.siteDescription } = Astro.props; // Ahora currentLocale ya está definido
 ---
 
 <!doctype html>

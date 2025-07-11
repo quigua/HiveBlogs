@@ -13,13 +13,13 @@ export default defineConfig({
     mode: 'standalone'
   }),
   i18n: {
-    defaultLocale: 'es',
+    defaultLocale: 'en', // Cambiado a inglés
     locales: ['es', 'en'],
     routing: {
-      prefixDefaultLocale: false, // Esto significa que /es/posts será /posts, y /en/posts será /en/en/posts
+      prefixDefaultLocale: false,
     },
   },
-  // Puedes tener otras configuraciones aquí (ej. site: 'https://tusitio.com')
+    site: 'http://localhost:4321/', // Añadido para definir la URL base del sitio
   integrations: [], // Deja esto vacío si no tienes otras integraciones
   markdown: {
     syntaxHighlight: 'prism', // O 'shiki'

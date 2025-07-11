@@ -60,7 +60,7 @@ const categoryToLocaleKeyMap = {
             const slug = category.toLowerCase().replace(/ /g, '-'); // El slug actual funciona para la URL
 
             return (
-              <li><a href={`/temas/${slug}/`}>{displayCategory}</a></li>
+              <li><a href={`${Astro.url.origin}/${slug}/?lang=${currentLang}`}>{displayCategory}</a></li>
             );
           })}
         </ul>

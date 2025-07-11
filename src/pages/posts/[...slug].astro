@@ -42,16 +42,16 @@ const breadcrumbs = [
 ];
 
 if (post.data.type === 'reblogged') {
-  breadcrumbs.push({ label: currentLocale.rebloggedPosts, href: '/posts/reblogueados' });
+  breadcrumbs.push({ label: currentLocale.rebloggedPosts, href: `${Astro.url.origin}/posts/reblogueados/?lang=${currentLang}` });
 } else if (category) {
   const categorySlug = category.toLowerCase().replace(/ /g, '-');
-  breadcrumbs.push({ label: category, href: `/temas/${categorySlug}/` });
+  breadcrumbs.push({ label: category, href: `${Astro.url.origin}/${categorySlug}/?lang=${currentLang}` });
 }
 
 if (subcategory) {
   const categorySlug = category.toLowerCase().replace(/ /g, '-');
   const subcategorySlug = subcategory.toLowerCase().replace(/ /g, '-');
-  breadcrumbs.push({ label: subcategory, href: `/temas/${categorySlug}/${subcategorySlug}/` });
+  breadcrumbs.push({ label: subcategory, href: `${Astro.url.origin}/${categorySlug}/${subcategorySlug}/?lang=${currentLang}` });
 }
 
 breadcrumbs.push({ label: title, href: `#` }); // El enlace del post actual no es navegable

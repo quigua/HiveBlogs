@@ -12,6 +12,14 @@ export interface Props {
 const { currentLang, currentLocale } = Astro.props;
 
 const avatarUrl = `https://images.hive.blog/u/${HIVE_USERNAME}/avatar`;
+
+// Lógica para construir la URL de cambio de idioma
+const newUrl = new URL(Astro.url.toString());
+const targetLang = currentLang === 'es' ? 'en' : 'es'; // El idioma al que queremos cambiar
+
+newUrl.searchParams.set('lang', targetLang); // Establecer el parámetro 'lang'
+
+const languageSwitcherHref = newUrl.toString();
 ---
 <header class="main-header">
   <div class="container">
@@ -34,7 +42,7 @@ const avatarUrl = `https://images.hive.blog/u/${HIVE_USERNAME}/avatar`;
           </ul>
         </li>
         <li><a href="/about">{currentLocale.about}</a></li>
-        <li><a href={currentLang === 'es' ? `${Astro.url.pathname}?lang=en` : `${Astro.url.pathname}?lang=es`} class="language-switcher">{currentLang === 'es' ? 'en' : 'es'}</a></li>
+        <li><a href={languageSwitcherHref} class="language-switcher">{currentLang === 'es' ? 'en' : 'es'}</a></li>
       </ul>
     </nav>
     <div class="user-menu">

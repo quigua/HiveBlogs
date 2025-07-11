@@ -1,0 +1,79 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { MAIN_CATEGORIES, POST_SETTINGS, SITE_INFO, SUBCATEGORIES } from '../../../config/site';
+import SubcategorySidebar from '../../../components/SubcategorySidebar.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+
+export const prerender = true;
+
+export interface Props {
+  categoryTitle: string;
+  subcategoryTitle: string; // La subcategoría es obligatoria aquí
+  page: any;
+}
+
+export async function getStaticPaths({ paginate }) {
+  const paginatedPaths = [];
+
+  for (const category of MAIN_CATEGORIES) {
+    const categorySlug = category.toLowerCase().replace(/ /g, '-');
+    const subcategories = SUBCATEGORIES[category] || [];
+
+    for (const subcategory of subcategories) {
+      const subcategorySlug = subcategory.toLowerCase().replace(/ /g, '-');
+      const allPostsSubcategory = await getCollection('blog', ({ data }) => {
+        return data.category === category && data.subcategory === subcategory;
+      });
+      const sortedPostsSubcategory = allPostsSubcategory.sort((a, b) => new Date(b.data.created).getTime() - new Date(a.data.created).getTime());
+      if (sortedPostsSubcategory.length > 0) { // Solo generar si hay posts para evitar páginas vacías
+        paginatedPaths.push(...paginate(sortedPostsSubcategory, {
+          pageSize: POST_SETTINGS.postsPerPage,
+          params: { category: categorySlug, subcategory: subcategorySlug },
+          props: { categoryTitle: category, subcategoryTitle: subcategory }
+        }));
+      }
+    }
+  }
+  return paginatedPaths;
+}
+
+const { categoryTitle, subcategoryTitle, page } = Astro.props;
+
+const url = new URL(Astro.request.url);
+const langParam = url.searchParams.get('lang');
+const currentLang = langParam && SITE_INFO.locales[langParam] ? langParam : SITE_INFO.language;
+const currentLocale = SITE_INFO.locales[currentLang];
+
+const breadcrumbs = [
+  { label: currentLocale.home, href: `${Astro.url.origin}/?lang=${currentLang}` },
+  { label: categoryTitle, href: `${Astro.url.origin}/${categoryTitle.toLowerCase().replace(/ /g, '-')}/?lang=${currentLang}` },
+  { label: subcategoryTitle, href: `${Astro.url.origin}/${categoryTitle.toLowerCase().replace(/ /g, '-')}/${subcategoryTitle.toLowerCase().replace(/ /g, '-')}/?lang=${currentLang}` }
+];
+---
+
+<Layout title={`Posts de ${categoryTitle} - ${subcategoryTitle}`} currentLocale={currentLocale} lang={currentLang}>
+  <Fragment slot="breadcrumbs">
+    <Breadcrumbs items={breadcrumbs} />
+  </Fragment>
+    <div class="page-container">
+    <main class="main-content">
+      <h1>Posts de {categoryTitle} - {subcategoryTitle}</h1>
+      <div class="posts-grid">
+        {page.data.map(post => (
+          <PostCard post={post} />
+        ))}
+      </div>
+
+      <div class="pagination-nav">
+        {page.url.prev && <a href={page.url.prev} class="pagination-link prev">&laquo; Anteriores</a>}
+        <span class="pagination-info">Página {page.currentPage} de {page.lastPage}</span>
+        {page.url.next && <a href={page.url.next} class="pagination-link next">Siguientes &raquo;</a>}
+      </div>
+    </main>
+    <aside class="sidebar-column">
+      <SubcategorySidebar category={categoryTitle} subcategory={subcategoryTitle} />
+    </aside>
+  </div>
+</Layout>

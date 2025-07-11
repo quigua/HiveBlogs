@@ -4,9 +4,10 @@ import { getCollection } from 'astro:content';
 
 export interface Props {
   category: string;
+  subcategory?: string;
 }
 
-const { category } = Astro.props;
+const { category, subcategory } = Astro.props;
 
 const allPosts = await getCollection('blog');
 const activeSubcategories = new Set();
@@ -26,7 +27,7 @@ const subcategories = (SUBCATEGORIES[category] || []).filter(subcat => activeSub
     <nav class="categories-nav">
       <ul>
         {subcategories.map(subcat => (
-          <li><a href={`/temas/${category.toLowerCase().replace(/ /g, '-')}/${subcat.toLowerCase().replace(/ /g, '-')}/`}>{subcat}</a></li>
+          <li><a href={`/${category.toLowerCase().replace(/ /g, '-')}/${subcat.toLowerCase().replace(/ /g, '-')}/`}>{subcat}</a></li>
         ))}
       </ul>
     </nav>

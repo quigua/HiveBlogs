@@ -7,7 +7,7 @@ export const SITE_INFO = {
   description: "Explora, lee, escribe y conecta en la blockchain de Hive. Contenido libre, descentralizado y recompensado.",
   author: "@quigua",
   siteUrl: "https://www.hivedblogs.com", // Reemplaza con la URL real de tu sitio cuando esté en producción
-  language: "es", // Idioma principal del sitio
+  language: "en", // Idioma principal del sitio
 
   socialLinks: {
     twitter: "https://twitter.com/tu_usuario_twitter", // Reemplaza con tu usuario real
