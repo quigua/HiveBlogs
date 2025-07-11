@@ -1,5 +1,5 @@
 ---
-import { SUBCATEGORIES } from '../config/site';
+import { SUBCATEGORIES, SITE_INFO } from '../config/site';
 import { getCollection } from 'astro:content';
 
 export interface Props {
@@ -8,6 +8,11 @@ export interface Props {
 }
 
 const { category, subcategory } = Astro.props;
+
+const url = new URL(Astro.request.url);
+const langParam = url.searchParams.get('lang');
+const currentLang = langParam && SITE_INFO.locales[langParam] ? langParam : SITE_INFO.language;
+const currentLocale = SITE_INFO.locales[currentLang];
 
 const allPosts = await getCollection('blog');
 const activeSubcategories = new Set();
@@ -19,16 +24,26 @@ allPosts.forEach(post => {
 });
 
 const subcategories = (SUBCATEGORIES[category] || []).filter(subcat => activeSubcategories.has(subcat));
+const subcategoryToLocaleKeyMap = {
+  "Tutoriales": "splinterlandsTutorials",
+  "Batallas y Estrategias": "splinterlandsBattlesStrategies",
+  "Estadísticas": "splinterlandsStatistics",
+  "Sugerencias y Fallos": "splinterlandsSuggestionsBugs"
+};
 ---
 
 {subcategories.length > 0 && (
   <>
-    <h3>Subcategorías de {category}</h3>
+    <h3>{currentLocale.subcategoriesOf.replace('{category}', category)}</h3>
     <nav class="categories-nav">
       <ul>
-        {subcategories.map(subcat => (
-          <li><a href={`/${category.toLowerCase().replace(/ /g, '-')}/${subcat.toLowerCase().replace(/ /g, '-')}/`}>{subcat}</a></li>
-        ))}
+        {subcategories.map(subcat => {
+          const localeKey = subcategoryToLocaleKeyMap[subcat];
+          const displaySubcategory = localeKey ? currentLocale[localeKey] : subcat;
+          return (
+            <li><a href={`/${category.toLowerCase().replace(/ /g, '-')}/${subcat.toLowerCase().replace(/ /g, '-')}/?lang=${currentLang}`}>{displaySubcategory}</a></li>
+          );
+        })}
       </ul>
     </nav>
   </>

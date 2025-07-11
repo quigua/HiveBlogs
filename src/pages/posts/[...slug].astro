@@ -37,6 +37,21 @@ const currentLocale = SITE_INFO.locales[currentLang];
 
 const { title, author, created, description, imageUrl, permlink, category, subcategory } = post.data;
 
+const categoryToLocaleKeyMap = {
+  "Splinterlands": "splinterlands",
+  "Hived Blogs": "hivedBlogs",
+  "La Web 3.0": "hiveTutorials",
+  "Servicios de quigua": "quiguaServices",
+  "Test Category": "testCategory"
+};
+
+const subcategoryToLocaleKeyMap = {
+  "Tutoriales": "splinterlandsTutorials",
+  "Batallas y Estrategias": "splinterlandsBattlesStrategies",
+  "Estadísticas": "splinterlandsStatistics",
+  "Sugerencias y Fallos": "splinterlandsSuggestionsBugs"
+};
+
 const breadcrumbs = [
   { label: currentLocale.home, href: '/' },
 ];
@@ -45,13 +60,15 @@ if (post.data.type === 'reblogged') {
   breadcrumbs.push({ label: currentLocale.rebloggedPosts, href: `${Astro.url.origin}/posts/reblogueados/?lang=${currentLang}` });
 } else if (category) {
   const categorySlug = category.toLowerCase().replace(/ /g, '-');
-  breadcrumbs.push({ label: category, href: `${Astro.url.origin}/${categorySlug}/?lang=${currentLang}` });
+  const displayCategory = categoryToLocaleKeyMap[category] ? currentLocale[categoryToLocaleKeyMap[category]] : category;
+  breadcrumbs.push({ label: displayCategory, href: `${Astro.url.origin}/${categorySlug}/?lang=${currentLang}` });
 }
 
 if (subcategory) {
   const categorySlug = category.toLowerCase().replace(/ /g, '-');
   const subcategorySlug = subcategory.toLowerCase().replace(/ /g, '-');
-  breadcrumbs.push({ label: subcategory, href: `${Astro.url.origin}/${categorySlug}/${subcategorySlug}/?lang=${currentLang}` });
+  const displaySubcategory = subcategoryToLocaleKeyMap[subcategory] ? currentLocale[subcategoryToLocaleKeyMap[subcategory]] : subcategory;
+  breadcrumbs.push({ label: displaySubcategory, href: `${Astro.url.origin}/${categorySlug}/${subcategorySlug}/?lang=${currentLang}` });
 }
 
 breadcrumbs.push({ label: title, href: `#` }); // El enlace del post actual no es navegable
@@ -71,7 +88,7 @@ try {
   }
 } catch (error) {
   console.error(`Error fetching comments for post ${permlink}:`, error);
-  errorMessage = "Error al cargar los comentarios.";
+  errorMessage = currentLocale.errorLoadingComments;
 }
 
 function sanitizeHtml(html) {
@@ -91,8 +108,8 @@ const sanitizedBody = sanitizeHtml(post.body); // Siempre llamar con un processe
     {imageUrl && <img src={imageUrl} alt={title} class="post-detail-image" />}
     <h1 class="post-detail-title">{title}</h1>
     <div class="post-detail-meta">
-      <span>Por <a href="#">@{author}</a></span>
-      <span> el {formattedDate}</span>
+      <span>{currentLocale.by} <a href="#">@{author}</a></span>
+      <span> {currentLocale.on} {formattedDate}</span>
     </div>
     <div class="post-content-body">
       {/* Aquí inyectamos el contenido Markdown del post */}
@@ -103,7 +120,7 @@ const sanitizedBody = sanitizeHtml(post.body); // Siempre llamar con un processe
   {comments && comments.length > 0 && (
     <div class="post-detail-container">
       <section class="post-comments-section">
-        <h2>Comentarios ({comments.length})</h2>
+        <h2>{currentLocale.commentsCountTitle.replace('{count}', comments.length)}</h2>
         <div class="comments-list">
           {comments.map((comment) => (
             <CommentCard comment={comment} isNested={false} />

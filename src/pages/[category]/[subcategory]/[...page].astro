@@ -46,20 +46,38 @@ const langParam = url.searchParams.get('lang');
 const currentLang = langParam && SITE_INFO.locales[langParam] ? langParam : SITE_INFO.language;
 const currentLocale = SITE_INFO.locales[currentLang];
 
+const categoryToLocaleKeyMap = {
+  "Splinterlands": "splinterlands",
+  "Hived Blogs": "hivedBlogs",
+  "La Web 3.0": "hiveTutorials",
+  "Servicios de quigua": "quiguaServices",
+  "Test Category": "testCategory"
+};
+
+const subcategoryToLocaleKeyMap = {
+  "Tutoriales": "splinterlandsTutorials",
+  "Batallas y Estrategias": "splinterlandsBattlesStrategies",
+  "Estadísticas": "splinterlandsStatistics",
+  "Sugerencias y Fallos": "splinterlandsSuggestionsBugs"
+};
+
+const displayCategory = categoryToLocaleKeyMap[categoryTitle] ? currentLocale[categoryToLocaleKeyMap[categoryTitle]] : categoryTitle;
+const displaySubcategory = subcategoryToLocaleKeyMap[subcategoryTitle] ? currentLocale[subcategoryToLocaleKeyMap[subcategoryTitle]] : subcategoryTitle;
+
 const breadcrumbs = [
   { label: currentLocale.home, href: `${Astro.url.origin}/?lang=${currentLang}` },
-  { label: categoryTitle, href: `${Astro.url.origin}/${categoryTitle.toLowerCase().replace(/ /g, '-')}/?lang=${currentLang}` },
-  { label: subcategoryTitle, href: `${Astro.url.origin}/${categoryTitle.toLowerCase().replace(/ /g, '-')}/${subcategoryTitle.toLowerCase().replace(/ /g, '-')}/?lang=${currentLang}` }
+  { label: displayCategory, href: `${Astro.url.origin}/${categoryTitle.toLowerCase().replace(/ /g, '-')}/?lang=${currentLang}` },
+  { label: displaySubcategory, href: `${Astro.url.origin}/${categoryTitle.toLowerCase().replace(/ /g, '-')}/${subcategoryTitle.toLowerCase().replace(/ /g, '-')}/?lang=${currentLang}` }
 ];
 ---
 
-<Layout title={`Posts de ${categoryTitle} - ${subcategoryTitle}`} currentLocale={currentLocale} lang={currentLang}>
+<Layout title={currentLocale.subcategoryPostsTitle.replace('{category}', categoryTitle).replace('{subcategory}', subcategoryTitle)} currentLocale={currentLocale} lang={currentLang}>
   <Fragment slot="breadcrumbs">
     <Breadcrumbs items={breadcrumbs} />
   </Fragment>
     <div class="page-container">
     <main class="main-content">
-      <h1>Posts de {categoryTitle} - {subcategoryTitle}</h1>
+      <h1>{currentLocale.subcategoryPostsTitle.replace('{category}', categoryTitle).replace('{subcategory}', subcategoryTitle)}</h1>
       <div class="posts-grid">
         {page.data.map(post => (
           <PostCard post={post} />
@@ -67,9 +85,9 @@ const breadcrumbs = [
       </div>
 
       <div class="pagination-nav">
-        {page.url.prev && <a href={page.url.prev} class="pagination-link prev">&laquo; Anteriores</a>}
-        <span class="pagination-info">Página {page.currentPage} de {page.lastPage}</span>
-        {page.url.next && <a href={page.url.next} class="pagination-link next">Siguientes &raquo;</a>}
+        {page.url.prev && <a href={page.url.prev} class="pagination-link prev">{currentLocale.previous}</a>}
+        <span class="pagination-info">{currentLocale.page} {page.currentPage} {currentLocale.of} {page.lastPage}</span>
+        {page.url.next && <a href={page.url.next} class="pagination-link next">{currentLocale.next}</a>}
       </div>
     </main>
     <aside class="sidebar-column">

@@ -54,8 +54,8 @@ export const SITE_INFO = {
       splinterlands: "Splinterlands",
       hivedBlogs: "Hived Blogs",
       hiveTutorials: "La Web 3.0",
-      quiguaServices: "Servicios de @quigua",
-      testCategory: "Categoría de Prueba", // Traducción para la categoría de prueba
+      quiguaServices: "Servicios de @quigua", // Display name with @
+      testCategory: "Categoría de Prueba",
       aboutUser: "Acerca de",
       subscribedCommunities: "Comunidades Suscritas",
       community: "Comunidad",
@@ -84,13 +84,23 @@ export const SITE_INFO = {
       page: "Página",
       of: "de",
       next: "Siguiente",
-      heroDescription: "Desarrollador de aplicaciones para la cadena de bloques de Hive",
-      heroTitle: "Bienvenido al blog de @quigua",
-      headerTitle: "El Blog de @quigua en Hive",
-      heroButton: "¿Quieres tener un blog monetizado?"
+      categoryPostsTitle: "Posts de {category}",
+      subcategoryPostsTitle: "Posts de {category} - {subcategory}",
+      subcategoriesOf: "Subcategorías de {category}",
+      splinterlandsTutorials: "Tutoriales",
+      splinterlandsBattlesStrategies: "Batallas y Estrategias",
+      splinterlandsStatistics: "Estadísticas",
+      splinterlandsSuggestionsBugs: "Sugerencias y Fallos",
+      categorySplinterlands: "Splinterlands",
+      categoryHivedBlogs: "Hived Blogs",
+      categoryWeb3: "La Web 3.0",
+      categoryQuiguaServices: "Servicios de @quigua", // Display name with @
+      categoryTestCategory: "Categoría de Prueba",
+      errorLoadingComments: "Error al cargar los comentarios.",
+      commentsCountTitle: "Comentarios ({count})",
     },
     en: {
-      siteTitle: "@quigua's Hived Blog", // Keeping the same for now, but can be changed
+      siteTitle: "@quigua's Hived Blog",
       siteDescription: "Explore, read, write, and connect on the Hive blockchain. Free, decentralized, and rewarded content.",
       communityName: "Hive Latam Community",
       footerCopyright: `© ${new Date().getFullYear()} @quigua's Hived Blog. All rights reserved.`,
@@ -114,7 +124,7 @@ export const SITE_INFO = {
       splinterlands: "Splinterlands",
       hivedBlogs: "Hived Blogs",
       hiveTutorials: "The Web 3.0",
-      quiguaServices: "@quigua's Services",
+      quiguaServices: "@quigua's Services", // Display name with @
       aboutUser: "About",
       subscribedCommunities: "Subscribed Communities",
       community: "Community",
@@ -139,14 +149,28 @@ export const SITE_INFO = {
       originalPostsPageTitle: "Original Posts",
       exploreOriginalPosts: "Explore original posts by",
       noOriginalPostsFound: "No original posts found. Run `node fetch-hive-posts.js` to get them.",
-      previous: "Anterior",
-      page: "Página",
-      of: "de",
-      next: "Siguiente",
+      previous: "Previous",
+      page: "Page",
+      of: "of",
+      next: "Next",
+      categoryPostsTitle: "Posts of {category}",
+      subcategoryPostsTitle: "Posts of {category} - {subcategory}",
+      subcategoriesOf: "Subcategories of {category}",
+      splinterlandsTutorials: "Tutorials",
+      splinterlandsBattlesStrategies: "Battles and Strategies",
+      splinterlandsStatistics: "Statistics",
+      splinterlandsSuggestionsBugs: "Suggestions and Bugs",
+      categorySplinterlands: "Splinterlands",
+      categoryHivedBlogs: "Hived Blogs",
+      categoryWeb3: "The Web 3.0",
+      categoryQuiguaServices: "@quigua's Services", // Display name with @
+      categoryTestCategory: "Test Category",
       heroDescription: "Application developer for the Hive blockchain",
       heroTitle: "Welcome to @quigua's blog",
       headerTitle: "@quigua's Hived Blog",
-      heroButton: "Do you want to have a monetized blog?"
+      heroButton: "Do you want to have a monetized blog?",
+      errorLoadingComments: "Error loading comments.",
+      commentsCountTitle: "Comments ({count})",
     }
   }
 };
@@ -175,6 +199,6 @@ export const SUBCATEGORIES = {
   ],
   "Hived Blogs": [],
   "La Web 3.0": [],
-  "Servicios de @quigua": [],
+  "Servicios de quigua": [],
   "Test Category": []
 };
